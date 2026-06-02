@@ -4,14 +4,14 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Sturm Energie – Sauber. Intelligent. Transparent.</title>
-<meta name="description" content="Sturm Energie – 100% Ökostrom, faire Preise, digitaler Service."/>
+<meta name="description" content="Sturm Energie – 100% Ökostrom, faire Preise, digitaler Service. Eine Reise durch die Energie der Zukunft."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#111314;--bg2:#242729;--bg3:#1a1c1e;
+  --bg:#0a0d12;--bg2:#0d1117;--bg3:#11151c;
   --white:#fff;--w90:rgba(255,255,255,.9);--w70:rgba(255,255,255,.7);
   --w40:rgba(255,255,255,.4);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08);
   --blue:#0a84ff;--blue2:#409cff;--blue3:#0060cc;
@@ -20,54 +20,65 @@
   --fd:'DM Serif Display',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif;
   --r8:8px;--r16:16px;--r24:24px;--r99:9999px;
   --tf:200ms cubic-bezier(.25,.46,.45,.94);
-  --tm:400ms cubic-bezier(.25,.46,.45,.94);
   --ts:700ms cubic-bezier(.16,1,.3,1);
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--bg);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--blue);color:#fff}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:#2e3235;border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:var(--blue)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#2e3235;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--blue)}
 
 @keyframes bgpulse{0%,100%{opacity:.4}50%{opacity:.7}}
-@keyframes orb1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-20px,20px) scale(.97)}}
-@keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-50px,25px) scale(1.08)}66%{transform:translate(30px,-15px) scale(.95)}}
 @keyframes shimmer{from{background-position:-200% center}to{background-position:200% center}}
 @keyframes floatdot{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes fadeup{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ts),transform .7s var(--ts)}
+/* ═══ THE PERSISTENT CINEMATIC CANVAS — lives behind EVERYTHING ═══ */
+#story-canvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block;pointer-events:none}
+/* A global tint layer that subtly shifts to keep text readable */
+#story-veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 0%,rgba(10,13,18,.35) 100%)}
+/* Everything else floats above the film */
+#page{position:relative;z-index:2}
+
+/* Chapter progress rail (right side) */
+#chapter-rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:14px;pointer-events:none}
+.chapter-tick{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);transition:all .4s var(--ts);position:relative}
+.chapter-tick.active{background:var(--blue2);box-shadow:0 0 12px var(--blue2);transform:scale(1.4)}
+.chapter-tick .ct-label{position:absolute;right:18px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--w40);opacity:0;transition:opacity .3s ease}
+.chapter-tick.active .ct-label{opacity:1;color:var(--w70)}
+
+/* Global scroll progress bar (top) */
+#scroll-bar{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(to right,var(--blue),var(--green));z-index:1001;transition:width .1s linear}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ts),transform .9s var(--ts)}
 .reveal.visible{opacity:1;transform:none}
-.reveal-left{opacity:0;transform:translateX(-28px);transition:opacity .7s var(--ts),transform .7s var(--ts)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .9s var(--ts),transform .9s var(--ts)}
 .reveal-left.visible{opacity:1;transform:none}
-.reveal-right{opacity:0;transform:translateX(28px);transition:opacity .7s var(--ts),transform .7s var(--ts)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .9s var(--ts),transform .9s var(--ts)}
 .reveal-right.visible{opacity:1;transform:none}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
 .btn-p{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:var(--r99);background:var(--blue);color:#fff;font-family:var(--fb);font-size:15px;font-weight:500;border:none;cursor:pointer;text-decoration:none;transition:transform var(--tf),box-shadow var(--tf),background var(--tf)}
 .btn-p:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(10,132,255,.4)}
-.btn-g{display:inline-flex;align-items:center;gap:10px;padding:14px 29px;border-radius:var(--r99);background:transparent;color:var(--w90);font-family:var(--fb);font-size:15px;border:1px solid var(--w15);cursor:pointer;text-decoration:none;transition:all var(--tf)}
+.btn-g{display:inline-flex;align-items:center;gap:10px;padding:14px 29px;border-radius:var(--r99);background:rgba(255,255,255,.06);backdrop-filter:blur(8px);color:var(--w90);font-family:var(--fb);font-size:15px;border:1px solid var(--w15);cursor:pointer;text-decoration:none;transition:all var(--tf)}
 .btn-g:hover{background:var(--w08);border-color:var(--w40);color:#fff}
 .btn-green{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:var(--r99);background:var(--green);color:#111;font-family:var(--fb);font-size:15px;font-weight:600;border:none;cursor:pointer;text-decoration:none;transition:all var(--tf)}
 .btn-green:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(48,209,88,.35)}
 
-.label{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:var(--r99);background:var(--bsubt);border:1px solid rgba(10,132,255,.2);color:var(--blue2);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
+.label{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:var(--r99);background:rgba(10,132,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(10,132,255,.25);color:var(--blue2);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
 .label .dot{width:6px;height:6px;border-radius:50%;background:var(--blue2);animation:bgpulse 2s ease-in-out infinite}
-.label.green{background:var(--gsubt);border-color:rgba(48,209,88,.2);color:var(--green)}
+.label.green{background:rgba(48,209,88,.12);border-color:rgba(48,209,88,.25);color:var(--green)}
 .label.green .dot{background:var(--green)}
 
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r24);transition:all var(--tm)}
-.card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.45)}
+/* Cards now use heavier glass since the film shows through */
+.card{background:rgba(18,22,28,.55);border:1px solid rgba(255,255,255,.09);border-radius:var(--r24);backdrop-filter:blur(16px) saturate(140%);transition:all .4s var(--ts)}
+.card:hover{background:rgba(22,27,34,.7);border-color:rgba(255,255,255,.16);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
 
 .shimmer{background:linear-gradient(90deg,#fff 30%,var(--blue2) 50%,#fff 70%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s linear infinite}
 .star{color:#ffd60a}
-.grid-bg{background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px}
 
 /* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;transition:all .4s cubic-bezier(.16,1,.3,1)}
-#nav.scrolled{background:rgba(17,19,20,.88);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.06)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;transition:all .4s var(--ts)}
+#nav.scrolled{background:rgba(10,13,18,.7);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.06)}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(10,132,255,.4);font-size:16px}
@@ -78,60 +89,53 @@ body{font-family:var(--fb);background:var(--bg);color:var(--white);overflow-x:hi
 .nav-links a:hover{color:#fff;background:var(--w08)}
 .nav-right{display:flex;gap:12px;align-items:center}
 
-/* HERO */
-#hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;overflow:hidden}
-#hero-bg{position:absolute;inset:-8% -5%;z-index:0;transform:scale(1.08);transform-origin:center;will-change:transform}
-#hero-bg svg{width:100%;height:100%}
-.orb1{position:absolute;top:15%;left:5%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(10,132,255,.07) 0%,transparent 70%);animation:orb1 12s ease-in-out infinite;pointer-events:none;z-index:1}
-.orb2{position:absolute;bottom:10%;right:10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(48,209,88,.05) 0%,transparent 70%);animation:orb2 15s ease-in-out infinite;pointer-events:none;z-index:1}
-.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
-.hero-inner{max-width:680px}
-.hero-h1{font-family:var(--fd);font-weight:400;font-size:clamp(44px,6vw,80px);line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:28px}
-.hero-sub{font-size:clamp(16px,2vw,20px);line-height:1.65;color:var(--w70);margin-bottom:44px;max-width:520px;font-weight:300}
-.hero-stats{display:flex;flex-wrap:wrap;gap:28px;margin-top:52px}
-.hero-stat{display:flex;flex-direction:column;gap:2px}
-.hero-stat-val{font-family:var(--fd);font-size:26px;color:#fff;letter-spacing:-.03em}
-.hero-stat-label{font-size:11px;color:var(--w40);letter-spacing:.05em;text-transform:uppercase}
-.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2}
-.scroll-hint span{font-size:11px;color:var(--w40);letter-spacing:.12em;text-transform:uppercase}
-.scroll-box{width:24px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:12px;display:flex;justify-content:center;padding-top:7px}
-.scroll-dot{width:4px;height:8px;border-radius:2px;background:var(--blue2);animation:floatdot 2s ease-in-out infinite}
-
-/* SECTIONS */
-section{padding:120px 24px;position:relative}
-.section-inner{max-width:1200px;margin:0 auto;position:relative}
+/* SECTIONS — now mostly transparent so the film is the backdrop.
+   Each has a soft gradient fade at top & bottom for seamless flow. */
+section{padding:140px 24px;position:relative;min-height:90vh;display:flex;align-items:center}
+.section-inner{max-width:1200px;margin:0 auto;position:relative;width:100%}
 .section-head{text-align:center;margin-bottom:72px}
-.section-h2{font-family:var(--fd);font-weight:400;font-size:clamp(32px,4vw,56px);line-height:1.1;letter-spacing:-.03em;color:#fff;margin-bottom:20px}
-.section-sub{color:var(--w70);font-size:18px;max-width:520px;margin:0 auto;font-weight:300}
-.divider{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.08),transparent)}
+.section-h2{font-family:var(--fd);font-weight:400;font-size:clamp(34px,4.5vw,60px);line-height:1.08;letter-spacing:-.03em;color:#fff;margin-bottom:20px;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.section-sub{color:var(--w90);font-size:18px;max-width:540px;margin:0 auto;font-weight:300;text-shadow:0 1px 20px rgba(0,0,0,.5)}
 
-/* FEATURES */
-#vorteile{background:var(--bg)}
+/* Chapter intro — big cinematic title that announces each "scene" */
+.chapter-mark{font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--blue2);margin-bottom:16px;font-weight:500}
+
+#hero{min-height:100vh;padding-top:0}
+.hero-block{max-width:720px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:var(--r99);background:rgba(10,132,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(10,132,255,.25);color:var(--blue2);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--blue2);animation:bgpulse 2s ease-in-out infinite}
+.hero-h1{font-family:var(--fd);font-weight:400;font-size:clamp(46px,6.5vw,88px);line-height:1.02;letter-spacing:-.03em;color:#fff;margin-bottom:26px;text-shadow:0 4px 40px rgba(0,0,0,.6)}
+.hero-h1 em{font-style:italic;color:var(--blue2)}
+.hero-sub{font-size:clamp(16px,2vw,21px);line-height:1.65;color:var(--w90);margin-bottom:44px;max-width:540px;font-weight:300;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:60px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:36px}
+.hero-stat .val{font-family:var(--fd);font-size:clamp(24px,3vw,32px);color:#fff;letter-spacing:-.03em}
+.hero-stat .lbl{font-size:11px;color:var(--w70);letter-spacing:.05em;text-transform:uppercase;margin-top:2px}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px}
+.hero-scroll span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--w70)}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--blue2),transparent)}
+
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
 .feature-card{padding:36px 32px}
 .feature-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:22px}
 .feature-card h3{font-size:18px;font-weight:500;margin-bottom:10px;letter-spacing:-.02em}
 .feature-card p{font-size:14px;line-height:1.7;color:var(--w70);font-weight:300}
 
-/* TARIFE */
-#tarife{background:var(--bg2)}
 .tarife-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start}
 .tarif-card{padding:40px 32px;cursor:pointer;position:relative;overflow:hidden}
-.tarif-card.featured{transform:scale(1.03);box-shadow:0 20px 60px rgba(10,132,255,.15)}
-.tarif-card.featured::before{content:'';position:absolute;inset:0;border-radius:var(--r24);background:linear-gradient(135deg,rgba(10,132,255,.12),rgba(10,132,255,.03));pointer-events:none}
+.tarif-card.featured{transform:scale(1.03);box-shadow:0 20px 60px rgba(10,132,255,.2)}
+.tarif-card.featured::before{content:'';position:absolute;inset:0;border-radius:var(--r24);background:linear-gradient(135deg,rgba(10,132,255,.14),rgba(10,132,255,.03));pointer-events:none}
 .tarif-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:11px;font-weight:600;padding:5px 18px;border-radius:0 0 12px 12px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
 .tarif-tag{font-size:13px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
 .tarif-name{font-family:var(--fd);font-size:28px;font-weight:400;margin-bottom:28px;letter-spacing:-.02em}
 .tarif-price{font-family:var(--fd);font-size:52px;font-weight:400;letter-spacing:-.04em}
 .tarif-unit{font-size:16px;color:var(--w70);margin-left:4px}
 .tarif-base{font-size:13px;color:var(--w40);margin-bottom:32px;margin-top:4px}
-.tarif-divider{height:1px;background:rgba(255,255,255,.06);margin-bottom:28px}
+.tarif-divider{height:1px;background:rgba(255,255,255,.08);margin-bottom:28px}
 .tarif-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
 .tarif-feature{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--w70)}
 .check-dot{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px}
 
-/* RECHNER */
-#rechner{background:var(--bg)}
 .rechner-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .rechner-card{padding:48px 44px}
 .rechner-label{font-size:13px;color:var(--w40);letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:14px}
@@ -142,72 +146,61 @@ section{padding:120px 24px;position:relative}
 input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--blue);box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer;transition:transform var(--tf)}
 input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
-.refs{margin-top:28px;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.refs{margin-top:28px;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
 .refs p{font-size:13px;color:var(--w40);margin-bottom:10px}
 .ref-row{display:flex;justify-content:space-between;font-size:13px;color:var(--w70);padding:4px 0}
-.result-card{padding:44px 40px;border:1px solid rgba(10,132,255,.2);background:linear-gradient(135deg,rgba(10,132,255,.06),rgba(10,132,255,.02))}
+.result-card{padding:44px 40px;border:1px solid rgba(10,132,255,.25);background:linear-gradient(135deg,rgba(10,132,255,.1),rgba(10,132,255,.02))}
 .result-total{font-family:var(--fd);font-size:64px;font-weight:400;letter-spacing:-.04em}
 .result-monthly{color:var(--w40);font-size:14px;margin-bottom:32px}
 .saving-box{display:flex;align-items:center;gap:12px;padding:16px;background:var(--gsubt);border-radius:12px;border:1px solid var(--gglow)}
-.saving-box .icon{font-size:20px}
 .cta-card{padding:32px 36px;margin-top:16px}
 
-/* WHY */
-#warum{background:var(--bg2)}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06);border-radius:20px;overflow:hidden;margin-bottom:100px}
-.stat-cell{padding:40px 32px;background:var(--bg2);text-align:center}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden;margin-bottom:100px}
+.stat-cell{padding:40px 32px;background:rgba(13,17,23,.6);backdrop-filter:blur(16px);text-align:center}
 .stat-val{font-family:var(--fd);font-size:40px;letter-spacing:-.04em;margin-bottom:6px}
 .stat-label{font-size:13px;color:var(--w40);letter-spacing:.04em}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.why-h2{font-family:var(--fd);font-weight:400;font-size:clamp(28px,3vw,48px);line-height:1.15;letter-spacing:-.03em;margin-bottom:24px}
-.why-p{color:var(--w70);font-size:16px;line-height:1.75;font-weight:300;margin-bottom:36px}
+.why-h2{font-family:var(--fd);font-weight:400;font-size:clamp(28px,3vw,48px);line-height:1.15;letter-spacing:-.03em;margin-bottom:24px;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.why-p{color:var(--w90);font-size:16px;line-height:1.75;font-weight:300;margin-bottom:36px}
 .check-list{display:flex;flex-direction:column;gap:14px}
 .check-item{display:flex;gap:12px;align-items:flex-start}
 .check-circle{width:22px;height:22px;border-radius:50%;background:var(--gsubt);border:1px solid var(--gglow);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:10px}
-.check-text{font-size:14px;color:var(--w70);line-height:1.6}
-.diagram-box{padding:44px;border-radius:24px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+.check-text{font-size:14px;color:var(--w90);line-height:1.6}
+.diagram-box{padding:44px;border-radius:24px;background:rgba(18,22,28,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.09)}
 
-/* SUSTAINABILITY */
-#nachhaltigkeit{background:var(--bg)}
 .sust-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .mix-card{padding:52px 44px}
 .mix-title{font-family:var(--fd);font-size:24px;font-weight:400;margin-bottom:40px}
 .mix-item{margin-bottom:28px}
 .mix-row{display:flex;justify-content:space-between;margin-bottom:10px;align-items:center}
 .mix-name{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--w70)}
-.mix-bar-bg{height:6px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+.mix-bar-bg{height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
 .mix-bar{height:100%;border-radius:3px;transition:width 1.5s var(--ts)}
-.mix-stats{display:flex;justify-content:space-between;margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,.06)}
+.mix-stats{display:flex;justify-content:space-between;margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}
 .mix-stat{text-align:center}
 .mix-stat-val{font-family:var(--fd);font-size:28px;color:var(--green);letter-spacing:-.03em}
 .mix-stat-label{font-size:12px;color:var(--w40);margin-top:4px}
-.sust-h2{font-family:var(--fd);font-weight:400;font-size:clamp(28px,3vw,48px);line-height:1.15;letter-spacing:-.03em;margin-bottom:24px}
-.sust-p{color:var(--w70);font-size:16px;line-height:1.75;font-weight:300;margin-bottom:28px}
+.sust-h2{font-family:var(--fd);font-weight:400;font-size:clamp(28px,3vw,48px);line-height:1.15;letter-spacing:-.03em;margin-bottom:24px;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.sust-p{color:var(--w90);font-size:16px;line-height:1.75;font-weight:300;margin-bottom:28px}
 
-/* TESTIMONIALS */
-#bewertungen{background:var(--bg2)}
 .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
 .review-card{padding:32px 28px}
 .review-stars{display:flex;gap:2px;margin-bottom:16px;font-size:14px}
-.review-text{font-size:14px;line-height:1.75;color:var(--w70);font-style:italic;margin-bottom:24px}
+.review-text{font-size:14px;line-height:1.75;color:var(--w90);font-style:italic;margin-bottom:24px}
 .review-footer{display:flex;justify-content:space-between;align-items:center}
 .review-name{font-size:14px;font-weight:500}
 .review-location{font-size:12px;color:var(--w40)}
 .review-tarif{font-size:11px;padding:4px 12px;border-radius:20px;background:var(--bsubt);border:1px solid rgba(10,132,255,.2);color:var(--blue2);font-weight:500}
 
-/* FAQ */
-#faq{background:var(--bg)}
-.faq-wrap{max-width:800px;margin:0 auto}
-.faq-item{border-bottom:1px solid rgba(255,255,255,.07)}
+.faq-wrap{max-width:800px;margin:0 auto;width:100%}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.09)}
 .faq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:24px 4px;background:none;border:none;cursor:pointer;color:#fff;font-family:var(--fb);font-size:16px;font-weight:400;text-align:left;letter-spacing:-.01em}
 .faq-icon{flex-shrink:0;margin-left:16px;font-size:18px;transition:transform .3s var(--ts);color:var(--w40)}
 .faq-icon.open{transform:rotate(45deg);color:var(--blue2)}
 .faq-body{overflow:hidden;max-height:0;opacity:0;transition:max-height .4s var(--ts),opacity .3s ease}
 .faq-body.open{max-height:200px;opacity:1}
-.faq-body p{padding:0 4px 24px;font-size:15px;line-height:1.75;color:var(--w70);font-weight:300}
+.faq-body p{padding:0 4px 24px;font-size:15px;line-height:1.75;color:var(--w90);font-weight:300}
 
-/* CONTACT */
-#kontakt{background:var(--bg2)}
 .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;align-items:start}
 .contact-cards{display:flex;flex-direction:column;gap:16px}
 .contact-card{padding:28px;display:flex;gap:16px;align-items:flex-start}
@@ -220,15 +213,14 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 .subject-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
 .subject-btn{padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-family:var(--fb);color:#fff;transition:all var(--tf)}
 .form-label{font-size:13px;color:var(--w40);letter-spacing:.04em;display:block;margin-bottom:8px}
-.form-input{width:100%;padding:14px 18px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--fb);font-size:15px;outline:none;transition:border-color var(--tf);margin-bottom:16px}
+.form-input{width:100%;padding:14px 18px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:var(--fb);font-size:15px;outline:none;transition:border-color var(--tf);margin-bottom:16px}
 .form-input:focus{border-color:rgba(10,132,255,.5)}
 .form-note{font-size:12px;color:var(--w40);text-align:center;margin-top:8px}
 .form-note a{color:var(--blue2);text-decoration:none}
 .success-box{text-align:center;padding:32px 0}
 .success-icon{width:64px;height:64px;border-radius:50%;background:var(--gsubt);border:1px solid var(--gglow);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px}
 
-/* FOOTER */
-footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:80px 24px 40px}
+footer{position:relative;z-index:2;background:linear-gradient(to bottom,transparent,rgba(10,13,18,.9) 30%);border-top:1px solid rgba(255,255,255,.06);padding:80px 24px 40px}
 .footer-inner{max-width:1200px;margin:0 auto}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:64px}
 .footer-brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:20px}
@@ -248,41 +240,49 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
 .lang-btns{display:flex;gap:8px}
 .lang-btn{padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-family:var(--fb);text-transform:uppercase;transition:all var(--tf)}
 
-/* RESPONSIVE */
 @media(max-width:900px){
   .rechner-grid,.why-grid,.sust-grid,.contact-grid{grid-template-columns:1fr!important}
   .tarife-grid{grid-template-columns:1fr!important}
   .tarif-card.featured{transform:none}
   .stats-row{grid-template-columns:1fr 1fr!important}
   .footer-grid{grid-template-columns:1fr 1fr!important}
+  #chapter-rail{display:none}
+  section{min-height:auto;padding:100px 20px}
 }
 @media(max-width:768px){
   .nav-links,.nav-portal{display:none!important}
-  .hero-stats{gap:20px}
   .footer-grid{grid-template-columns:1fr!important}
 }
 @media(max-width:480px){
   .stats-row{grid-template-columns:1fr!important}
-  section{padding:80px 16px}
 }
 </style>
 </head>
 <body>
 
+<!-- ═══ THE CONTINUOUS FILM ═══ -->
+<canvas id="story-canvas"></canvas>
+<div id="story-veil"></div>
+<div id="scroll-bar"></div>
+
+<!-- Chapter rail -->
+<div id="chapter-rail">
+  <div class="chapter-tick" data-i="0"><span class="ct-label">Nacht</span></div>
+  <div class="chapter-tick" data-i="1"><span class="ct-label">Dämmerung</span></div>
+  <div class="chapter-tick" data-i="2"><span class="ct-label">Sonnenaufgang</span></div>
+  <div class="chapter-tick" data-i="3"><span class="ct-label">Voller Tag</span></div>
+  <div class="chapter-tick" data-i="4"><span class="ct-label">Windkraft</span></div>
+  <div class="chapter-tick" data-i="5"><span class="ct-label">Grüne Welt</span></div>
+  <div class="chapter-tick" data-i="6"><span class="ct-label">Goldene Stunde</span></div>
+  <div class="chapter-tick" data-i="7"><span class="ct-label">Stadt der Zukunft</span></div>
+</div>
+
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-icon">⚡</div>
-      <span class="logo-text">Sturm<span>Energie</span></span>
-    </a>
+    <a href="#hero" class="logo"><div class="logo-icon">⚡</div><span class="logo-text">Sturm<span>Energie</span></span></a>
     <div class="nav-links">
-      <a href="#tarife">Tarife</a>
-      <a href="#vorteile">Vorteile</a>
-      <a href="#nachhaltigkeit">Nachhaltigkeit</a>
-      <a href="#bewertungen">Kundenstimmen</a>
-      <a href="#faq">FAQ</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="#tarife">Tarife</a><a href="#vorteile">Vorteile</a><a href="#nachhaltigkeit">Nachhaltigkeit</a><a href="#bewertungen">Kundenstimmen</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a>
     </div>
     <div class="nav-right">
       <a href="#portal" class="btn-g nav-portal" style="padding:9px 20px;font-size:14px">Kundenportal</a>
@@ -291,143 +291,64 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div id="hero-bg">
-    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#050a14"/>
-          <stop offset="40%" stop-color="#0a1525"/>
-          <stop offset="70%" stop-color="#0d1f3a"/>
-          <stop offset="100%" stop-color="#111314"/>
-        </linearGradient>
-        <radialGradient id="cglow" cx="50%" cy="70%" r="60%">
-          <stop offset="0%" stop-color="#0a84ff" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#0a84ff" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="sglow" cx="75%" cy="25%" r="30%">
-          <stop offset="0%" stop-color="#30d158" stop-opacity="0.18"/>
-          <stop offset="100%" stop-color="#30d158" stop-opacity="0"/>
-        </radialGradient>
-        <linearGradient id="overlay" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#0a0f1a" stop-opacity="0.88"/>
-          <stop offset="55%" stop-color="#0a0f1a" stop-opacity="0.4"/>
-          <stop offset="100%" stop-color="#0a0f1a" stop-opacity="0.05"/>
-        </linearGradient>
-      </defs>
-      <rect width="1440" height="900" fill="url(#sky)"/>
-      <rect width="1440" height="900" fill="url(#cglow)"/>
-      <rect width="1440" height="900" fill="url(#sglow)"/>
-      <!-- Stars -->
-      <circle cx="120" cy="80" r="0.8" fill="white" opacity="0.5"/><circle cx="340" cy="45" r="1.1" fill="white" opacity="0.4"/><circle cx="560" cy="110" r="0.7" fill="white" opacity="0.6"/><circle cx="780" cy="60" r="1.0" fill="white" opacity="0.3"/><circle cx="1000" cy="90" r="0.8" fill="white" opacity="0.5"/><circle cx="1220" cy="40" r="1.2" fill="white" opacity="0.4"/><circle cx="200" cy="160" r="0.6" fill="white" opacity="0.3"/><circle cx="450" cy="200" r="0.9" fill="white" opacity="0.5"/><circle cx="700" cy="150" r="0.7" fill="white" opacity="0.4"/><circle cx="950" cy="180" r="1.0" fill="white" opacity="0.3"/><circle cx="1150" cy="130" r="0.8" fill="white" opacity="0.5"/><circle cx="1380" cy="170" r="0.6" fill="white" opacity="0.4"/><circle cx="80" cy="250" r="0.9" fill="white" opacity="0.3"/><circle cx="320" cy="280" r="0.7" fill="white" opacity="0.5"/><circle cx="640" cy="300" r="1.1" fill="white" opacity="0.4"/><circle cx="890" cy="260" r="0.8" fill="white" opacity="0.3"/><circle cx="1100" cy="320" r="0.6" fill="white" opacity="0.5"/><circle cx="1300" cy="240" r="1.0" fill="white" opacity="0.4"/>
-      <!-- Turbines -->
-      <g opacity="0.3"><line x1="200" y1="280" x2="200" y2="500" stroke="#aaa" stroke-width="2"/><circle cx="200" cy="280" r="4" fill="#aaa"/><line x1="200" y1="280" x2="248" y2="246" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="200" y1="280" x2="152" y2="246" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="200" y1="280" x2="200" y2="225" stroke="white" stroke-width="2.5" stroke-linecap="round"/></g>
-      <g opacity="0.3"><line x1="400" y1="265" x2="400" y2="490" stroke="#aaa" stroke-width="2"/><circle cx="400" cy="265" r="4" fill="#aaa"/><line x1="400" y1="265" x2="445" y2="237" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="400" y1="265" x2="355" y2="237" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="400" y1="265" x2="400" y2="210" stroke="white" stroke-width="2.5" stroke-linecap="round"/></g>
-      <g opacity="0.25"><line x1="1100" y1="275" x2="1100" y2="495" stroke="#aaa" stroke-width="2"/><circle cx="1100" cy="275" r="4" fill="#aaa"/><line x1="1100" y1="275" x2="1148" y2="247" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="1100" y1="275" x2="1052" y2="247" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="1100" y1="275" x2="1100" y2="220" stroke="white" stroke-width="2.5" stroke-linecap="round"/></g>
-      <g opacity="0.25"><line x1="1280" y1="260" x2="1280" y2="480" stroke="#aaa" stroke-width="2"/><circle cx="1280" cy="260" r="4" fill="#aaa"/><line x1="1280" y1="260" x2="1325" y2="234" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="1280" y1="260" x2="1235" y2="234" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="1280" y1="260" x2="1280" y2="207" stroke="white" stroke-width="2.5" stroke-linecap="round"/></g>
-      <!-- City -->
-      <rect x="0" y="680" width="80" height="220" fill="#0d1a2e"/><rect x="80" y="720" width="50" height="180" fill="#0d1a2e"/><rect x="130" y="700" width="40" height="200" fill="#0d1a2e"/><rect x="170" y="730" width="60" height="170" fill="#0d1a2e"/><rect x="230" y="710" width="45" height="190" fill="#0d1a2e"/><rect x="275" y="740" width="35" height="160" fill="#0d1a2e"/><rect x="310" y="695" width="55" height="205" fill="#0d1a2e"/><rect x="365" y="720" width="40" height="180" fill="#0d1a2e"/><rect x="405" y="688" width="70" height="212" fill="#0d1a2e"/><rect x="475" y="715" width="50" height="185" fill="#0d1a2e"/><rect x="525" y="730" width="40" height="170" fill="#0d1a2e"/><rect x="565" y="705" width="55" height="195" fill="#0d1a2e"/><rect x="620" y="718" width="45" height="182" fill="#0d1a2e"/><rect x="665" y="693" width="65" height="207" fill="#0d1a2e"/><rect x="730" y="710" width="50" height="190" fill="#0d1a2e"/><rect x="780" y="728" width="40" height="172" fill="#0d1a2e"/><rect x="820" y="700" width="60" height="200" fill="#0d1a2e"/><rect x="880" y="714" width="45" height="186" fill="#0d1a2e"/><rect x="925" y="738" width="35" height="162" fill="#0d1a2e"/><rect x="960" y="704" width="55" height="196" fill="#0d1a2e"/><rect x="1015" y="719" width="50" height="181" fill="#0d1a2e"/><rect x="1065" y="688" width="70" height="212" fill="#0d1a2e"/><rect x="1135" y="714" width="45" height="186" fill="#0d1a2e"/><rect x="1180" y="729" width="40" height="171" fill="#0d1a2e"/><rect x="1220" y="699" width="60" height="201" fill="#0d1a2e"/><rect x="1280" y="714" width="50" height="186" fill="#0d1a2e"/><rect x="1330" y="738" width="35" height="162" fill="#0d1a2e"/><rect x="1365" y="704" width="75" height="196" fill="#0d1a2e"/>
-      <!-- Windows -->
-      <rect x="10" y="700" width="6" height="10" fill="#0a84ff" opacity="0.5"/><rect x="24" y="700" width="6" height="10" fill="#1c3a5a" opacity="0.4"/><rect x="38" y="700" width="6" height="10" fill="#0a84ff" opacity="0.6"/><rect x="10" y="720" width="6" height="10" fill="#1c3a5a" opacity="0.4"/><rect x="24" y="720" width="6" height="10" fill="#0a84ff" opacity="0.5"/><rect x="38" y="720" width="6" height="10" fill="#0a84ff" opacity="0.3"/><rect x="416" y="705" width="6" height="10" fill="#0a84ff" opacity="0.6"/><rect x="430" y="705" width="6" height="10" fill="#1c3a5a" opacity="0.4"/><rect x="444" y="705" width="6" height="10" fill="#0a84ff" opacity="0.5"/><rect x="458" y="705" width="6" height="10" fill="#0a84ff" opacity="0.3"/><rect x="416" y="725" width="6" height="10" fill="#1c3a5a" opacity="0.4"/><rect x="430" y="725" width="6" height="10" fill="#0a84ff" opacity="0.6"/><rect x="676" y="710" width="6" height="10" fill="#0a84ff" opacity="0.5"/><rect x="690" y="710" width="6" height="10" fill="#0a84ff" opacity="0.6"/><rect x="704" y="710" width="6" height="10" fill="#1c3a5a" opacity="0.3"/><rect x="718" y="710" width="6" height="10" fill="#0a84ff" opacity="0.5"/><rect x="676" y="730" width="6" height="10" fill="#1c3a5a" opacity="0.4"/><rect x="690" y="730" width="6" height="10" fill="#0a84ff" opacity="0.6"/>
-      <!-- Solar panels -->
-      <g transform="translate(60,778)" opacity="0.6"><rect x="0" y="0" width="45" height="28" rx="2" fill="#0a1f3d" stroke="#0a84ff" stroke-width="0.8"/><line x1="22" y1="0" x2="22" y2="28" stroke="#0a84ff" stroke-width="0.5" opacity="0.4"/><line x1="0" y1="14" x2="45" y2="14" stroke="#0a84ff" stroke-width="0.5" opacity="0.4"/></g>
-      <g transform="translate(120,778)" opacity="0.6"><rect x="0" y="0" width="45" height="28" rx="2" fill="#0a1f3d" stroke="#0a84ff" stroke-width="0.8"/><line x1="22" y1="0" x2="22" y2="28" stroke="#0a84ff" stroke-width="0.5" opacity="0.4"/><line x1="0" y1="14" x2="45" y2="14" stroke="#0a84ff" stroke-width="0.5" opacity="0.4"/></g>
-      <g transform="translate(180,782)" opacity="0.5"><rect x="0" y="0" width="45" height="28" rx="2" fill="#0a1f3d" stroke="#0a84ff" stroke-width="0.8"/><line x1="22" y1="0" x2="22" y2="28" stroke="#0a84ff" stroke-width="0.5" opacity="0.4"/><line x1="0" y1="14" x2="45" y2="14" stroke="#0a84ff" stroke-width="0.5" opacity="0.4"/></g>
-      <rect width="1440" height="900" fill="url(#overlay)"/>
-    </svg>
-  </div>
-  <div class="orb1"></div>
-  <div class="orb2"></div>
-  <div class="hero-content">
-    <div class="hero-inner" id="hero-inner">
-      <div class="label" style="opacity:0;transition:all .6s cubic-bezier(.16,1,.3,1) .2s" id="h-label"><div class="dot"></div>Deutschlands moderner Energieversorger</div>
-      <h1 class="hero-h1" style="opacity:0;transition:all .7s cubic-bezier(.16,1,.3,1) .35s" id="h-title">
-        Energie. <em style="font-style:italic;color:var(--blue2)">Sauber.</em><br>
-        Intelligent.<br>
-        <span class="shimmer">Transparent.</span>
-      </h1>
-      <p class="hero-sub" style="opacity:0;transition:all .7s cubic-bezier(.16,1,.3,1) .5s" id="h-sub">
-        100% Ökostrom. Faire Preise ohne versteckte Kosten. Digitaler Service, der wirklich funktioniert – für eine Zukunft, die wir gemeinsam gestalten.
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:14px;opacity:0;transition:all .7s cubic-bezier(.16,1,.3,1) .65s" id="h-btns">
+<div id="page">
+
+<!-- CHAPTER 0 · HERO · NIGHT → FIRST LIGHT -->
+<section id="hero" data-chapter="0">
+  <div class="section-inner">
+    <div class="hero-block">
+      <div class="hero-eyebrow"><div class="dot"></div>Deutschlands moderner Energieversorger</div>
+      <h1 class="hero-h1">Energie. <em>Sauber.</em><br>Intelligent.<br><span class="shimmer">Transparent.</span></h1>
+      <p class="hero-sub">Begleiten Sie uns auf einer Reise – von der Nacht bis zur Energie der Zukunft. 100% Ökostrom, faire Preise, digitaler Service.</p>
+      <div class="hero-actions">
         <a href="#tarife" class="btn-p" style="font-size:16px;padding:16px 34px">Tarif berechnen →</a>
-        <a href="#vorteile" class="btn-g" style="font-size:16px">Mehr erfahren</a>
+        <a href="#vorteile" class="btn-g" style="font-size:16px">Die Reise beginnen</a>
       </div>
-      <div class="hero-stats" style="opacity:0;transition:all .7s cubic-bezier(.16,1,.3,1) .8s" id="h-stats">
-        <div class="hero-stat"><span class="hero-stat-val">100%</span><span class="hero-stat-label">Ökostrom</span></div>
-        <div class="hero-stat"><span class="hero-stat-val">48 h</span><span class="hero-stat-label">Wechselgarantie</span></div>
-        <div class="hero-stat"><span class="hero-stat-val">4,8★</span><span class="hero-stat-label">Kundenbewertung</span></div>
-        <div class="hero-stat"><span class="hero-stat-val">0€</span><span class="hero-stat-label">Wechselgebühr</span></div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="val">100%</div><div class="lbl">Ökostrom</div></div>
+        <div class="hero-stat"><div class="val">48 h</div><div class="lbl">Wechselgarantie</div></div>
+        <div class="hero-stat"><div class="val">4,8★</div><div class="lbl">Kundenbewertung</div></div>
+        <div class="hero-stat"><div class="val">0€</div><div class="lbl">Wechselgebühr</div></div>
       </div>
     </div>
   </div>
-  <div class="scroll-hint" id="scroll-hint" style="opacity:0;transition:opacity 1s ease 1.2s">
-    <span>Entdecken</span>
-    <div class="scroll-box"><div class="scroll-dot"></div></div>
-  </div>
+  <div class="hero-scroll"><span>Scrollen & erleben</span><div class="scroll-line"></div></div>
 </section>
 
-<!-- VORTEILE -->
-<section id="vorteile">
-  <div class="grid-bg" style="position:absolute;inset:0;opacity:.4;pointer-events:none"></div>
+<!-- CHAPTER 1 · VORTEILE · DAWN -->
+<section id="vorteile" data-chapter="1">
   <div class="section-inner">
     <div class="section-head">
-      <div class="label reveal"><div class="dot"></div>Warum Sturm Energie</div>
-      <h2 class="section-h2 reveal d1">Energie, die für Sie<br><em style="font-style:italic;color:var(--blue2)">arbeitet</em></h2>
-      <p class="section-sub reveal d2">Wir verbinden modernste Technologie mit echtem Engagement für die Energiewende.</p>
+      <div class="chapter-mark reveal">Kapitel I · Die Dämmerung</div>
+      <div class="label reveal d1"><div class="dot"></div>Warum Sturm Energie</div>
+      <h2 class="section-h2 reveal d2">Wenn der Tag erwacht,<br><em style="font-style:italic;color:var(--blue2)">arbeitet Ihre Energie</em></h2>
+      <p class="section-sub reveal d3">Wir verbinden modernste Technologie mit echtem Engagement für die Energiewende.</p>
     </div>
     <div class="features-grid">
-      <div class="card feature-card reveal d1">
-        <div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">🌿</div>
-        <h3>100% Ökostrom</h3>
-        <p>Ausschließlich Strom aus erneuerbaren Quellen – zertifiziert, transparent und ohne Greenwashing.</p>
-      </div>
-      <div class="card feature-card reveal d2">
-        <div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">🛡️</div>
-        <h3>Faire Preise</h3>
-        <p>Keine versteckten Kosten, keine Preisüberraschungen. Volle Kostentransparenz von Beginn an.</p>
-      </div>
-      <div class="card feature-card reveal d3">
-        <div class="feature-icon" style="background:rgba(255,159,10,.1);border:1px solid rgba(255,159,10,.3)">📈</div>
-        <h3>Preisgarantie</h3>
-        <p>12 Monate Preissicherheit für Neukunden. Planen Sie Ihre Energiekosten verlässlich.</p>
-      </div>
-      <div class="card feature-card reveal d1">
-        <div class="feature-icon" style="background:rgba(191,90,242,.1);border:1px solid rgba(191,90,242,.3)">📱</div>
-        <h3>Digitaler Service</h3>
-        <p>Ihr Kundenportal – rund um die Uhr. Verbrauch, Rechnungen, Zählerstand – alles digital.</p>
-      </div>
-      <div class="card feature-card reveal d2">
-        <div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">⚡</div>
-        <h3>Schneller Wechsel</h3>
-        <p>In nur 48 Stunden gewechselt. Wir kümmern uns um die Kündigung bei Ihrem alten Anbieter.</p>
-      </div>
-      <div class="card feature-card reveal d3">
-        <div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">🌍</div>
-        <h3>CO₂-neutral</h3>
-        <p>Jede kWh wird durch Investitionen in erneuerbare Energieprojekte kompensiert.</p>
-      </div>
+      <div class="card feature-card reveal d1"><div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">🌿</div><h3>100% Ökostrom</h3><p>Ausschließlich Strom aus erneuerbaren Quellen – zertifiziert, transparent und ohne Greenwashing.</p></div>
+      <div class="card feature-card reveal d2"><div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">🛡️</div><h3>Faire Preise</h3><p>Keine versteckten Kosten, keine Preisüberraschungen. Volle Kostentransparenz von Beginn an.</p></div>
+      <div class="card feature-card reveal d3"><div class="feature-icon" style="background:rgba(255,159,10,.1);border:1px solid rgba(255,159,10,.3)">📈</div><h3>Preisgarantie</h3><p>12 Monate Preissicherheit für Neukunden. Planen Sie Ihre Energiekosten verlässlich.</p></div>
+      <div class="card feature-card reveal d1"><div class="feature-icon" style="background:rgba(191,90,242,.1);border:1px solid rgba(191,90,242,.3)">📱</div><h3>Digitaler Service</h3><p>Ihr Kundenportal – rund um die Uhr. Verbrauch, Rechnungen, Zählerstand – alles digital.</p></div>
+      <div class="card feature-card reveal d2"><div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">⚡</div><h3>Schneller Wechsel</h3><p>In nur 48 Stunden gewechselt. Wir kümmern uns um die Kündigung bei Ihrem alten Anbieter.</p></div>
+      <div class="card feature-card reveal d3"><div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">🌍</div><h3>CO₂-neutral</h3><p>Jede kWh wird durch Investitionen in erneuerbare Energieprojekte kompensiert.</p></div>
     </div>
   </div>
 </section>
 
-<!-- TARIFE -->
-<section id="tarife" style="background:var(--bg2)">
-  <div class="divider"></div>
+<!-- CHAPTER 2 · TARIFE · SUNRISE -->
+<section id="tarife" data-chapter="2">
   <div class="section-inner">
     <div class="section-head">
-      <div class="label reveal"><div class="dot"></div>Unsere Tarife</div>
-      <h2 class="section-h2 reveal d1">Der richtige Tarif<br>für <em style="font-style:italic;color:var(--blue2)">jeden Haushalt</em></h2>
-      <p class="section-sub reveal d2">Alle Tarife inklusive 100% Ökostrom. Keine Vertragslaufzeit, keine versteckten Gebühren.</p>
+      <div class="chapter-mark reveal">Kapitel II · Der Sonnenaufgang</div>
+      <div class="label reveal d1"><div class="dot"></div>Unsere Tarife</div>
+      <h2 class="section-h2 reveal d2">Der richtige Tarif<br>für <em style="font-style:italic;color:var(--blue2)">jeden Haushalt</em></h2>
+      <p class="section-sub reveal d3">Alle Tarife inklusive 100% Ökostrom. Keine Vertragslaufzeit, keine versteckten Gebühren.</p>
     </div>
     <div class="tarife-grid">
       <div class="card tarif-card reveal d1">
-        <div class="tarif-tag" style="color:#98989f">Einfach & fair</div>
-        <div class="tarif-name">Basis</div>
+        <div class="tarif-tag" style="color:#98989f">Einfach & fair</div><div class="tarif-name">Basis</div>
         <div><span class="tarif-price">28,9</span><span class="tarif-unit">ct/kWh</span></div>
-        <div class="tarif-base">zzgl. 9,90 €/Monat Grundpreis</div>
-        <div class="tarif-divider"></div>
+        <div class="tarif-base">zzgl. 9,90 €/Monat Grundpreis</div><div class="tarif-divider"></div>
         <ul class="tarif-features">
           <li class="tarif-feature"><div class="check-dot" style="background:rgba(255,255,255,.05)">✓</div>100% Ökostrom</li>
           <li class="tarif-feature"><div class="check-dot" style="background:rgba(255,255,255,.05)">✓</div>Monatliche Abrechnung</li>
@@ -437,72 +358,57 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
         <a href="#rechner" class="btn-g" style="width:100%;justify-content:center">Basis wählen →</a>
       </div>
       <div class="card tarif-card featured reveal d2" style="padding:48px 32px 40px">
-        <div class="tarif-badge">Beliebteste Wahl</div>
-        <div class="tarif-tag" style="color:var(--blue2)">Unser Bestseller</div>
-        <div class="tarif-name">Komfort</div>
+        <div class="tarif-badge">Beliebteste Wahl</div><div class="tarif-tag" style="color:var(--blue2)">Unser Bestseller</div><div class="tarif-name">Komfort</div>
         <div><span class="tarif-price">26,9</span><span class="tarif-unit">ct/kWh</span></div>
-        <div class="tarif-base">zzgl. 7,90 €/Monat Grundpreis</div>
-        <div class="tarif-divider"></div>
+        <div class="tarif-base">zzgl. 7,90 €/Monat Grundpreis</div><div class="tarif-divider"></div>
         <ul class="tarif-features">
           <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>100% Ökostrom + Zertifikat</li>
           <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>Premiumportal & App</li>
           <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>24 Monate Preissicherheit</li>
           <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>Persönlicher Energieberater</li>
           <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>CO₂-Ausgleich inklusive</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>Monatliche Abrechnung</li>
         </ul>
         <a href="#rechner" class="btn-p" style="width:100%;justify-content:center">Jetzt wechseln →</a>
       </div>
       <div class="card tarif-card reveal d3">
-        <div class="tarif-tag" style="color:var(--green)">Für Klimapioniere</div>
-        <div class="tarif-name">Öko Plus</div>
+        <div class="tarif-tag" style="color:var(--green)">Für Klimapioniere</div><div class="tarif-name">Öko Plus</div>
         <div><span class="tarif-price">29,9</span><span class="tarif-unit">ct/kWh</span></div>
-        <div class="tarif-base">zzgl. 8,90 €/Monat Grundpreis</div>
-        <div class="tarif-divider"></div>
+        <div class="tarif-base">zzgl. 8,90 €/Monat Grundpreis</div><div class="tarif-divider"></div>
         <ul class="tarif-features">
           <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>100% Regionalstrom</li>
           <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>Monatlicher Klimabericht</li>
           <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>24 Monate Preissicherheit</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>Baumplanzprogramm inkl.</li>
+          <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>Baumpflanzprogramm inkl.</li>
           <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>Förderberatung Solar</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>Energieberatung Premium</li>
         </ul>
         <a href="#rechner" class="btn-green" style="width:100%;justify-content:center">Öko Plus wählen →</a>
       </div>
     </div>
-    <p class="reveal" style="text-align:center;margin-top:32px;font-size:13px;color:var(--w40)">Alle Preise inkl. Steuern und Abgaben. Gültig ab 01.07.2025.</p>
   </div>
 </section>
 
-<!-- RECHNER -->
-<section id="rechner">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(10,132,255,.04) 0%,transparent 70%);pointer-events:none"></div>
+<!-- CHAPTER 3 · RECHNER · FULL DAY -->
+<section id="rechner" data-chapter="3">
   <div class="section-inner">
     <div class="section-head">
-      <div class="label reveal"><div class="dot"></div>Tarifrechner</div>
-      <h2 class="section-h2 reveal d1">Was kostet Ihr Strom<br><em style="font-style:italic;color:var(--blue2)">wirklich?</em></h2>
+      <div class="chapter-mark reveal">Kapitel III · Der volle Tag</div>
+      <div class="label reveal d1"><div class="dot"></div>Tarifrechner</div>
+      <h2 class="section-h2 reveal d2">Was kostet Ihr Strom<br><em style="font-style:italic;color:var(--blue2)">wirklich?</em></h2>
     </div>
     <div class="rechner-grid">
       <div class="card rechner-card reveal">
-        <div>
-          <span class="rechner-label">Verbrauchstyp</span>
+        <div><span class="rechner-label">Verbrauchstyp</span>
           <div class="type-btns">
             <button class="type-btn" id="btn-haushalt" onclick="setType('haushalt')" style="background:var(--blue);border:1px solid var(--blue)">Haushalt</button>
             <button class="type-btn" id="btn-gewerbe" onclick="setType('gewerbe')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Gewerbe</button>
           </div>
         </div>
         <div>
-          <div class="slider-row">
-            <span class="rechner-label" style="margin-bottom:0">Jahresverbrauch</span>
-            <span class="slider-val" id="kwh-display">2.500 kWh</span>
-          </div>
+          <div class="slider-row"><span class="rechner-label" style="margin-bottom:0">Jahresverbrauch</span><span class="slider-val" id="kwh-display">2.500 kWh</span></div>
           <input type="range" id="kwh-slider" min="500" max="6000" step="100" value="2500" oninput="updateCalc()" style="background:linear-gradient(to right,var(--blue) 33%,rgba(255,255,255,.12) 33%)"/>
-          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--w40)">
-            <span>500 kWh</span><span id="max-label">6.000 kWh</span>
-          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--w40)"><span>500 kWh</span><span id="max-label">6.000 kWh</span></div>
         </div>
-        <div class="refs">
-          <p>Typische Verbräuche</p>
+        <div class="refs"><p>Typische Verbräuche</p>
           <div class="ref-row"><span>1-Person Haushalt</span><span style="color:var(--w40)">≈ 1.500 kWh</span></div>
           <div class="ref-row"><span>2-Personen Haushalt</span><span style="color:var(--w40)">≈ 2.500 kWh</span></div>
           <div class="ref-row"><span>4-Personen Haushalt</span><span style="color:var(--w40)">≈ 4.000 kWh</span></div>
@@ -515,13 +421,7 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
           <div style="margin-bottom:6px"><span class="result-total" id="total-display">766,70</span><span style="font-size:20px;color:var(--w70);margin-left:4px">€</span></div>
           <p class="result-monthly">≈ <span id="monthly-display" style="color:var(--w70)">63,89 €/Monat</span></p>
           <div style="height:1px;background:rgba(255,255,255,.06);margin-bottom:24px"></div>
-          <div class="saving-box">
-            <div class="icon">📈</div>
-            <div>
-              <p style="font-size:13px;color:var(--green);font-weight:500">Gegenüber Bundesdurchschnitt:</p>
-              <p style="font-size:18px;font-weight:500" id="saving-display">111,30 € jährlich sparen</p>
-            </div>
-          </div>
+          <div class="saving-box"><div style="font-size:20px">📈</div><div><p style="font-size:13px;color:var(--green);font-weight:500">Gegenüber Bundesdurchschnitt:</p><p style="font-size:18px;font-weight:500" id="saving-display">111,30 € jährlich sparen</p></div></div>
         </div>
         <div class="card cta-card reveal d2">
           <p style="font-size:14px;color:var(--w70);margin-bottom:20px;line-height:1.6">Ihr individuelles Angebot dauert nur 2 Minuten. Kostenlos, unverbindlich, sofort.</p>
@@ -532,10 +432,12 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
   </div>
 </section>
 
-<!-- WHY -->
-<section id="warum" style="background:var(--bg2)">
-  <div class="divider"></div>
+<!-- CHAPTER 4 · WARUM · WIND -->
+<section id="warum" data-chapter="4">
   <div class="section-inner">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="chapter-mark reveal">Kapitel IV · Die Kraft des Windes</div>
+    </div>
     <div class="stats-row reveal">
       <div class="stat-cell"><div class="stat-val">180.000+</div><div class="stat-label">Zufriedene Kunden</div></div>
       <div class="stat-cell"><div class="stat-val">98,7%</div><div class="stat-label">Kundenzufriedenheit</div></div>
@@ -557,27 +459,12 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
         <div class="diagram-box">
           <svg viewBox="0 0 360 320" style="width:100%;height:auto">
             <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0a84ff"/><stop offset="100%" stop-color="#30d158"/></linearGradient></defs>
-            <circle cx="50" cy="60" r="28" fill="rgba(255,255,255,.04)" stroke="rgba(255,214,10,.4)" stroke-width="1"/>
-            <text x="50" y="55" text-anchor="middle" font-size="16">☀️</text>
-            <text x="50" y="73" text-anchor="middle" fill="#ffd60a" font-size="9" font-family="DM Sans">Solar</text>
-            <line x1="78" y1="60" x2="165" y2="155" stroke="#ffd60a" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5"/>
-            <circle cx="50" cy="160" r="28" fill="rgba(255,255,255,.04)" stroke="rgba(10,132,255,.4)" stroke-width="1"/>
-            <text x="50" y="155" text-anchor="middle" font-size="16">💨</text>
-            <text x="50" y="173" text-anchor="middle" fill="#409cff" font-size="9" font-family="DM Sans">Wind</text>
-            <line x1="78" y1="160" x2="165" y2="160" stroke="#409cff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5"/>
-            <circle cx="50" cy="260" r="28" fill="rgba(255,255,255,.04)" stroke="rgba(48,209,88,.4)" stroke-width="1"/>
-            <text x="50" y="255" text-anchor="middle" font-size="16">💧</text>
-            <text x="50" y="273" text-anchor="middle" fill="#30d158" font-size="9" font-family="DM Sans">Wasser</text>
-            <line x1="78" y1="260" x2="165" y2="165" stroke="#30d158" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5"/>
-            <circle cx="193" cy="160" r="42" fill="rgba(10,132,255,.08)" stroke="#0a84ff" stroke-width="1.5"/>
-            <circle cx="193" cy="160" r="30" fill="rgba(10,132,255,.06)" stroke="#0a84ff" stroke-width="1"/>
-            <text x="193" y="155" text-anchor="middle" fill="#409cff" font-size="11" font-family="DM Sans" font-weight="500">Sturm</text>
-            <text x="193" y="170" text-anchor="middle" fill="#409cff" font-size="11" font-family="DM Sans" font-weight="500">Energie</text>
-            <line x1="235" y1="160" x2="298" y2="160" stroke="url(#lg)" stroke-width="2.5"/>
-            <polygon points="298,154 310,160 298,166" fill="#30d158"/>
-            <circle cx="328" cy="160" r="24" fill="rgba(48,209,88,.08)" stroke="#30d158" stroke-width="1.5"/>
-            <text x="328" y="155" text-anchor="middle" fill="#30d158" font-size="11" font-family="DM Sans">Ihr</text>
-            <text x="328" y="169" text-anchor="middle" fill="#30d158" font-size="11" font-family="DM Sans">Heim</text>
+            <circle cx="50" cy="60" r="28" fill="rgba(255,255,255,.04)" stroke="rgba(255,214,10,.4)" stroke-width="1"/><text x="50" y="55" text-anchor="middle" font-size="16">☀️</text><text x="50" y="73" text-anchor="middle" fill="#ffd60a" font-size="9" font-family="DM Sans">Solar</text><line x1="78" y1="60" x2="165" y2="155" stroke="#ffd60a" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5"/>
+            <circle cx="50" cy="160" r="28" fill="rgba(255,255,255,.04)" stroke="rgba(10,132,255,.4)" stroke-width="1"/><text x="50" y="155" text-anchor="middle" font-size="16">💨</text><text x="50" y="173" text-anchor="middle" fill="#409cff" font-size="9" font-family="DM Sans">Wind</text><line x1="78" y1="160" x2="165" y2="160" stroke="#409cff" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5"/>
+            <circle cx="50" cy="260" r="28" fill="rgba(255,255,255,.04)" stroke="rgba(48,209,88,.4)" stroke-width="1"/><text x="50" y="255" text-anchor="middle" font-size="16">💧</text><text x="50" y="273" text-anchor="middle" fill="#30d158" font-size="9" font-family="DM Sans">Wasser</text><line x1="78" y1="260" x2="165" y2="165" stroke="#30d158" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5"/>
+            <circle cx="193" cy="160" r="42" fill="rgba(10,132,255,.08)" stroke="#0a84ff" stroke-width="1.5"/><circle cx="193" cy="160" r="30" fill="rgba(10,132,255,.06)" stroke="#0a84ff" stroke-width="1"/><text x="193" y="155" text-anchor="middle" fill="#409cff" font-size="11" font-family="DM Sans" font-weight="500">Sturm</text><text x="193" y="170" text-anchor="middle" fill="#409cff" font-size="11" font-family="DM Sans" font-weight="500">Energie</text>
+            <line x1="235" y1="160" x2="298" y2="160" stroke="url(#lg)" stroke-width="2.5"/><polygon points="298,154 310,160 298,166" fill="#30d158"/>
+            <circle cx="328" cy="160" r="24" fill="rgba(48,209,88,.08)" stroke="#30d158" stroke-width="1.5"/><text x="328" y="155" text-anchor="middle" fill="#30d158" font-size="11" font-family="DM Sans">Ihr</text><text x="328" y="169" text-anchor="middle" fill="#30d158" font-size="11" font-family="DM Sans">Heim</text>
           </svg>
         </div>
       </div>
@@ -585,30 +472,19 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
   </div>
 </section>
 
-<!-- NACHHALTIGKEIT -->
-<section id="nachhaltigkeit">
-  <div style="position:absolute;top:-20%;right:-10%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(48,209,88,.04) 0%,transparent 70%);pointer-events:none"></div>
+<!-- CHAPTER 5 · NACHHALTIGKEIT · GREEN WORLD -->
+<section id="nachhaltigkeit" data-chapter="5">
   <div class="section-inner">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="chapter-mark reveal" style="color:var(--green)">Kapitel V · Die grüne Welt</div>
+    </div>
     <div class="sust-grid">
       <div class="card mix-card reveal-left">
         <div class="mix-title">Unser Energiemix 2025</div>
-        <div class="mix-item">
-          <div class="mix-row"><div class="mix-name"><span>💨</span>Windkraft</div><span style="color:#0a84ff;font-weight:500">68%</span></div>
-          <div class="mix-bar-bg"><div class="mix-bar" style="width:68%;background:linear-gradient(to right,rgba(10,132,255,.5),#0a84ff)"></div></div>
-        </div>
-        <div class="mix-item">
-          <div class="mix-row"><div class="mix-name"><span>☀️</span>Solarenergie</div><span style="color:#ffd60a;font-weight:500">22%</span></div>
-          <div class="mix-bar-bg"><div class="mix-bar" style="width:22%;background:linear-gradient(to right,rgba(255,214,10,.5),#ffd60a)"></div></div>
-        </div>
-        <div class="mix-item">
-          <div class="mix-row"><div class="mix-name"><span>💧</span>Wasserkraft</div><span style="color:#30d158;font-weight:500">10%</span></div>
-          <div class="mix-bar-bg"><div class="mix-bar" style="width:10%;background:linear-gradient(to right,rgba(48,209,88,.5),#30d158)"></div></div>
-        </div>
-        <div class="mix-stats">
-          <div class="mix-stat"><div class="mix-stat-val">100%</div><div class="mix-stat-label">Erneuerbar</div></div>
-          <div class="mix-stat"><div class="mix-stat-val">0g</div><div class="mix-stat-label">CO₂/kWh</div></div>
-          <div class="mix-stat"><div class="mix-stat-val">TÜV</div><div class="mix-stat-label">Zertifiziert</div></div>
-        </div>
+        <div class="mix-item"><div class="mix-row"><div class="mix-name"><span>💨</span>Windkraft</div><span style="color:#0a84ff;font-weight:500">68%</span></div><div class="mix-bar-bg"><div class="mix-bar" style="width:68%;background:linear-gradient(to right,rgba(10,132,255,.5),#0a84ff)"></div></div></div>
+        <div class="mix-item"><div class="mix-row"><div class="mix-name"><span>☀️</span>Solarenergie</div><span style="color:#ffd60a;font-weight:500">22%</span></div><div class="mix-bar-bg"><div class="mix-bar" style="width:22%;background:linear-gradient(to right,rgba(255,214,10,.5),#ffd60a)"></div></div></div>
+        <div class="mix-item"><div class="mix-row"><div class="mix-name"><span>💧</span>Wasserkraft</div><span style="color:#30d158;font-weight:500">10%</span></div><div class="mix-bar-bg"><div class="mix-bar" style="width:10%;background:linear-gradient(to right,rgba(48,209,88,.5),#30d158)"></div></div></div>
+        <div class="mix-stats"><div class="mix-stat"><div class="mix-stat-val">100%</div><div class="mix-stat-label">Erneuerbar</div></div><div class="mix-stat"><div class="mix-stat-val">0g</div><div class="mix-stat-label">CO₂/kWh</div></div><div class="mix-stat"><div class="mix-stat-val">TÜV</div><div class="mix-stat-label">Zertifiziert</div></div></div>
       </div>
       <div>
         <div class="label green reveal"><div class="dot"></div>Nachhaltigkeit</div>
@@ -621,17 +497,14 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
   </div>
 </section>
 
-<!-- BEWERTUNGEN -->
-<section id="bewertungen" style="background:var(--bg2)">
-  <div class="divider"></div>
+<!-- CHAPTER 6 · BEWERTUNGEN · GOLDEN HOUR -->
+<section id="bewertungen" data-chapter="6">
   <div class="section-inner">
     <div class="section-head">
-      <div class="label reveal"><div class="dot"></div>Kundenstimmen</div>
-      <h2 class="section-h2 reveal d1">Was unsere Kunden<br><em style="font-style:italic;color:var(--blue2)">wirklich sagen</em></h2>
-      <div style="display:flex;justify-content:center;gap:4px;margin-top:16px;align-items:center" class="reveal d2">
-        <span class="star">★★★★★</span>
-        <span style="margin-left:10px;color:var(--w70);font-size:14px">4,8 / 5 aus 12.400 Bewertungen</span>
-      </div>
+      <div class="chapter-mark reveal">Kapitel VI · Die goldene Stunde</div>
+      <div class="label reveal d1"><div class="dot"></div>Kundenstimmen</div>
+      <h2 class="section-h2 reveal d2">Was unsere Kunden<br><em style="font-style:italic;color:var(--blue2)">wirklich sagen</em></h2>
+      <div style="display:flex;justify-content:center;gap:4px;margin-top:16px;align-items:center" class="reveal d3"><span class="star">★★★★★</span><span style="margin-left:10px;color:var(--w90);font-size:14px">4,8 / 5 aus 12.400 Bewertungen</span></div>
     </div>
     <div class="reviews-grid">
       <div class="card review-card reveal d1"><div class="review-stars">★★★★★</div><p class="review-text">„Wechsel in 2 Tagen erledigt, Kundensupport war top und die App ist wirklich intuitiv. Endlich ein Anbieter, der das ernst nimmt."</p><div class="review-footer"><div><div class="review-name">Sarah M.</div><div class="review-location">München</div></div><span class="review-tarif">Komfort</span></div></div>
@@ -644,8 +517,8 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq">
+<!-- FAQ (part of golden hour fading to evening) -->
+<section id="faq" data-chapter="6">
   <div class="section-inner">
     <div class="section-head">
       <div class="label reveal"><div class="dot"></div>Häufige Fragen</div>
@@ -655,20 +528,20 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
       <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(0)"><span>Wie lange dauert der Wechsel zu Sturm Energie?</span><span class="faq-icon" id="fi0">+</span></button><div class="faq-body" id="fb0"><p>In der Regel dauert der Wechsel nur 48 Stunden. Wir kümmern uns um die Kündigung bei Ihrem alten Anbieter und koordinieren alles – Sie müssen nichts weiter tun als das Bestellformular ausfüllen.</p></div></div>
       <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(1)"><span>Gibt es eine Mindestvertragslaufzeit?</span><span class="faq-icon" id="fi1">+</span></button><div class="faq-body" id="fb1"><p>Nein. Alle unsere Tarife sind monatlich kündbar. Es gibt keine Mindestlaufzeit und keine Wechselgebühren – wir setzen auf Qualität, nicht auf Bindungsklauseln.</p></div></div>
       <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(2)"><span>Was bedeutet 100% Ökostrom bei Sturm Energie?</span><span class="faq-icon" id="fi2">+</span></button><div class="faq-body" id="fb2"><p>Für jede Kilowattstunde, die Sie verbrauchen, kaufen wir eine Kilowattstunde aus zertifizierten erneuerbaren Quellen ein – mit lückenlosem Herkunftsnachweis gemäß EEG.</p></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(3)"><span>Wie hoch ist mein Abschlag und kann ich ihn anpassen?</span><span class="faq-icon" id="fi3">+</span></button><div class="faq-body" id="fb3"><p>Ihr monatlicher Abschlag wird anhand Ihres Jahresverbrauchs berechnet. Im Kundenportal können Sie ihn jederzeit flexibel anpassen – nach oben oder nach unten.</p></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(4)"><span>Was passiert, wenn ich umziehe?</span><span class="faq-icon" id="fi4">+</span></button><div class="faq-body" id="fb4"><p>Kein Problem – melden Sie uns Ihren Umzug einfach im Kundenportal. Wir begleiten Sie zu Ihrer neuen Adresse, sofern wir dort liefern. Andernfalls können Sie ohne Gebühren kündigen.</p></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(5)"><span>Ist die Preisgarantie wirklich verbindlich?</span><span class="faq-icon" id="fi5">+</span></button><div class="faq-body" id="fb5"><p>Ja. Die Preisgarantie gilt vertraglich für die angegebene Laufzeit. Preisanpassungen während der Garantiephase sind ausgeschlossen – das ist unser schriftliches Versprechen.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(3)"><span>Wie hoch ist mein Abschlag und kann ich ihn anpassen?</span><span class="faq-icon" id="fi3">+</span></button><div class="faq-body" id="fb3"><p>Ihr monatlicher Abschlag wird anhand Ihres Jahresverbrauchs berechnet. Im Kundenportal können Sie ihn jederzeit flexibel anpassen.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(4)"><span>Was passiert, wenn ich umziehe?</span><span class="faq-icon" id="fi4">+</span></button><div class="faq-body" id="fb4"><p>Kein Problem – melden Sie uns Ihren Umzug einfach im Kundenportal. Wir begleiten Sie zu Ihrer neuen Adresse, sofern wir dort liefern.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(5)"><span>Ist die Preisgarantie wirklich verbindlich?</span><span class="faq-icon" id="fi5">+</span></button><div class="faq-body" id="fb5"><p>Ja. Die Preisgarantie gilt vertraglich für die angegebene Laufzeit. Preisanpassungen während der Garantiephase sind ausgeschlossen.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- KONTAKT -->
-<section id="kontakt" style="background:var(--bg2)">
-  <div class="divider"></div>
+<!-- CHAPTER 7 · KONTAKT · CITY OF THE FUTURE / NIGHT LIGHTS -->
+<section id="kontakt" data-chapter="7">
   <div class="section-inner">
     <div class="section-head">
-      <div class="label reveal"><div class="dot"></div>Kontakt</div>
-      <h2 class="section-h2 reveal d1">Wir sind für Sie da –<br><em style="font-style:italic;color:var(--blue2)">jederzeit</em></h2>
+      <div class="chapter-mark reveal">Kapitel VII · Die Stadt der Zukunft</div>
+      <div class="label reveal d1"><div class="dot"></div>Kontakt</div>
+      <h2 class="section-h2 reveal d2">Ihre Reise beginnt –<br><em style="font-style:italic;color:var(--blue2)">jetzt</em></h2>
     </div>
     <div class="contact-grid">
       <div class="contact-cards reveal-left">
@@ -684,12 +557,9 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
           <button class="subject-btn" id="sb2" onclick="setSubject(2)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Abrechnung</button>
           <button class="subject-btn" id="sb3" onclick="setSubject(3)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Sonstiges</button>
         </div>
-        <label class="form-label">Name</label>
-        <input class="form-input" type="text" placeholder="Max Mustermann"/>
-        <label class="form-label">E-Mail</label>
-        <input class="form-input" type="email" placeholder="max@beispiel.de"/>
-        <label class="form-label">Nachricht</label>
-        <textarea class="form-input" rows="4" placeholder="Wie können wir Ihnen helfen?" style="resize:vertical"></textarea>
+        <label class="form-label">Name</label><input class="form-input" type="text" placeholder="Max Mustermann"/>
+        <label class="form-label">E-Mail</label><input class="form-input" type="email" placeholder="max@beispiel.de"/>
+        <label class="form-label">Nachricht</label><textarea class="form-input" rows="4" placeholder="Wie können wir Ihnen helfen?" style="resize:vertical"></textarea>
         <button class="btn-p" onclick="submitForm()" style="width:100%;justify-content:center;margin-top:8px">Nachricht senden →</button>
         <p class="form-note">Mit dem Absenden stimmen Sie unserer <a href="#">Datenschutzerklärung</a> zu.</p>
       </div>
@@ -702,113 +572,304 @@ footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.06);padding:8
   <div class="footer-inner">
     <div class="footer-grid">
       <div>
-        <a href="#" class="footer-brand"><div class="footer-brand-icon">⚡</div><span class="footer-brand-text">Sturm<span>Energie</span></span></a>
+        <a href="#hero" class="footer-brand"><div class="footer-brand-icon">⚡</div><span class="footer-brand-text">Sturm<span>Energie</span></span></a>
         <p class="footer-desc">Deutschlands moderner Energieversorger. 100% Ökostrom, faire Preise, digitaler Service.</p>
         <div class="footer-badges"><span class="footer-badge">Ökostrom</span><span class="footer-badge">TÜV</span><span class="footer-badge">CO₂-neutral</span></div>
       </div>
-      <div>
-        <div class="footer-col-title">Produkte</div>
-        <ul class="footer-links"><li><a href="#tarife">Stromtarife</a></li><li><a href="#rechner">Tarifrechner</a></li><li><a href="#">Kundenportal</a></li><li><a href="#">App herunterladen</a></li><li><a href="#">Förderprogramme</a></li></ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Unternehmen</div>
-        <ul class="footer-links"><li><a href="#">Über uns</a></li><li><a href="#">Karriere<span class="footer-link-badge">Jobs!</span></a></li><li><a href="#">Presse</a></li><li><a href="#">Partnerprogramm</a></li><li><a href="#">Blog</a></li></ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Wissen</div>
-        <ul class="footer-links"><li><a href="#">Stromlexikon</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">Energieführer</a></li><li><a href="#">Nachhaltigkeitsbericht</a></li></ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Rechtliches</div>
-        <ul class="footer-links"><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li><li><a href="#">AGB</a></li><li><a href="#">Cookie-Einstellungen</a></li></ul>
-      </div>
+      <div><div class="footer-col-title">Produkte</div><ul class="footer-links"><li><a href="#tarife">Stromtarife</a></li><li><a href="#rechner">Tarifrechner</a></li><li><a href="#">Kundenportal</a></li><li><a href="#">App herunterladen</a></li><li><a href="#">Förderprogramme</a></li></ul></div>
+      <div><div class="footer-col-title">Unternehmen</div><ul class="footer-links"><li><a href="#">Über uns</a></li><li><a href="#">Karriere<span class="footer-link-badge">Jobs!</span></a></li><li><a href="#">Presse</a></li><li><a href="#">Partnerprogramm</a></li><li><a href="#">Blog</a></li></ul></div>
+      <div><div class="footer-col-title">Wissen</div><ul class="footer-links"><li><a href="#">Stromlexikon</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">Energieführer</a></li><li><a href="#">Nachhaltigkeitsbericht</a></li></ul></div>
+      <div><div class="footer-col-title">Rechtliches</div><ul class="footer-links"><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li><li><a href="#">AGB</a></li><li><a href="#">Cookie-Einstellungen</a></li></ul></div>
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2025 Sturm Energie GmbH · Alle Rechte vorbehalten · Reguliert durch die BNetzA</p>
-      <div class="lang-btns">
-        <button class="lang-btn" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#fff">DE</button>
-        <button class="lang-btn" style="background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--w40)">EN</button>
-      </div>
+      <div class="lang-btns"><button class="lang-btn" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#fff">DE</button><button class="lang-btn" style="background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--w40)">EN</button></div>
     </div>
   </div>
 </footer>
 
-<script>
-// Hero entrance
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    ['h-label','h-title','h-sub','h-btns','h-stats','scroll-hint'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
-    });
-  }, 100);
-});
+</div><!-- /#page -->
 
-// Nav scroll
+<script>
+/* ════════════════════════════════════════════════════════════════
+   THE CONTINUOUS STORY — one canvas film spanning the WHOLE page
+   ────────────────────────────────────────────────────────────────
+   The whole document scroll (0→1) drives a single evolving scene:
+   night → dawn → sunrise → full day → wind → green world →
+   golden hour → city of the future. Every section is a chapter.
+
+   Rendered live each frame (no pre-baked images needed) but kept
+   cheap: simple shapes, capped DPR, capped FPS on weak devices.
+   rAF + lerp = exact scroll-coupled scrubbing, 60fps where possible.
+   ════════════════════════════════════════════════════════════════ */
+(function(){
+  const canvas = document.getElementById('story-canvas');
+  const ctx = canvas.getContext('2d',{alpha:false});
+  const veil = document.getElementById('story-veil');
+  const bar  = document.getElementById('scroll-bar');
+  const ticks= [...document.querySelectorAll('.chapter-tick')];
+
+  const isMobile = window.matchMedia('(max-width:768px)').matches;
+  const lowPower = isMobile || (navigator.hardwareConcurrency||8) <= 4;
+  const reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DPR = Math.min(window.devicePixelRatio||1, lowPower?1.5:2);
+  const FPS_CAP = lowPower ? 30 : 60;
+
+  let W=0,H=0;
+  function resize(){
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = Math.round(W*DPR);
+    canvas.height= Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  resize();
+
+  // ── helpers ──
+  const lerp=(a,b,k)=>a+(b-a)*k;
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  function mixC(c1,c2,k){return [Math.round(lerp(c1[0],c2[0],k)),Math.round(lerp(c1[1],c2[1],k)),Math.round(lerp(c1[2],c2[2],k))];}
+  function rgb(c,a){return a==null?`rgb(${c[0]},${c[1]},${c[2]})`:`rgba(${c[0]},${c[1]},${c[2]},${a})`;}
+
+  // Sky keyframes across the journey (top + horizon colours)
+  // p: 0          .14         .28         .42        .56        .70        .85        1
+  const SKY_TOP=[[6,9,16],[18,22,42],[34,44,82],[40,70,120],[46,86,140],[40,90,110],[70,55,90],[10,16,30]];
+  const SKY_HOR=[[10,14,26],[60,45,70],[150,90,70],[120,150,200],[150,180,220],[120,170,130],[210,130,80],[30,45,80]];
+  const STOPS  =[0,0.14,0.28,0.42,0.56,0.70,0.85,1];
+  function skyAt(p){
+    let i=0; while(i<STOPS.length-1 && p>STOPS[i+1]) i++;
+    const k=(p-STOPS[i])/((STOPS[i+1]-STOPS[i])||1);
+    return { top:mixC(SKY_TOP[i],SKY_TOP[i+1],k), hor:mixC(SKY_HOR[i],SKY_HOR[i+1],k) };
+  }
+
+  // ── the scene renderer: everything is a function of p (0..1) ──
+  function render(p, time){
+    const sky = skyAt(p);
+    // SKY gradient
+    const g = ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0, rgb(sky.top));
+    g.addColorStop(0.62, rgb(sky.hor));
+    g.addColorStop(1, '#0a0d12');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+
+    // SUN/MOON — travels in an arc across the journey
+    const arc = p; // 0..1
+    const sunX = W*(0.12 + arc*0.7);
+    const sunY = H*(0.92 - Math.sin(arc*Math.PI)*0.72);
+    const isDay = p>0.18 && p<0.86;
+    const sunR = Math.max(W,H)*(p<0.85?0.045:0.035);
+    // glow
+    const gl = ctx.createRadialGradient(sunX,sunY,0,sunX,sunY,sunR*7);
+    let warm = p<0.28? lerp(0.4,1,p/0.28) : (p>0.7? lerp(1,0.7,(p-0.7)/0.3):1);
+    const sunCol = p<0.30?[255,180,110]: p<0.6?[255,235,180]: p<0.8?[255,215,150]:[255,170,120];
+    gl.addColorStop(0, rgb(sunCol, 0.5*warm));
+    gl.addColorStop(1, rgb(sunCol,0));
+    ctx.fillStyle=gl; ctx.fillRect(0,0,W,H);
+    ctx.beginPath(); ctx.arc(sunX,sunY,sunR,0,Math.PI*2);
+    ctx.fillStyle = rgb(sunCol,0.9); ctx.fill();
+
+    // STARS — visible at night & late evening
+    const starA = Math.max(0, Math.max(0.55-p*3, (p-0.9)*4));
+    if(starA>0.02){
+      ctx.fillStyle = rgb([255,255,255], clamp(starA,0,0.7));
+      for(let i=0;i<70;i++){
+        const sx=(i*149.3)%W, sy=((i*83.7)%(H*0.5));
+        const tw = 0.6 + 0.4*Math.sin(time*0.002 + i);
+        ctx.globalAlpha = clamp(starA*tw,0,0.7);
+        ctx.fillRect(sx,sy, i%5===0?1.8:1, i%5===0?1.8:1);
+      }
+      ctx.globalAlpha=1;
+    }
+
+    const horizon = H*0.74;
+
+    // SOLAR PANELS (foreground left) — appear & tilt to sun (chapters 2-3)
+    const solarA = clamp((p-0.22)/0.18,0,1) * clamp((0.62-p)/0.1+1,0,1);
+    if(solarA>0.02){
+      ctx.globalAlpha=solarA;
+      const tilt=-0.5 + clamp((p-0.22)/0.3,0,1)*0.5;
+      for(let i=0;i<4;i++){
+        ctx.save();
+        ctx.translate(W*0.08 + i*W*0.05, horizon+H*0.06);
+        ctx.rotate(tilt);
+        ctx.fillStyle='rgba(10,31,61,0.95)';
+        ctx.strokeStyle='rgba(10,132,255,0.6)'; ctx.lineWidth=1;
+        const pw=W*0.04, ph=H*0.035;
+        ctx.fillRect(0,0,pw,ph); ctx.strokeRect(0,0,pw,ph);
+        ctx.beginPath(); ctx.moveTo(pw/2,0); ctx.lineTo(pw/2,ph); ctx.stroke();
+        ctx.restore();
+      }
+      ctx.globalAlpha=1;
+    }
+
+    // WIND TURBINES (mid) — spin up around chapter 4
+    const windA = clamp((p-0.42)/0.15,0,1);
+    if(windA>0.02){
+      ctx.globalAlpha=windA;
+      const spin = time*0.0012 + p*Math.PI*6;
+      const T=[[0.32,0],[0.46,0.4],[0.60,0.15],[0.74,0.5]];
+      T.forEach((t,idx)=>{
+        const tx=W*t[0], ty=horizon-H*0.04;
+        const blade=Math.max(W,H)*0.05;
+        ctx.strokeStyle='rgba(255,255,255,0.45)'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(tx,ty); ctx.lineTo(tx,ty+H*0.18); ctx.stroke();
+        ctx.save(); ctx.translate(tx,ty); ctx.rotate(spin+t[1]);
+        for(let b=0;b<3;b++){ ctx.rotate(Math.PI*2/3); ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,-blade); ctx.stroke(); }
+        ctx.restore();
+        ctx.beginPath(); ctx.arc(tx,ty,3,0,Math.PI*2); ctx.fillStyle='rgba(255,255,255,0.6)'; ctx.fill();
+      });
+      ctx.globalAlpha=1;
+    }
+
+    // GREEN HILLS (chapter 5) — rolling green ground rises in
+    const greenA = clamp((p-0.62)/0.12,0,1) * clamp((0.92-p)/0.1+1,0,1);
+    if(greenA>0.02){
+      ctx.globalAlpha=greenA;
+      ctx.fillStyle='rgba(30,80,45,0.55)';
+      ctx.beginPath();
+      ctx.moveTo(0,horizon+H*0.02);
+      for(let x=0;x<=W;x+=40){ ctx.lineTo(x, horizon+H*0.02 - Math.sin(x*0.004+2)*18); }
+      ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
+      ctx.globalAlpha=1;
+    }
+
+    // CITY SKYLINE — always on the horizon; windows ignite toward night
+    const cityLit = clamp((p-0.78)/0.18,0,1) + clamp(0.16-p,0,0.16)*2;
+    const buildings=16;
+    for(let i=0;i<buildings;i++){
+      const bw=W/buildings;
+      const bh=H*(0.08+((i*5)%5)*0.025);
+      const bx=i*bw, by=horizon-bh;
+      // building gets a touch lighter at full day
+      const shade = isDay?22:13;
+      ctx.fillStyle=`rgb(${shade},${shade+8},${shade+18})`;
+      ctx.fillRect(bx,by,bw*0.88,bh);
+      for(let wy=by+6; wy<horizon-4; wy+=12){
+        for(let wx=bx+4; wx<bx+bw*0.88-5; wx+=9){
+          const lit = ((wx+wy+i)%7)/7 < cityLit;
+          ctx.fillStyle = lit ? rgb([10,132,255], 0.5+0.4*cityLit) : 'rgba(28,42,64,0.35)';
+          ctx.fillRect(wx,wy,4,6);
+        }
+      }
+    }
+
+    // SMART-GRID flow lines (chapter 7) — energy pulses across city
+    const gridA = clamp((p-0.82)/0.18,0,1);
+    if(gridA>0.02){
+      ctx.globalAlpha=gridA*0.5;
+      ctx.strokeStyle=rgb([48,209,88],0.5); ctx.lineWidth=1.2;
+      for(let i=0;i<5;i++){
+        const yy=horizon-20-i*22;
+        ctx.beginPath(); ctx.setLineDash([4,12]);
+        ctx.lineDashOffset = -(time*0.05 + i*20);
+        ctx.moveTo(0,yy); ctx.lineTo(W,yy-40); ctx.stroke();
+      }
+      ctx.setLineDash([]); ctx.globalAlpha=1;
+    }
+
+    // Floating energy particles — present subtly throughout for cohesion
+    ctx.fillStyle = rgb(p<0.5?[10,132,255]:[48,209,88], 0.25);
+    for(let i=0;i<18;i++){
+      const px=(i*97.3 + time*0.02*(i%3+1))%W;
+      const py=(horizon*0.6) - ((i*53.7 + time*0.03)% (horizon*0.6));
+      ctx.beginPath(); ctx.arc(px,py, i%4===0?2:1.2, 0,Math.PI*2); ctx.fill();
+    }
+
+    // Ground reflection glow
+    const refl=ctx.createLinearGradient(0,horizon,0,H);
+    refl.addColorStop(0, rgb(sky.hor,0.15));
+    refl.addColorStop(1,'rgba(10,13,18,0)');
+    ctx.fillStyle=refl; ctx.fillRect(0,horizon,W,H-horizon);
+  }
+
+  // ── scroll → progress, with rAF lerp scrubbing ──
+  let target=0, cur=0, last=0;
+  function computeTarget(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    target = max>0 ? clamp(window.scrollY/max,0,1) : 0;
+    bar.style.width=(target*100)+'%';
+    // chapter ticks: 8 chapters
+    const ci = Math.min(7, Math.floor(target*8));
+    ticks.forEach((t,idx)=>t.classList.toggle('active', idx===ci));
+    // veil strengthens slightly mid-day so text stays readable over bright sky
+    const midBright = Math.sin(clamp(target,0,1)*Math.PI);
+    veil.style.background=`radial-gradient(ellipse at 50% 40%, transparent 0%, rgba(10,13,18,${0.30+midBright*0.25}) 100%)`;
+  }
+  computeTarget();
+  window.addEventListener('scroll', computeTarget, {passive:true});
+  window.addEventListener('resize', ()=>{resize();computeTarget();}, {passive:true});
+
+  if(reduce){
+    // Static: render a single representative frame, no loop.
+    resize(); render(0.5, 0);
+    window.addEventListener('scroll', ()=>{computeTarget(); render(target,0);}, {passive:true});
+  } else {
+    const interval = 1000/FPS_CAP;
+    function loop(ts){
+      requestAnimationFrame(loop);
+      if(ts-last < interval) return;
+      last=ts;
+      cur += (target-cur)*0.12;
+      if(Math.abs(target-cur)<0.0005) cur=target;
+      render(cur, ts);
+    }
+    requestAnimationFrame(loop);
+  }
+})();
+
+/* ════════════ EXISTING SITE LOGIC (unchanged) ════════════ */
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
-  const bg = document.getElementById('hero-bg');
-  if (bg) bg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.22}px)`;
-}, { passive: true });
+}, { passive:true });
 
-// Scroll reveal
+// Scroll reveal — with light parallax handled by transform on .reveal already
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.12, rootMargin:'0px 0px -60px 0px' });
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => observer.observe(el));
 
 // Calc
-let currentType = 'haushalt';
-function setType(t) {
-  currentType = t;
-  const max = t === 'haushalt' ? 6000 : 20000;
-  const slider = document.getElementById('kwh-slider');
-  slider.max = max;
-  slider.value = t === 'haushalt' ? 2500 : 8000;
-  document.getElementById('max-label').textContent = max.toLocaleString('de-DE') + ' kWh';
-  document.getElementById('btn-haushalt').style.background = t === 'haushalt' ? 'var(--blue)' : 'rgba(255,255,255,.05)';
-  document.getElementById('btn-haushalt').style.border = t === 'haushalt' ? '1px solid var(--blue)' : '1px solid rgba(255,255,255,.1)';
-  document.getElementById('btn-gewerbe').style.background = t === 'gewerbe' ? 'var(--blue)' : 'rgba(255,255,255,.05)';
-  document.getElementById('btn-gewerbe').style.border = t === 'gewerbe' ? '1px solid var(--blue)' : '1px solid rgba(255,255,255,.1)';
+let currentType='haushalt';
+function setType(t){
+  currentType=t;
+  const max=t==='haushalt'?6000:20000;
+  const slider=document.getElementById('kwh-slider');
+  slider.max=max; slider.value=t==='haushalt'?2500:8000;
+  document.getElementById('max-label').textContent=max.toLocaleString('de-DE')+' kWh';
+  document.getElementById('btn-haushalt').style.background=t==='haushalt'?'var(--blue)':'rgba(255,255,255,.05)';
+  document.getElementById('btn-haushalt').style.border=t==='haushalt'?'1px solid var(--blue)':'1px solid rgba(255,255,255,.1)';
+  document.getElementById('btn-gewerbe').style.background=t==='gewerbe'?'var(--blue)':'rgba(255,255,255,.05)';
+  document.getElementById('btn-gewerbe').style.border=t==='gewerbe'?'1px solid var(--blue)':'1px solid rgba(255,255,255,.1)';
   updateCalc();
 }
-function updateCalc() {
-  const slider = document.getElementById('kwh-slider');
-  const kwh = Number(slider.value);
-  const max = Number(slider.max);
-  const pct = ((kwh - 500) / (max - 500)) * 100;
-  slider.style.background = `linear-gradient(to right, var(--blue) ${pct}%, rgba(255,255,255,.12) ${pct}%)`;
-  document.getElementById('kwh-display').textContent = kwh.toLocaleString('de-DE') + ' kWh';
-  const total = (kwh * 0.269 + 7.90 * 12).toFixed(2);
-  const monthly = (total / 12).toFixed(2);
-  const saving = ((kwh * 0.314 + 7.90 * 12) - parseFloat(total)).toFixed(2);
-  document.getElementById('total-display').textContent = total.replace('.', ',');
-  document.getElementById('monthly-display').textContent = monthly.replace('.', ',') + ' €/Monat';
-  document.getElementById('saving-display').textContent = saving.replace('.', ',') + ' € jährlich sparen';
+function updateCalc(){
+  const slider=document.getElementById('kwh-slider');
+  const kwh=Number(slider.value), max=Number(slider.max);
+  const pct=((kwh-500)/(max-500))*100;
+  slider.style.background=`linear-gradient(to right, var(--blue) ${pct}%, rgba(255,255,255,.12) ${pct}%)`;
+  document.getElementById('kwh-display').textContent=kwh.toLocaleString('de-DE')+' kWh';
+  const total=(kwh*0.269+7.90*12).toFixed(2);
+  const monthly=(total/12).toFixed(2);
+  const saving=((kwh*0.314+7.90*12)-parseFloat(total)).toFixed(2);
+  document.getElementById('total-display').textContent=total.replace('.',',');
+  document.getElementById('monthly-display').textContent=monthly.replace('.',',')+' €/Monat';
+  document.getElementById('saving-display').textContent=saving.replace('.',',')+' € jährlich sparen';
 }
-
-// FAQ
-function toggleFaq(i) {
-  const body = document.getElementById('fb' + i);
-  const icon = document.getElementById('fi' + i);
-  const isOpen = body.classList.contains('open');
-  document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
-  document.querySelectorAll('.faq-icon').forEach(ic => { ic.classList.remove('open'); ic.textContent = '+'; });
-  if (!isOpen) { body.classList.add('open'); icon.classList.add('open'); icon.textContent = '+'; }
+function toggleFaq(i){
+  const body=document.getElementById('fb'+i), icon=document.getElementById('fi'+i);
+  const isOpen=body.classList.contains('open');
+  document.querySelectorAll('.faq-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.faq-icon').forEach(ic=>{ic.classList.remove('open');ic.textContent='+';});
+  if(!isOpen){body.classList.add('open');icon.classList.add('open');icon.textContent='+';}
 }
-
-// Subject
-function setSubject(i) {
-  for (let j = 0; j < 4; j++) {
-    const btn = document.getElementById('sb' + j);
-    btn.style.background = j === i ? 'var(--blue)' : 'rgba(255,255,255,.05)';
-    btn.style.border = j === i ? '1px solid var(--blue)' : '1px solid rgba(255,255,255,.1)';
+function setSubject(i){
+  for(let j=0;j<4;j++){
+    const btn=document.getElementById('sb'+j);
+    btn.style.background=j===i?'var(--blue)':'rgba(255,255,255,.05)';
+    btn.style.border=j===i?'1px solid var(--blue)':'1px solid rgba(255,255,255,.1)';
   }
 }
-
-// Form
-function submitForm() {
-  document.getElementById('form-wrap').innerHTML = '<div class="success-box"><div class="success-icon">✓</div><h3 style="font-family:var(--fd);font-size:24px;margin-bottom:12px">Nachricht erhalten!</h3><p style="color:var(--w70);font-size:15px">Wir melden uns innerhalb von 4 Stunden bei Ihnen.</p></div>';
+function submitForm(){
+  document.getElementById('form-wrap').innerHTML='<div class="success-box"><div class="success-icon">✓</div><h3 style="font-family:var(--fd);font-size:24px;margin-bottom:12px">Nachricht erhalten!</h3><p style="color:var(--w90);font-size:15px">Wir melden uns innerhalb von 4 Stunden bei Ihnen.</p></div>';
 }
 </script>
 </body>
