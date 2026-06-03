@@ -121,6 +121,65 @@ section{padding:140px 24px;position:relative;min-height:90vh;display:flex;align-
 .feature-card h3{font-size:18px;font-weight:500;margin-bottom:10px;letter-spacing:-.02em}
 .feature-card p{font-size:14px;line-height:1.7;color:var(--w70);font-weight:300}
 
+/* ── REQUEST FUNNEL ── */
+.funnel{max-width:760px;margin:0 auto;width:100%}
+.funnel-card{padding:44px 48px}
+.funnel-steps{display:flex;align-items:center;gap:8px;margin-bottom:36px}
+.fstep{display:flex;align-items:center;gap:8px;flex:1}
+.fstep .num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--w40);transition:all .4s var(--ts)}
+.fstep.active .num{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 16px rgba(10,132,255,.5)}
+.fstep.done .num{background:var(--green);border-color:var(--green);color:#0a0d12}
+.fstep .ln{flex:1;height:2px;background:rgba(255,255,255,.1);border-radius:2px;transition:background .4s var(--ts)}
+.fstep.done .ln{background:var(--green)}
+.fstep:last-child{flex:0}
+.fpanel{display:none;animation:fpanelin .5s var(--ts)}
+.fpanel.active{display:block}
+@keyframes fpanelin{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.fpanel h3{font-family:var(--fd);font-size:24px;font-weight:400;margin-bottom:6px;letter-spacing:-.02em}
+.fpanel .fhint{font-size:14px;color:var(--w40);margin-bottom:28px}
+.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.choice-grid.two{grid-template-columns:repeat(2,1fr)}
+.choice{padding:28px 20px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);cursor:pointer;text-align:center;transition:all .25s var(--ts)}
+.choice:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2);transform:translateY(-3px)}
+.choice.sel{background:rgba(10,132,255,.12);border-color:var(--blue);box-shadow:0 0 24px rgba(10,132,255,.18)}
+.choice .ico{font-size:34px;margin-bottom:12px;display:block}
+.choice .ttl{font-size:16px;font-weight:600;color:#fff;margin-bottom:4px}
+.choice .desc{font-size:12px;color:var(--w40);line-height:1.5}
+.choice.sel .desc{color:var(--w70)}
+.funnel-nav{display:flex;justify-content:space-between;gap:12px;margin-top:32px}
+.fbtn-back{padding:13px 26px;border-radius:var(--r99);background:transparent;border:1px solid var(--w15);color:var(--w70);font-family:var(--fb);font-size:15px;cursor:pointer;transition:all var(--tf)}
+.fbtn-back:hover{background:var(--w08);color:#fff}
+.fbtn-next{padding:13px 30px;border-radius:var(--r99);background:var(--blue);border:none;color:#fff;font-family:var(--fb);font-size:15px;font-weight:500;cursor:pointer;transition:all var(--tf);display:inline-flex;align-items:center;gap:8px}
+.fbtn-next:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(10,132,255,.4)}
+.fbtn-next:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.ffield{margin-bottom:18px}
+.flabel{font-size:13px;color:var(--w40);letter-spacing:.03em;display:block;margin-bottom:8px}
+.finput{width:100%;padding:14px 18px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:var(--fb);font-size:15px;outline:none;transition:border-color var(--tf)}
+.finput:focus{border-color:rgba(10,132,255,.5)}
+.finput::placeholder{color:rgba(255,255,255,.25)}
+/* upload zone */
+.dropzone{border:2px dashed rgba(255,255,255,.16);border-radius:18px;padding:40px 24px;text-align:center;cursor:pointer;transition:all .25s var(--ts);background:rgba(255,255,255,.02)}
+.dropzone:hover,.dropzone.drag{border-color:var(--blue);background:rgba(10,132,255,.06)}
+.dropzone .dz-ico{font-size:40px;margin-bottom:14px}
+.dropzone .dz-main{font-size:16px;color:#fff;font-weight:500;margin-bottom:6px}
+.dropzone .dz-sub{font-size:13px;color:var(--w40)}
+.file-list{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.file-chip{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:rgba(48,209,88,.08);border:1px solid var(--gglow);font-size:13px;color:var(--w90)}
+.file-chip .fc-ico{font-size:16px}
+.file-chip .fc-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-chip .fc-x{cursor:pointer;color:var(--w40);font-size:16px;flex-shrink:0}
+.file-chip .fc-x:hover{color:#fff}
+.alt-send{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.alt-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;border-radius:14px;font-family:var(--fb);font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:all var(--tf);border:none}
+.alt-wa{background:#25D366;color:#0a3d1f}
+.alt-wa:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,.35)}
+.alt-mail{background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--w15)}
+.alt-mail:hover{background:var(--w08);border-color:var(--w40)}
+.funnel-success{text-align:center;padding:24px 0}
+.funnel-success .sx-ico{width:72px;height:72px;border-radius:50%;background:var(--gsubt);border:1px solid var(--gglow);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px}
+.trust-strip{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:28px}
+.trust-strip span{font-size:13px;color:var(--w40);display:flex;align-items:center;gap:6px}
+@media(max-width:600px){.funnel-card{padding:32px 24px}.choice-grid{grid-template-columns:1fr}.alt-send{grid-template-columns:1fr}.fpanel .funnel-steps .fstep .ln{min-width:12px}}
 .tarife-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start}
 .tarif-card{padding:40px 32px;cursor:pointer;position:relative;overflow:hidden}
 .tarif-card.featured{transform:scale(1.03);box-shadow:0 20px 60px rgba(10,132,255,.2)}
@@ -240,6 +299,47 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
 .lang-btns{display:flex;gap:8px}
 .lang-btn{padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-family:var(--fb);text-transform:uppercase;transition:all var(--tf)}
 
+/* IMPRESSUM / DATENSCHUTZ / KARRIERE MODALS */
+#imp-modal,#ds-modal,#kr-modal,#info-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+#imp-modal.open,#ds-modal.open,#kr-modal.open,#info-modal.open{display:flex}
+#imp-backdrop,#ds-backdrop,#kr-backdrop,#info-backdrop{position:fixed;inset:0;background:rgba(5,7,10,.8);backdrop-filter:blur(12px);opacity:0;transition:opacity .4s ease}
+#imp-modal.open #imp-backdrop,#ds-modal.open #ds-backdrop,#kr-modal.open #kr-backdrop,#info-modal.open #info-backdrop{opacity:1}
+.imp-dialog{position:relative;z-index:1;max-width:760px;width:100%;background:rgba(13,17,23,.92);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:48px 48px 40px;margin:auto;box-shadow:0 40px 120px rgba(0,0,0,.6);transform:translateY(24px) scale(.98);opacity:0;transition:transform .5s var(--ts),opacity .4s ease}
+#imp-modal.open .imp-dialog,#ds-modal.open .imp-dialog,#kr-modal.open .imp-dialog,#info-modal.open .imp-dialog{transform:none;opacity:1}
+.imp-close{position:absolute;top:24px;right:24px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--w15);color:var(--w70);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--tf)}
+.imp-close:hover{background:var(--w08);color:#fff;border-color:var(--w40)}
+.imp-label{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:var(--r99);background:rgba(10,132,255,.1);border:1px solid rgba(10,132,255,.25);color:var(--blue2);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
+.imp-label .dot{width:6px;height:6px;border-radius:50%;background:var(--blue2)}
+.imp-dialog h2{font-family:var(--fd);font-weight:400;font-size:clamp(32px,5vw,44px);letter-spacing:-.03em;margin-bottom:8px;line-height:1.05}
+.imp-dialog .imp-subtitle{color:var(--w40);font-size:14px;margin-bottom:36px}
+.imp-block{margin-bottom:32px}
+.imp-block:last-child{margin-bottom:0}
+.imp-block h3{font-size:14px;font-weight:600;color:var(--blue2);letter-spacing:.02em;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.imp-block h3 .ico{font-size:16px}
+.imp-block p{font-size:15px;line-height:1.8;color:var(--w90);font-weight:300;margin-bottom:10px}
+.imp-block p:last-child{margin-bottom:0}
+.imp-block strong{font-weight:500;color:#fff}
+.imp-block a{color:var(--blue2);text-decoration:none}
+.imp-block a:hover{text-decoration:underline}
+.imp-name{font-weight:500;color:#fff}
+.imp-muted{color:var(--w40);font-size:13px}
+.imp-notice{background:rgba(48,209,88,.06);border:1px solid var(--gglow);border-radius:14px;padding:18px 22px;margin-top:14px}
+.imp-notice p{color:var(--w90);font-size:14px;line-height:1.7;margin:0}
+.imp-notice strong{color:var(--green)}
+.imp-sep{height:1px;background:rgba(255,255,255,.07);margin:32px 0}
+/* Career modal extras */
+.car-hero{display:flex;align-items:center;gap:8px;padding:6px 16px;border-radius:var(--r99);background:rgba(48,209,88,.1);border:1px solid rgba(48,209,88,.25);color:var(--green);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
+.car-contact{display:flex;gap:14px;align-items:center;padding:20px 22px;border-radius:16px;background:rgba(10,132,255,.06);border:1px solid rgba(10,132,255,.18);margin:8px 0 4px}
+.car-contact .av{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.car-perks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.car-perk{padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.car-perk .pk-ico{font-size:22px;margin-bottom:8px}
+.car-perk h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.car-perk p{font-size:13px;color:var(--w70);line-height:1.6;font-weight:300;margin:0}
+.car-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:var(--r99);background:var(--blue);color:#fff;font-size:15px;font-weight:500;text-decoration:none;margin-top:8px;transition:all var(--tf)}
+.car-cta:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(10,132,255,.4);text-decoration:none}
+@media(max-width:600px){.imp-dialog{padding:36px 26px 32px}.car-perks{grid-template-columns:1fr}}
+
 @media(max-width:900px){
   .rechner-grid,.why-grid,.sust-grid,.contact-grid{grid-template-columns:1fr!important}
   .tarife-grid{grid-template-columns:1fr!important}
@@ -282,11 +382,11 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
   <div class="nav-inner">
     <a href="#hero" class="logo"><div class="logo-icon">⚡</div><span class="logo-text">Sturm<span>Energie</span></span></a>
     <div class="nav-links">
-      <a href="#tarife">Tarife</a><a href="#vorteile">Vorteile</a><a href="#nachhaltigkeit">Nachhaltigkeit</a><a href="#bewertungen">Kundenstimmen</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a>
+      <a href="#anfrage">Angebot</a><a href="#vorteile">Vorteile</a><a href="#nachhaltigkeit">Öko-Tarife</a><a href="#bewertungen">Service</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a>
     </div>
     <div class="nav-right">
-      <a href="#portal" class="btn-g nav-portal" style="padding:9px 20px;font-size:14px">Kundenportal</a>
-      <a href="#tarife" class="btn-p" style="padding:9px 20px;font-size:14px">Jetzt wechseln</a>
+      <a href="#" onclick="openInfo(event,'portal')" class="btn-g nav-portal" style="padding:9px 20px;font-size:14px">Kundenportal</a>
+      <a href="#anfrage" class="btn-p" style="padding:9px 20px;font-size:14px">Angebot anfordern</a>
     </div>
   </div>
 </nav>
@@ -297,140 +397,186 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
 <section id="hero" data-chapter="0">
   <div class="section-inner">
     <div class="hero-block">
-      <div class="hero-eyebrow"><div class="dot"></div>Deutschlands moderner Energieversorger</div>
-      <h1 class="hero-h1">Energie. <em>Sauber.</em><br>Intelligent.<br><span class="shimmer">Transparent.</span></h1>
-      <p class="hero-sub">Begleiten Sie uns auf einer Reise – von der Nacht bis zur Energie der Zukunft. 100% Ökostrom, faire Preise, digitaler Service.</p>
+      <div class="hero-eyebrow"><div class="dot"></div>Unabhängige Tarifvermittlung · Strom · Gas · Wärme</div>
+      <h1 class="hero-h1">Wir vergleichen.<br><em>Sie sparen.</em></h1>
+      <p class="hero-sub">Individuelle Energieangebote auf Basis Ihrer tatsächlichen Verbrauchsdaten. Anfrage absenden, Jahresabrechnung übermitteln – und Ihr persönliches Sparangebot erhalten. Kostenlos & unverbindlich.</p>
       <div class="hero-actions">
-        <a href="#tarife" class="btn-p" style="font-size:16px;padding:16px 34px">Tarif berechnen →</a>
-        <a href="#vorteile" class="btn-g" style="font-size:16px">Die Reise beginnen</a>
+        <a href="#anfrage" class="btn-p" style="font-size:16px;padding:16px 34px">Jetzt Angebot anfordern →</a>
+        <a href="#warum-rechnung" class="btn-g" style="font-size:16px">So funktioniert's</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><div class="val">100%</div><div class="lbl">Ökostrom</div></div>
-        <div class="hero-stat"><div class="val">48 h</div><div class="lbl">Wechselgarantie</div></div>
-        <div class="hero-stat"><div class="val">4,8★</div><div class="lbl">Kundenbewertung</div></div>
-        <div class="hero-stat"><div class="val">0€</div><div class="lbl">Wechselgebühr</div></div>
+        <div class="hero-stat"><div class="val">60 Sek.</div><div class="lbl">Anfrage gestellt</div></div>
+        <div class="hero-stat"><div class="val">0€</div><div class="lbl">Kostenlos & unverbindlich</div></div>
+        <div class="hero-stat"><div class="val">100%</div><div class="lbl">Auf Ihre Daten zugeschnitten</div></div>
+        <div class="hero-stat"><div class="val">Unabhängig</div><div class="lbl">Anbieterneutral vermittelt</div></div>
       </div>
     </div>
   </div>
-  <div class="hero-scroll"><span>Scrollen & erleben</span><div class="scroll-line"></div></div>
+  <div class="hero-scroll"><span>Mehr entdecken</span><div class="scroll-line"></div></div>
 </section>
 
 <!-- CHAPTER 1 · VORTEILE · DAWN -->
+<!-- placeholder -->
 <section id="vorteile" data-chapter="1">
   <div class="section-inner">
     <div class="section-head">
       <div class="chapter-mark reveal">Kapitel I · Die Dämmerung</div>
-      <div class="label reveal d1"><div class="dot"></div>Warum Sturm Energie</div>
-      <h2 class="section-h2 reveal d2">Wenn der Tag erwacht,<br><em style="font-style:italic;color:var(--blue2)">arbeitet Ihre Energie</em></h2>
-      <p class="section-sub reveal d3">Wir verbinden modernste Technologie mit echtem Engagement für die Energiewende.</p>
+      <div class="label reveal d1"><div class="dot"></div>Ihre Vorteile</div>
+      <h2 class="section-h2 reveal d2">Warum sich eine<br><em style="font-style:italic;color:var(--blue2)">Tarifoptimierung lohnt</em></h2>
+      <p class="section-sub reveal d3">Als unabhängiger Vermittler prüfen wir den Markt für Sie – und finden den Tarif, der wirklich zu Ihrem Verbrauch passt.</p>
     </div>
     <div class="features-grid">
-      <div class="card feature-card reveal d1"><div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">🌿</div><h3>100% Ökostrom</h3><p>Ausschließlich Strom aus erneuerbaren Quellen – zertifiziert, transparent und ohne Greenwashing.</p></div>
-      <div class="card feature-card reveal d2"><div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">🛡️</div><h3>Faire Preise</h3><p>Keine versteckten Kosten, keine Preisüberraschungen. Volle Kostentransparenz von Beginn an.</p></div>
-      <div class="card feature-card reveal d3"><div class="feature-icon" style="background:rgba(255,159,10,.1);border:1px solid rgba(255,159,10,.3)">📈</div><h3>Preisgarantie</h3><p>12 Monate Preissicherheit für Neukunden. Planen Sie Ihre Energiekosten verlässlich.</p></div>
-      <div class="card feature-card reveal d1"><div class="feature-icon" style="background:rgba(191,90,242,.1);border:1px solid rgba(191,90,242,.3)">📱</div><h3>Digitaler Service</h3><p>Ihr Kundenportal – rund um die Uhr. Verbrauch, Rechnungen, Zählerstand – alles digital.</p></div>
-      <div class="card feature-card reveal d2"><div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">⚡</div><h3>Schneller Wechsel</h3><p>In nur 48 Stunden gewechselt. Wir kümmern uns um die Kündigung bei Ihrem alten Anbieter.</p></div>
-      <div class="card feature-card reveal d3"><div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">🌍</div><h3>CO₂-neutral</h3><p>Jede kWh wird durch Investitionen in erneuerbare Energieprojekte kompensiert.</p></div>
+      <div class="card feature-card reveal d1"><div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">💶</div><h3>Echte Kostenersparnis</h3><p>Wir vergleichen für Sie und finden Einsparpotenziale, die Sie allein oft übersehen – auf Basis Ihrer realen Verbrauchsdaten.</p></div>
+      <div class="card feature-card reveal d2"><div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">🔍</div><h3>Volle Transparenz</h3><p>Keine versteckten Kosten, kein Kleingedrucktes. Sie sehen genau, welcher Tarif welche Vorteile bringt.</p></div>
+      <div class="card feature-card reveal d3"><div class="feature-icon" style="background:rgba(255,159,10,.1);border:1px solid rgba(255,159,10,.3)">🎯</div><h3>Individuelle Angebote</h3><p>Kein Standard von der Stange. Jedes Angebot basiert auf Ihrer tatsächlichen Jahresabrechnung – präzise und realistisch.</p></div>
+      <div class="card feature-card reveal d1"><div class="feature-icon" style="background:rgba(191,90,242,.1);border:1px solid rgba(191,90,242,.3)">🤝</div><h3>Persönliche Betreuung</h3><p>Ein fester Ansprechpartner statt Warteschleife. Ehrlich, erreichbar und ohne Verkaufsdruck.</p></div>
+      <div class="card feature-card reveal d2"><div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">⚡</div><h3>Einfach & schnell</h3><p>Anfrage in 60 Sekunden, Jahresabrechnung übermitteln, Angebot erhalten. Den Rest übernehmen wir.</p></div>
+      <div class="card feature-card reveal d3"><div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">🌿</div><h3>Öko oder Standard</h3><p>Sie entscheiden: Ökostrom für mehr Nachhaltigkeit oder ein klassischer Standardtarif – wir vermitteln beides.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CHAPTER 2 · TARIFE · SUNRISE -->
-<section id="tarife" data-chapter="2">
+<!-- CHAPTER 2 · ANFRAGE-FUNNEL · SUNRISE -->
+<section id="anfrage" data-chapter="2">
   <div class="section-inner">
     <div class="section-head">
       <div class="chapter-mark reveal">Kapitel II · Der Sonnenaufgang</div>
-      <div class="label reveal d1"><div class="dot"></div>Unsere Tarife</div>
-      <h2 class="section-h2 reveal d2">Der richtige Tarif<br>für <em style="font-style:italic;color:var(--blue2)">jeden Haushalt</em></h2>
-      <p class="section-sub reveal d3">Alle Tarife inklusive 100% Ökostrom. Keine Vertragslaufzeit, keine versteckten Gebühren.</p>
+      <div class="label reveal d1"><div class="dot"></div>In 60 Sekunden zum Angebot</div>
+      <h2 class="section-h2 reveal d2">Angebot anfordern.<br><em style="font-style:italic;color:var(--blue2)">Jahresabrechnung hochladen.</em></h2>
+      <p class="section-sub reveal d3">Drei kurze Schritte, dann Ihre Jahresabrechnung übermitteln – und wir erstellen Ihr persönliches Sparangebot. Kostenlos & unverbindlich.</p>
     </div>
-    <div class="tarife-grid">
-      <div class="card tarif-card reveal d1">
-        <div class="tarif-tag" style="color:#98989f">Einfach & fair</div><div class="tarif-name">Basis</div>
-        <div><span class="tarif-price">28,9</span><span class="tarif-unit">ct/kWh</span></div>
-        <div class="tarif-base">zzgl. 9,90 €/Monat Grundpreis</div><div class="tarif-divider"></div>
-        <ul class="tarif-features">
-          <li class="tarif-feature"><div class="check-dot" style="background:rgba(255,255,255,.05)">✓</div>100% Ökostrom</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:rgba(255,255,255,.05)">✓</div>Monatliche Abrechnung</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:rgba(255,255,255,.05)">✓</div>Online-Kundenportal</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:rgba(255,255,255,.05)">✓</div>12 Monate Preissicherheit</li>
-        </ul>
-        <a href="#rechner" class="btn-g" style="width:100%;justify-content:center">Basis wählen →</a>
+
+    <div class="funnel reveal-s d1">
+      <div class="card funnel-card">
+        <!-- Progress -->
+        <div class="funnel-steps">
+          <div class="fstep active" id="fs0"><div class="num">1</div><div class="ln"></div></div>
+          <div class="fstep" id="fs1"><div class="num">2</div><div class="ln"></div></div>
+          <div class="fstep" id="fs2"><div class="num">3</div><div class="ln"></div></div>
+          <div class="fstep" id="fs3"><div class="num">4</div></div>
+        </div>
+
+        <!-- Step 1: Energieart -->
+        <div class="fpanel active" id="fp0">
+          <h3>Welche Energie möchten Sie optimieren?</h3>
+          <p class="fhint">Wählen Sie die Energieart für Ihr individuelles Angebot.</p>
+          <div class="choice-grid">
+            <div class="choice" data-group="energie" data-val="Strom" onclick="pickChoice(this)"><span class="ico">⚡</span><div class="ttl">Strom</div><div class="desc">Haushalt oder Gewerbe</div></div>
+            <div class="choice" data-group="energie" data-val="Gas" onclick="pickChoice(this)"><span class="ico">🔥</span><div class="ttl">Gas</div><div class="desc">Erdgas-Tarife</div></div>
+            <div class="choice" data-group="energie" data-val="Wärmeenergie" onclick="pickChoice(this)"><span class="ico">🌡️</span><div class="ttl">Wärmeenergie</div><div class="desc">Wärme & Heizenergie</div></div>
+          </div>
+          <div class="funnel-nav"><span></span><button class="fbtn-next" id="next0" disabled onclick="funnelNext()">Weiter →</button></div>
+        </div>
+
+        <!-- Step 2: Tarifart -->
+        <div class="fpanel" id="fp1">
+          <h3>Öko oder Standard?</h3>
+          <p class="fhint">Optional – wählen Sie Ihre bevorzugte Tarifart.</p>
+          <div class="choice-grid two">
+            <div class="choice" data-group="tarif" data-val="Öko-Tarif" onclick="pickChoice(this)"><span class="ico">🌿</span><div class="ttl">Öko-Tarif</div><div class="desc">100% erneuerbare Energie</div></div>
+            <div class="choice" data-group="tarif" data-val="Standard-Tarif" onclick="pickChoice(this)"><span class="ico">💡</span><div class="ttl">Standard-Tarif</div><div class="desc">Bestes Preis-Leistungs-Verhältnis</div></div>
+          </div>
+          <div class="funnel-nav"><button class="fbtn-back" onclick="funnelBack()">← Zurück</button><button class="fbtn-next" onclick="funnelNext()">Weiter →</button></div>
+        </div>
+
+        <!-- Step 3: Kontaktdaten -->
+        <div class="fpanel" id="fp2">
+          <h3>Ihre Kontaktdaten</h3>
+          <p class="fhint">Damit wir Ihnen Ihr persönliches Angebot zusenden können.</p>
+          <div class="ffield"><label class="flabel">Name</label><input class="finput" id="f-name" type="text" placeholder="Max Mustermann" oninput="checkStep2()"/></div>
+          <div class="ffield"><label class="flabel">Telefonnummer</label><input class="finput" id="f-phone" type="tel" placeholder="0172 0000000" oninput="checkStep2()"/></div>
+          <div class="ffield"><label class="flabel">E-Mail</label><input class="finput" id="f-email" type="email" placeholder="max@beispiel.de" oninput="checkStep2()"/></div>
+          <div class="funnel-nav"><button class="fbtn-back" onclick="funnelBack()">← Zurück</button><button class="fbtn-next" id="next2" disabled onclick="funnelNext()">Weiter →</button></div>
+        </div>
+
+        <!-- Step 4: Jahresabrechnung -->
+        <div class="fpanel" id="fp3">
+          <h3>Jahresabrechnung übermitteln</h3>
+          <p class="fhint">Der wichtigste Schritt: Mit Ihrer Jahresabrechnung erstellen wir ein präzises, seriöses Angebot.</p>
+          <div class="dropzone" id="dropzone" onclick="document.getElementById('f-file').click()">
+            <div class="dz-ico">📄</div>
+            <div class="dz-main">Datei hierher ziehen oder klicken</div>
+            <div class="dz-sub">PDF, JPG oder PNG · max. 10 MB</div>
+            <input type="file" id="f-file" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleFiles(this.files)"/>
+          </div>
+          <div class="file-list" id="fileList"></div>
+          <p class="fhint" style="margin:24px 0 0;text-align:center">Sie haben die Rechnung gerade nicht zur Hand? Senden Sie Ihre Anfrage trotzdem ab und reichen die Abrechnung bequem per WhatsApp oder E-Mail nach:</p>
+          <div class="alt-send">
+            <a class="alt-btn alt-wa" id="waBtn" href="#" target="_blank" rel="noopener">💬 Per WhatsApp senden</a>
+            <a class="alt-btn alt-mail" id="mailBtn" href="#">✉️ Per E-Mail senden</a>
+          </div>
+          <div class="funnel-nav"><button class="fbtn-back" onclick="funnelBack()">← Zurück</button><button class="fbtn-next" onclick="funnelSubmit()">Anfrage absenden ✓</button></div>
+        </div>
+
+        <!-- Success -->
+        <div class="fpanel" id="fp4">
+          <div class="funnel-success">
+            <div class="sx-ico">✓</div>
+            <h3>Anfrage erfolgreich gesendet!</h3>
+            <p class="fhint" style="max-width:420px;margin:8px auto 0">Vielen Dank. Wir prüfen Ihre Angaben und melden uns in der Regel innerhalb weniger Stunden mit Ihrem persönlichen Angebot.</p>
+            <p class="fhint" style="max-width:440px;margin:16px auto 0">Falls noch nicht geschehen, übermitteln Sie uns bitte Ihre Jahresabrechnung – ohne sie können wir kein Angebot erstellen:</p>
+            <div class="alt-send" style="max-width:440px;margin:20px auto 0">
+              <a class="alt-btn alt-wa" id="waBtn2" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+              <a class="alt-btn alt-mail" id="mailBtn2" href="#">✉️ E-Mail</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card tarif-card featured reveal d2" style="padding:48px 32px 40px">
-        <div class="tarif-badge">Beliebteste Wahl</div><div class="tarif-tag" style="color:var(--blue2)">Unser Bestseller</div><div class="tarif-name">Komfort</div>
-        <div><span class="tarif-price">26,9</span><span class="tarif-unit">ct/kWh</span></div>
-        <div class="tarif-base">zzgl. 7,90 €/Monat Grundpreis</div><div class="tarif-divider"></div>
-        <ul class="tarif-features">
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>100% Ökostrom + Zertifikat</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>Premiumportal & App</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>24 Monate Preissicherheit</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>Persönlicher Energieberater</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--bsubt)">✓</div>CO₂-Ausgleich inklusive</li>
-        </ul>
-        <a href="#rechner" class="btn-p" style="width:100%;justify-content:center">Jetzt wechseln →</a>
-      </div>
-      <div class="card tarif-card reveal d3">
-        <div class="tarif-tag" style="color:var(--green)">Für Klimapioniere</div><div class="tarif-name">Öko Plus</div>
-        <div><span class="tarif-price">29,9</span><span class="tarif-unit">ct/kWh</span></div>
-        <div class="tarif-base">zzgl. 8,90 €/Monat Grundpreis</div><div class="tarif-divider"></div>
-        <ul class="tarif-features">
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>100% Regionalstrom</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>Monatlicher Klimabericht</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>24 Monate Preissicherheit</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>Baumpflanzprogramm inkl.</li>
-          <li class="tarif-feature"><div class="check-dot" style="background:var(--gsubt)">✓</div>Förderberatung Solar</li>
-        </ul>
-        <a href="#rechner" class="btn-green" style="width:100%;justify-content:center">Öko Plus wählen →</a>
+
+      <div class="trust-strip reveal d2">
+        <span>🔒 SSL-verschlüsselt</span>
+        <span>🆓 100% kostenlos</span>
+        <span>📝 Unverbindlich</span>
+        <span>⏱️ Antwort in Stunden</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CHAPTER 3 · RECHNER · FULL DAY -->
-<section id="rechner" data-chapter="3">
+<!-- CHAPTER 3 · WARUM JAHRESABRECHNUNG · FULL DAY -->
+<!-- replaced rechner -->
+<section id="warum-rechnung" data-chapter="3">
   <div class="section-inner">
     <div class="section-head">
       <div class="chapter-mark reveal">Kapitel III · Der volle Tag</div>
-      <div class="label reveal d1"><div class="dot"></div>Tarifrechner</div>
-      <h2 class="section-h2 reveal d2">Was kostet Ihr Strom<br><em style="font-style:italic;color:var(--blue2)">wirklich?</em></h2>
+      <div class="label reveal d1"><div class="dot"></div>So funktioniert's</div>
+      <h2 class="section-h2 reveal d2">Warum wir Ihre<br><em style="font-style:italic;color:var(--blue2)">Jahresabrechnung brauchen</em></h2>
+      <p class="section-sub reveal d3">Die Jahresabrechnung ist der wichtigste Baustein. Ohne sie ist keine präzise Tarifanalyse und kein seriöses Angebot möglich.</p>
     </div>
+
     <div class="rechner-grid">
-      <div class="card rechner-card reveal">
-        <div><span class="rechner-label">Verbrauchstyp</span>
-          <div class="type-btns">
-            <button class="type-btn" id="btn-haushalt" onclick="setType('haushalt')" style="background:var(--blue);border:1px solid var(--blue)">Haushalt</button>
-            <button class="type-btn" id="btn-gewerbe" onclick="setType('gewerbe')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Gewerbe</button>
-          </div>
-        </div>
-        <div>
-          <div class="slider-row"><span class="rechner-label" style="margin-bottom:0">Jahresverbrauch</span><span class="slider-val" id="kwh-display">2.500 kWh</span></div>
-          <input type="range" id="kwh-slider" min="500" max="6000" step="100" value="2500" oninput="updateCalc()" style="background:linear-gradient(to right,var(--blue) 33%,rgba(255,255,255,.12) 33%)"/>
-          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--w40)"><span>500 kWh</span><span id="max-label">6.000 kWh</span></div>
-        </div>
-        <div class="refs"><p>Typische Verbräuche</p>
-          <div class="ref-row"><span>1-Person Haushalt</span><span style="color:var(--w40)">≈ 1.500 kWh</span></div>
-          <div class="ref-row"><span>2-Personen Haushalt</span><span style="color:var(--w40)">≈ 2.500 kWh</span></div>
-          <div class="ref-row"><span>4-Personen Haushalt</span><span style="color:var(--w40)">≈ 4.000 kWh</span></div>
-          <div class="ref-row"><span>Kleines Gewerbe</span><span style="color:var(--w40)">≈ 10.000 kWh</span></div>
+      <!-- Why -->
+      <div class="card rechner-card reveal-left">
+        <div class="mix-title" style="font-family:var(--fd);font-size:22px;margin-bottom:28px">Ihr Vorteil mit echten Daten</div>
+        <div class="check-list">
+          <div class="check-item" style="margin-bottom:18px"><div class="check-circle" style="background:var(--bsubt);border-color:rgba(10,132,255,.3)">📊</div><div><div style="font-size:15px;font-weight:500;color:#fff;margin-bottom:3px">Exakte Verbrauchsdaten</div><span class="check-text">Ihr tatsächlicher Jahresverbrauch statt grober Schätzungen.</span></div></div>
+          <div class="check-item" style="margin-bottom:18px"><div class="check-circle" style="background:var(--bsubt);border-color:rgba(10,132,255,.3)">🎯</div><div><div style="font-size:15px;font-weight:500;color:#fff;margin-bottom:3px">Präzisere Tarifberechnung</div><span class="check-text">Wir rechnen mit Ihren realen Zahlen – kein Pi-mal-Daumen.</span></div></div>
+          <div class="check-item" style="margin-bottom:18px"><div class="check-circle" style="background:var(--bsubt);border-color:rgba(10,132,255,.3)">⚖️</div><div><div style="font-size:15px;font-weight:500;color:#fff;margin-bottom:3px">Realistische Preisvergleiche</div><span class="check-text">Nur so lässt sich Ihr echtes Sparpotenzial bestimmen.</span></div></div>
+          <div class="check-item"><div class="check-circle" style="background:var(--gsubt)">✓</div><div><div style="font-size:15px;font-weight:500;color:#fff;margin-bottom:3px">Keine falschen Angebote</div><span class="check-text">Sie bekommen ein verbindliches, ehrliches Angebot – keine Lockpreise.</span></div></div>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="card result-card reveal d1">
-          <p style="font-size:13px;color:var(--w40);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px">Ihre Jahreskosten (Komfort)</p>
-          <div style="margin-bottom:6px"><span class="result-total" id="total-display">766,70</span><span style="font-size:20px;color:var(--w70);margin-left:4px">€</span></div>
-          <p class="result-monthly">≈ <span id="monthly-display" style="color:var(--w70)">63,89 €/Monat</span></p>
-          <div style="height:1px;background:rgba(255,255,255,.06);margin-bottom:24px"></div>
-          <div class="saving-box"><div style="font-size:20px">📈</div><div><p style="font-size:13px;color:var(--green);font-weight:500">Gegenüber Bundesdurchschnitt:</p><p style="font-size:18px;font-weight:500" id="saving-display">111,30 € jährlich sparen</p></div></div>
+
+      <!-- Process steps -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card cta-card reveal d1" style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:40px;height:40px;border-radius:12px;background:var(--bsubt);border:1px solid rgba(10,132,255,.3);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:18px;color:var(--blue2);flex-shrink:0">1</div>
+          <div><div style="font-size:16px;font-weight:500;color:#fff;margin-bottom:4px">Anfrage absenden</div><p style="font-size:14px;color:var(--w70);line-height:1.6;margin:0">Energieart und Tarifart wählen, Kontaktdaten eingeben – in 60 Sekunden erledigt.</p></div>
         </div>
-        <div class="card cta-card reveal d2">
-          <p style="font-size:14px;color:var(--w70);margin-bottom:20px;line-height:1.6">Ihr individuelles Angebot dauert nur 2 Minuten. Kostenlos, unverbindlich, sofort.</p>
-          <a href="#kontakt" class="btn-p" style="width:100%;justify-content:center">Jetzt wechseln & sparen →</a>
+        <div class="card cta-card reveal d2" style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:40px;height:40px;border-radius:12px;background:var(--bsubt);border:1px solid rgba(10,132,255,.3);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:18px;color:var(--blue2);flex-shrink:0">2</div>
+          <div><div style="font-size:16px;font-weight:500;color:#fff;margin-bottom:4px">Jahresabrechnung übermitteln</div><p style="font-size:14px;color:var(--w70);line-height:1.6;margin:0">Direkt hochladen (PDF, JPG, PNG) oder bequem per WhatsApp bzw. E-Mail nachreichen.</p></div>
         </div>
+        <div class="card cta-card reveal d3" style="display:flex;gap:16px;align-items:flex-start">
+          <div style="width:40px;height:40px;border-radius:12px;background:var(--gsubt);border:1px solid var(--gglow);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:18px;color:var(--green);flex-shrink:0">3</div>
+          <div><div style="font-size:16px;font-weight:500;color:#fff;margin-bottom:4px">Individuelles Angebot erhalten</div><p style="font-size:14px;color:var(--w70);line-height:1.6;margin:0">Wir analysieren, vergleichen und melden uns in der Regel innerhalb weniger Stunden.</p></div>
+        </div>
+        <a href="#anfrage" class="btn-p reveal d4" style="width:100%;justify-content:center;margin-top:4px">Jetzt Anfrage starten →</a>
       </div>
     </div>
   </div>
 </section>
+
+<!-- CHAPTER 4 · WARUM · WIND --><!--marker-->
 
 <!-- CHAPTER 4 · WARUM · WIND -->
 <section id="warum" data-chapter="4">
@@ -439,20 +585,20 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
       <div class="chapter-mark reveal">Kapitel IV · Die Kraft des Windes</div>
     </div>
     <div class="stats-row reveal">
-      <div class="stat-cell"><div class="stat-val">180.000+</div><div class="stat-label">Zufriedene Kunden</div></div>
-      <div class="stat-cell"><div class="stat-val">98,7%</div><div class="stat-label">Kundenzufriedenheit</div></div>
-      <div class="stat-cell"><div class="stat-val">2,4 Mio.</div><div class="stat-label">tCO₂ eingespart</div></div>
-      <div class="stat-cell"><div class="stat-val">48 h</div><div class="stat-label">Ø Wechseldauer</div></div>
+      <div class="stat-cell"><div class="stat-val">100%</div><div class="stat-label">Unabhängige Vermittlung</div></div>
+      <div class="stat-cell"><div class="stat-val">0€</div><div class="stat-label">Kosten für Sie</div></div>
+      <div class="stat-cell"><div class="stat-val">Stunden</div><div class="stat-label">Statt Tage bis zum Angebot</div></div>
+      <div class="stat-cell"><div class="stat-val">PDF · JPG</div><div class="stat-label">Rechnung einfach hochladen</div></div>
     </div>
     <div class="why-grid">
       <div>
         <div class="label reveal"><div class="dot"></div>Unser Versprechen</div>
-        <h2 class="why-h2 reveal d1">Nicht nur Energie –<br><em style="font-style:italic;color:var(--blue2)">ein Versprechen</em><br>an die Zukunft</h2>
-        <p class="why-p reveal d2">Sturm Energie wurde gegründet, weil die Energiebranche transparenter und fairer werden muss. Wir investieren 15% unseres Umsatzes direkt in neue Erneuerbare-Energien-Projekte in Deutschland.</p>
+        <h2 class="why-h2 reveal d1">Unabhängig.<br><em style="font-style:italic;color:var(--blue2)">Ehrlich.</em><br>An Ihrer Seite.</h2>
+        <p class="why-p reveal d2">Als unabhängiger Vermittler im Auftrag der Teleson AG sind wir nicht an einen einzelnen Anbieter gebunden. Wir prüfen den Markt und empfehlen, was für Sie wirklich am besten passt – persönlich und ohne Verkaufsdruck.</p>
         <div class="check-list reveal d3">
-          <div class="check-item"><div class="check-circle">✓</div><span class="check-text">Zertifizierter Ökostrom aus deutschen Windparks &amp; Solaranlagen</span></div>
-          <div class="check-item"><div class="check-circle">✓</div><span class="check-text">Klimaneutral seit 2022 – geprüft durch TÜV Rheinland</span></div>
-          <div class="check-item"><div class="check-circle">✓</div><span class="check-text">Transparente Herkunftsnachweise für jede kWh</span></div>
+          <div class="check-item"><div class="check-circle">✓</div><span class="check-text">Kostenlose &amp; unverbindliche Tarifprüfung</span></div>
+          <div class="check-item"><div class="check-circle">✓</div><span class="check-text">Angebote auf Basis Ihrer echten Verbrauchsdaten</span></div>
+          <div class="check-item"><div class="check-circle">✓</div><span class="check-text">Ein fester, persönlicher Ansprechpartner</span></div>
         </div>
       </div>
       <div class="reveal-right">
@@ -480,39 +626,39 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
     </div>
     <div class="sust-grid">
       <div class="card mix-card reveal-left">
-        <div class="mix-title">Unser Energiemix 2025</div>
+        <div class="mix-title">Typischer Öko-Tarif-Mix</div>
         <div class="mix-item"><div class="mix-row"><div class="mix-name"><span>💨</span>Windkraft</div><span style="color:#0a84ff;font-weight:500">68%</span></div><div class="mix-bar-bg"><div class="mix-bar" style="width:68%;background:linear-gradient(to right,rgba(10,132,255,.5),#0a84ff)"></div></div></div>
         <div class="mix-item"><div class="mix-row"><div class="mix-name"><span>☀️</span>Solarenergie</div><span style="color:#ffd60a;font-weight:500">22%</span></div><div class="mix-bar-bg"><div class="mix-bar" style="width:22%;background:linear-gradient(to right,rgba(255,214,10,.5),#ffd60a)"></div></div></div>
         <div class="mix-item"><div class="mix-row"><div class="mix-name"><span>💧</span>Wasserkraft</div><span style="color:#30d158;font-weight:500">10%</span></div><div class="mix-bar-bg"><div class="mix-bar" style="width:10%;background:linear-gradient(to right,rgba(48,209,88,.5),#30d158)"></div></div></div>
-        <div class="mix-stats"><div class="mix-stat"><div class="mix-stat-val">100%</div><div class="mix-stat-label">Erneuerbar</div></div><div class="mix-stat"><div class="mix-stat-val">0g</div><div class="mix-stat-label">CO₂/kWh</div></div><div class="mix-stat"><div class="mix-stat-val">TÜV</div><div class="mix-stat-label">Zertifiziert</div></div></div>
+        <div class="mix-stats"><div class="mix-stat"><div class="mix-stat-val">100%</div><div class="mix-stat-label">Erneuerbar</div></div><div class="mix-stat"><div class="mix-stat-val">0g</div><div class="mix-stat-label">CO₂/kWh</div></div><div class="mix-stat"><div class="mix-stat-val">HKN</div><div class="mix-stat-label">Nachweis</div></div></div>
       </div>
       <div>
-        <div class="label green reveal"><div class="dot"></div>Nachhaltigkeit</div>
-        <h2 class="sust-h2 reveal d1">Jede Kilowattstunde<br><em style="font-style:italic;color:var(--green)">zählt für morgen</em></h2>
-        <p class="sust-p reveal d2">Unser Strom kommt ausschließlich aus deutschen und europäischen Erneuerbaren-Anlagen. Jede kWh ist rückverfolgbar – mit Herkunftsnachweis und jährlichem Nachhaltigkeitsbericht.</p>
-        <p class="sust-p reveal d3">Mit dem Öko-Plus-Tarif investieren Sie zusätzlich direkt in neue Windpark- und Solarprojekte – und pflanzen pro Vertragsjahr automatisch 10 Bäume.</p>
-        <a href="#tarife" class="btn-green reveal d4">Klimaneutral werden 🌿</a>
+        <div class="label green reveal"><div class="dot"></div>Öko oder Standard</div>
+        <h2 class="sust-h2 reveal d1">Nachhaltigkeit –<br><em style="font-style:italic;color:var(--green)">wenn Sie möchten</em></h2>
+        <p class="sust-p reveal d2">Sie haben die Wahl: Wir vermitteln sowohl klassische Standardtarife mit dem besten Preis-Leistungs-Verhältnis als auch zertifizierte Öko-Tarife aus 100% erneuerbaren Quellen – mit Herkunftsnachweis.</p>
+        <p class="sust-p reveal d3">Geben Sie einfach bei Ihrer Anfrage an, ob Sie einen Öko- oder Standard-Tarif bevorzugen. Wir finden in beiden Fällen das passende Angebot für Sie.</p>
+        <a href="#anfrage" class="btn-green reveal d4">Tarif anfragen 🌿</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CHAPTER 6 · BEWERTUNGEN · GOLDEN HOUR -->
+<!-- CHAPTER 6 · SERVICEVERSPRECHEN · GOLDEN HOUR -->
 <section id="bewertungen" data-chapter="6">
   <div class="section-inner">
     <div class="section-head">
       <div class="chapter-mark reveal">Kapitel VI · Die goldene Stunde</div>
-      <div class="label reveal d1"><div class="dot"></div>Kundenstimmen</div>
-      <h2 class="section-h2 reveal d2">Was unsere Kunden<br><em style="font-style:italic;color:var(--blue2)">wirklich sagen</em></h2>
-      <div style="display:flex;justify-content:center;gap:4px;margin-top:16px;align-items:center" class="reveal d3"><span class="star">★★★★★</span><span style="margin-left:10px;color:var(--w90);font-size:14px">4,8 / 5 aus 12.400 Bewertungen</span></div>
+      <div class="label reveal d1"><div class="dot"></div>Unser Serviceversprechen</div>
+      <h2 class="section-h2 reveal d2">Worauf Sie sich bei uns<br><em style="font-style:italic;color:var(--blue2)">verlassen können</em></h2>
+      <p class="section-sub reveal d3">Klar, ehrlich und ohne Verkaufsdruck – das ist unser Anspruch bei jeder Anfrage.</p>
     </div>
-    <div class="reviews-grid">
-      <div class="card review-card reveal d1"><div class="review-stars">★★★★★</div><p class="review-text">„Wechsel in 2 Tagen erledigt, Kundensupport war top und die App ist wirklich intuitiv. Endlich ein Anbieter, der das ernst nimmt."</p><div class="review-footer"><div><div class="review-name">Sarah M.</div><div class="review-location">München</div></div><span class="review-tarif">Komfort</span></div></div>
-      <div class="card review-card reveal d2"><div class="review-stars">★★★★★</div><p class="review-text">„Nach Jahren bei einem der großen Anbieter bin ich froh gewechselt zu haben. Transparente Abrechnung und faire Preise."</p><div class="review-footer"><div><div class="review-name">Thomas K.</div><div class="review-location">Hamburg</div></div><span class="review-tarif">Öko Plus</span></div></div>
-      <div class="card review-card reveal d3"><div class="review-stars">★★★★★</div><p class="review-text">„Das Kundenportal ist das beste, was ich je gesehen habe. Verbrauch in Echtzeit, alles digital. Genau so soll das sein."</p><div class="review-footer"><div><div class="review-name">Lisa B.</div><div class="review-location">Berlin</div></div><span class="review-tarif">Komfort</span></div></div>
-      <div class="card review-card reveal d1"><div class="review-stars">★★★★☆</div><p class="review-text">„Sehr guter Service und faire Konditionen. Die Preisgarantie war für mich das entscheidende Argument."</p><div class="review-footer"><div><div class="review-name">Michael W.</div><div class="review-location">Frankfurt</div></div><span class="review-tarif">Basis</span></div></div>
-      <div class="card review-card reveal d2"><div class="review-stars">★★★★★</div><p class="review-text">„Endlich ein Energieanbieter, dem Nachhaltigkeit nicht nur Marketing ist. Mein CO₂-Bericht zeigt mir wirklich, was ich einspare."</p><div class="review-footer"><div><div class="review-name">Claudia R.</div><div class="review-location">Stuttgart</div></div><span class="review-tarif">Öko Plus</span></div></div>
-      <div class="card review-card reveal d3"><div class="review-stars">★★★★★</div><p class="review-text">„Super schnelle Reaktionszeiten im Support, faire Preise und das Ökostrom-Zertifikat gibt mir ein gutes Gefühl."</p><div class="review-footer"><div><div class="review-name">Jan F.</div><div class="review-location">Köln</div></div><span class="review-tarif">Komfort</span></div></div>
+    <div class="features-grid">
+      <div class="card feature-card reveal d1"><div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">🔍</div><h3>Transparenter Ablauf</h3><p>Sie wissen jederzeit, was passiert: Anfrage stellen, Jahresabrechnung übermitteln, individuelles Angebot erhalten. Keine versteckten Schritte.</p></div>
+      <div class="card feature-card reveal d2"><div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">🆓</div><h3>Kostenlos & unverbindlich</h3><p>Die Tarifanalyse und Ihr Angebot sind für Sie vollständig kostenfrei. Ob Sie wechseln, entscheiden allein Sie – ohne jede Verpflichtung.</p></div>
+      <div class="card feature-card reveal d3"><div class="feature-icon" style="background:rgba(255,159,10,.1);border:1px solid rgba(255,159,10,.3)">🎯</div><h3>Angebote auf echten Daten</h3><p>Wir rechnen mit Ihrem tatsächlichen Verbrauch aus der Jahresabrechnung – für ein realistisches, seriöses Angebot statt Lockpreisen.</p></div>
+      <div class="card feature-card reveal d1"><div class="feature-icon" style="background:rgba(191,90,242,.1);border:1px solid rgba(191,90,242,.3)">🤝</div><h3>Persönliche Betreuung</h3><p>Ein fester Ansprechpartner statt anonymer Hotline. Erreichbar per WhatsApp, E-Mail und Telefon – ehrlich und auf Augenhöhe.</p></div>
+      <div class="card feature-card reveal d2"><div class="feature-icon" style="background:var(--bsubt);border:1px solid rgba(10,132,255,.3)">🔒</div><h3>Sicherer Umgang mit Daten</h3><p>Ihre Unterlagen werden verschlüsselt übertragen, vertraulich behandelt und ausschließlich zur Erstellung Ihres Angebots genutzt.</p></div>
+      <div class="card feature-card reveal d3"><div class="feature-icon" style="background:var(--gsubt);border:1px solid rgba(48,209,88,.3)">⏱️</div><h3>Schnelle Rückmeldung</h3><p>Sobald uns Ihre Jahresabrechnung vorliegt, erstellen wir Ihr Angebot in der Regel innerhalb weniger Stunden.</p></div>
     </div>
   </div>
 </section>
@@ -525,12 +671,12 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
       <h2 class="section-h2 reveal d1">Ihre Fragen,<br><em style="font-style:italic;color:var(--blue2)">unsere Antworten</em></h2>
     </div>
     <div class="faq-wrap reveal">
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(0)"><span>Wie lange dauert der Wechsel zu Sturm Energie?</span><span class="faq-icon" id="fi0">+</span></button><div class="faq-body" id="fb0"><p>In der Regel dauert der Wechsel nur 48 Stunden. Wir kümmern uns um die Kündigung bei Ihrem alten Anbieter und koordinieren alles – Sie müssen nichts weiter tun als das Bestellformular ausfüllen.</p></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(1)"><span>Gibt es eine Mindestvertragslaufzeit?</span><span class="faq-icon" id="fi1">+</span></button><div class="faq-body" id="fb1"><p>Nein. Alle unsere Tarife sind monatlich kündbar. Es gibt keine Mindestlaufzeit und keine Wechselgebühren – wir setzen auf Qualität, nicht auf Bindungsklauseln.</p></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(2)"><span>Was bedeutet 100% Ökostrom bei Sturm Energie?</span><span class="faq-icon" id="fi2">+</span></button><div class="faq-body" id="fb2"><p>Für jede Kilowattstunde, die Sie verbrauchen, kaufen wir eine Kilowattstunde aus zertifizierten erneuerbaren Quellen ein – mit lückenlosem Herkunftsnachweis gemäß EEG.</p></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(3)"><span>Wie hoch ist mein Abschlag und kann ich ihn anpassen?</span><span class="faq-icon" id="fi3">+</span></button><div class="faq-body" id="fb3"><p>Ihr monatlicher Abschlag wird anhand Ihres Jahresverbrauchs berechnet. Im Kundenportal können Sie ihn jederzeit flexibel anpassen.</p></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(4)"><span>Was passiert, wenn ich umziehe?</span><span class="faq-icon" id="fi4">+</span></button><div class="faq-body" id="fb4"><p>Kein Problem – melden Sie uns Ihren Umzug einfach im Kundenportal. Wir begleiten Sie zu Ihrer neuen Adresse, sofern wir dort liefern.</p></div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(5)"><span>Ist die Preisgarantie wirklich verbindlich?</span><span class="faq-icon" id="fi5">+</span></button><div class="faq-body" id="fb5"><p>Ja. Die Preisgarantie gilt vertraglich für die angegebene Laufzeit. Preisanpassungen während der Garantiephase sind ausgeschlossen.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(0)"><span>Welche Unterlagen werden benötigt?</span><span class="faq-icon" id="fi0">+</span></button><div class="faq-body" id="fb0"><p>Wir benötigen lediglich Ihre aktuelle Jahresabschlussrechnung bzw. Verbrauchsabrechnung Ihres jetzigen Anbieters. Daraus lesen wir Ihren tatsächlichen Verbrauch und Ihre aktuellen Kosten ab – die Grundlage für ein präzises Angebot.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(1)"><span>Wie lange dauert die Angebotserstellung?</span><span class="faq-icon" id="fi1">+</span></button><div class="faq-body" id="fb1"><p>Sobald uns Ihre Jahresabrechnung vorliegt, erstellen wir Ihr individuelles Angebot in der Regel innerhalb weniger Stunden – meist noch am selben Tag.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(2)"><span>Ist die Anfrage wirklich kostenlos?</span><span class="faq-icon" id="fi2">+</span></button><div class="faq-body" id="fb2"><p>Ja, die Anfrage und die Erstellung Ihres Angebots sind für Sie vollständig kostenlos und unverbindlich. Es entstehen Ihnen keinerlei Kosten oder Verpflichtungen.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(3)"><span>Muss ich meinen Anbieter wechseln?</span><span class="faq-icon" id="fi3">+</span></button><div class="faq-body" id="fb3"><p>Nein, ein Anbieterwechsel ist nicht verpflichtend. Entscheiden Sie sich für einen neuen Tarif, übernehmen wir die gesamte Abwicklung, während Ihr bestehender Vertrag regulär zum nächstmöglichen Zeitpunkt endet.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(4)"><span>Wie wird mit meinen Daten umgegangen?</span><span class="faq-icon" id="fi4">+</span></button><div class="faq-body" id="fb4"><p>Ihre Daten und Dokumente werden verschlüsselt übertragen (SSL/TLS), vertraulich behandelt und ausschließlich zur Erstellung Ihres Angebots verwendet. Details finden Sie in unserer Datenschutzerklärung.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(5)"><span>Warum ist die Jahresabrechnung so wichtig?</span><span class="faq-icon" id="fi5">+</span></button><div class="faq-body" id="fb5"><p>Nur mit Ihren echten Verbrauchsdaten können wir realistisch vergleichen und ein seriöses Angebot machen. Schätzungen führen oft zu falschen Lockpreisen – Ihre Jahresabrechnung sorgt für Genauigkeit und Ehrlichkeit.</p></div></div>
     </div>
   </div>
 </section>
@@ -540,28 +686,29 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
   <div class="section-inner">
     <div class="section-head">
       <div class="chapter-mark reveal">Kapitel VII · Die Stadt der Zukunft</div>
-      <div class="label reveal d1"><div class="dot"></div>Kontakt</div>
-      <h2 class="section-h2 reveal d2">Ihre Reise beginnt –<br><em style="font-style:italic;color:var(--blue2)">jetzt</em></h2>
+      <div class="label reveal d1"><div class="dot"></div>Support & Kontakt</div>
+      <h2 class="section-h2 reveal d2">Wir sind für Sie da –<br><em style="font-style:italic;color:var(--blue2)">persönlich erreichbar</em></h2>
+      <p class="section-sub reveal d3">Fragen vor Ihrer Anfrage? Erreichen Sie uns direkt per WhatsApp, E-Mail oder Telefon.</p>
     </div>
     <div class="contact-grid">
       <div class="contact-cards reveal-left">
-        <div class="card contact-card"><div class="contact-icon" style="background:rgba(10,132,255,.15);border:1px solid rgba(10,132,255,.3)">📞</div><div><div class="contact-label">Hotline</div><div class="contact-val">0800 – 78876 0</div><div class="contact-sub">Mo–Fr 8–20 Uhr, Sa 9–16 Uhr</div></div></div>
-        <div class="card contact-card"><div class="contact-icon" style="background:rgba(48,209,88,.12);border:1px solid rgba(48,209,88,.3)">✉️</div><div><div class="contact-label">E-Mail</div><div class="contact-val">service@sturmenergie.de</div><div class="contact-sub">Antwort innerhalb von 4 Stunden</div></div></div>
-        <div class="card contact-card"><div class="contact-icon" style="background:rgba(191,90,242,.12);border:1px solid rgba(191,90,242,.3)">💻</div><div><div class="contact-label">Kundenportal</div><div class="contact-val">portal.sturmenergie.de</div><div class="contact-sub">24/7 Self-Service & Chat</div></div></div>
+        <a class="card contact-card" id="kontaktWa" href="#" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer"><div class="contact-icon" style="background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.3)">💬</div><div><div class="contact-label">WhatsApp</div><div class="contact-val">Direkt schreiben</div><div class="contact-sub">Schnellste Antwort · Rechnung einfach nachreichen</div></div></a>
+        <a class="card contact-card" href="mailto:sturmkonrad96@googlemail.com" style="text-decoration:none"><div class="contact-icon" style="background:rgba(10,132,255,.15);border:1px solid rgba(10,132,255,.3)">✉️</div><div><div class="contact-label">E-Mail</div><div class="contact-val">sturmkonrad96@googlemail.com</div><div class="contact-sub">Antwort innerhalb von 4 Stunden</div></div></a>
+        <a class="card contact-card" href="tel:+4901725767938" style="text-decoration:none"><div class="contact-icon" style="background:rgba(191,90,242,.12);border:1px solid rgba(191,90,242,.3)">📞</div><div><div class="contact-label">Telefon</div><div class="contact-val">0172 5767938</div><div class="contact-sub">Ernst Konrad Sturm · persönlich</div></div></a>
       </div>
       <div class="card form-card reveal-right" id="form-wrap">
-        <div class="form-h3">Nachricht senden</div>
+        <div class="form-h3">Schnell eine Frage stellen</div>
         <div class="subject-btns">
-          <button class="subject-btn" id="sb0" onclick="setSubject(0)" style="background:var(--blue);border:1px solid var(--blue)">Wechsel</button>
-          <button class="subject-btn" id="sb1" onclick="setSubject(1)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Support</button>
-          <button class="subject-btn" id="sb2" onclick="setSubject(2)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Abrechnung</button>
-          <button class="subject-btn" id="sb3" onclick="setSubject(3)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Sonstiges</button>
+          <button class="subject-btn" id="sb0" onclick="setSubject(0)" style="background:var(--blue);border:1px solid var(--blue)">Angebot</button>
+          <button class="subject-btn" id="sb1" onclick="setSubject(1)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Jahresabrechnung</button>
+          <button class="subject-btn" id="sb2" onclick="setSubject(2)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Allgemeine Frage</button>
         </div>
         <label class="form-label">Name</label><input class="form-input" type="text" placeholder="Max Mustermann"/>
         <label class="form-label">E-Mail</label><input class="form-input" type="email" placeholder="max@beispiel.de"/>
         <label class="form-label">Nachricht</label><textarea class="form-input" rows="4" placeholder="Wie können wir Ihnen helfen?" style="resize:vertical"></textarea>
         <button class="btn-p" onclick="submitForm()" style="width:100%;justify-content:center;margin-top:8px">Nachricht senden →</button>
-        <p class="form-note">Mit dem Absenden stimmen Sie unserer <a href="#">Datenschutzerklärung</a> zu.</p>
+        <p class="form-note">Bereit für Ihr Angebot? <a href="#anfrage">Direkt zur Anfrage →</a></p>
+        <p class="form-note" style="margin-top:6px">Mit dem Absenden stimmen Sie unserer <a href="#" onclick="openDatenschutz(event)">Datenschutzerklärung</a> zu.</p>
       </div>
     </div>
   </div>
@@ -576,10 +723,10 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
         <p class="footer-desc">Deutschlands moderner Energieversorger. 100% Ökostrom, faire Preise, digitaler Service.</p>
         <div class="footer-badges"><span class="footer-badge">Ökostrom</span><span class="footer-badge">TÜV</span><span class="footer-badge">CO₂-neutral</span></div>
       </div>
-      <div><div class="footer-col-title">Produkte</div><ul class="footer-links"><li><a href="#tarife">Stromtarife</a></li><li><a href="#rechner">Tarifrechner</a></li><li><a href="#">Kundenportal</a></li><li><a href="#">App herunterladen</a></li><li><a href="#">Förderprogramme</a></li></ul></div>
-      <div><div class="footer-col-title">Unternehmen</div><ul class="footer-links"><li><a href="#">Über uns</a></li><li><a href="#">Karriere<span class="footer-link-badge">Jobs!</span></a></li><li><a href="#">Presse</a></li><li><a href="#">Partnerprogramm</a></li><li><a href="#">Blog</a></li></ul></div>
-      <div><div class="footer-col-title">Wissen</div><ul class="footer-links"><li><a href="#">Stromlexikon</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">Energieführer</a></li><li><a href="#">Nachhaltigkeitsbericht</a></li></ul></div>
-      <div><div class="footer-col-title">Rechtliches</div><ul class="footer-links"><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li><li><a href="#">AGB</a></li><li><a href="#">Cookie-Einstellungen</a></li></ul></div>
+      <div><div class="footer-col-title">Angebot</div><ul class="footer-links"><li><a href="#anfrage">Angebot anfordern</a></li><li><a href="#warum-rechnung">So funktioniert's</a></li><li><a href="#nachhaltigkeit">Öko & Standard</a></li><li><a href="#" onclick="openInfo(event,'foerder')">Förderprogramme</a></li><li><a href="#" onclick="openInfo(event,'app')">App (in Kürze)</a></li></ul></div>
+      <div><div class="footer-col-title">Unternehmen</div><ul class="footer-links"><li><a href="#" onclick="openInfo(event,'ueberuns')">Über uns</a></li><li><a href="#" onclick="openKarriere(event)">Karriere<span class="footer-link-badge">Jobs!</span></a></li><li><a href="#" onclick="openInfo(event,'presse')">Presse</a></li><li><a href="#" onclick="openInfo(event,'partner')">Partnerprogramm</a></li><li><a href="#" onclick="openInfo(event,'blog')">Blog</a></li></ul></div>
+      <div><div class="footer-col-title">Wissen</div><ul class="footer-links"><li><a href="#" onclick="openInfo(event,'lexikon')">Stromlexikon</a></li><li><a href="#faq">FAQ</a></li><li><a href="#" onclick="openInfo(event,'guide')">Energieführer</a></li><li><a href="#" onclick="openInfo(event,'bericht')">Nachhaltigkeitsbericht</a></li></ul></div>
+      <div><div class="footer-col-title">Rechtliches</div><ul class="footer-links"><li><a href="#" onclick="openImpressum(event)">Impressum</a></li><li><a href="#" onclick="openDatenschutz(event)">Datenschutz</a></li><li><a href="#" onclick="openInfo(event,'agb')">AGB</a></li><li><a href="#" onclick="openInfo(event,'cookies')">Cookie-Einstellungen</a></li></ul></div>
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2025 Sturm Energie GmbH · Alle Rechte vorbehalten · Reguliert durch die BNetzA</p>
@@ -589,6 +736,220 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
 </footer>
 
 </div><!-- /#page -->
+
+<!-- ═══ IMPRESSUM MODAL ═══ -->
+<div id="imp-modal" role="dialog" aria-modal="true" aria-labelledby="imp-title">
+  <div id="imp-backdrop" onclick="closeImpressum()"></div>
+  <div class="imp-dialog">
+    <button class="imp-close" onclick="closeImpressum()" aria-label="Schließen">✕</button>
+    <div class="imp-label"><div class="dot"></div>Rechtliches</div>
+    <h2 id="imp-title">Impressum</h2>
+    <p class="imp-subtitle">Angaben gemäß § 5 TMG</p>
+
+    <div class="imp-block">
+      <h3><span class="ico">🏢</span>Anbieter</h3>
+      <p><span class="imp-name">Sturm Energie</span><br>
+        Inhaber: Ernst Konrad Sturm<br>
+        handelnd unter der Marke „Sturm Energie"<br>
+        Münzplatz 3<br>56068 Koblenz</p>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">📞</span>Kontakt</h3>
+      <p>Telefon: <a href="tel:+4901725767938">0172 5767938</a><br>
+        E-Mail: <a href="mailto:sturmkonrad96@googlemail.com">sturmkonrad96@googlemail.com</a></p>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">💼</span>Tätigkeit</h3>
+      <p>Selbstständige Tätigkeit als Handelsvertreter im Sinne des § 84 HGB.</p>
+      <p>Ich bin als unabhängiger Handelsvertreter im Auftrag der <strong>Teleson AG</strong> tätig und vermittle Strom- und Gastarife für Privat- und Geschäftskunden.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">ℹ️</span>Hinweis zur Vermittlung</h3>
+      <p>Ich bin <strong>kein Energieversorger</strong>.</p>
+      <p>Verträge kommen ausschließlich zwischen dem Kunden und dem jeweiligen Energieversorgungsunternehmen zustande.</p>
+      <p>Die Vermittlung erfolgt im Auftrag und unter Einhaltung der Rahmenbedingungen der:</p>
+      <div class="imp-notice"><p><strong>Teleson AG</strong><br><a href="https://www.teleson.de/" target="_blank" rel="noopener noreferrer">https://www.teleson.de/</a></p></div>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">📋</span>Umsatzsteuer</h3>
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br><span class="imp-muted">[USt-IdNr.]</span></p>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">✍️</span>Verantwortlich für den Inhalt</h3>
+      <p class="imp-muted" style="margin-bottom:10px">nach § 18 Abs. 2 MStV</p>
+      <p><span class="imp-name">Ernst Konrad Sturm</span><br>Münzplatz 3<br>56068 Koblenz</p>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">⚖️</span>Streitschlichtung</h3>
+      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:</p>
+      <p><a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a></p>
+      <div class="imp-sep"></div>
+      <p>Ich bin nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DATENSCHUTZ MODAL ═══ -->
+<div id="ds-modal" role="dialog" aria-modal="true" aria-labelledby="ds-title">
+  <div id="ds-backdrop" onclick="closeDatenschutz()"></div>
+  <div class="imp-dialog">
+    <button class="imp-close" onclick="closeDatenschutz()" aria-label="Schließen">✕</button>
+    <div class="imp-label"><div class="dot"></div>Rechtliches</div>
+    <h2 id="ds-title">Datenschutzerklärung</h2>
+    <p class="imp-subtitle">Stand: Juni 2026</p>
+
+    <div class="imp-block">
+      <p>Der Schutz Ihrer persönlichen Daten ist uns wichtig. Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, BDSG, TTDSG). Im Folgenden informieren wir Sie darüber, welche personenbezogenen Daten wir auf dieser Website verarbeiten, zu welchem Zweck und welche Rechte Ihnen zustehen.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>1. Verantwortliche Stelle</h3>
+      <p>Verantwortlich im Sinne der DSGVO ist:</p>
+      <p><span class="imp-name">Sturm Energie</span><br>
+        Inhaber: Ernst Konrad Sturm<br>
+        handelnd unter der Marke „Sturm Energie"<br>
+        Münzplatz 3<br>56068 Koblenz<br>Rheinland-Pfalz, Deutschland</p>
+      <p>Telefon: <a href="tel:+4901725767938">0172 5767938</a><br>
+        E-Mail: <a href="mailto:sturmkonrad96@googlemail.com">sturmkonrad96@googlemail.com</a></p>
+    </div>
+
+    <div class="imp-block">
+      <h3>2. Zweck der Datenverarbeitung</h3>
+      <p>Die Website verarbeitet personenbezogene Daten zu folgenden Zwecken: Vermittlung von Strom- und Gastarifen, Bearbeitung von Kundenanfragen, Erstellung individueller Tarifangebote, Kontaktaufnahme per E-Mail und WhatsApp, Kundenkommunikation sowie Verbesserung der Website (Analyse und Statistik).</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>3. Verarbeitete Daten</h3>
+      <p>Wir verarbeiten folgende Kategorien personenbezogener Daten: Name (optional), E-Mail-Adresse, Telefonnummer (optional; Pflicht bei Wahl der WhatsApp-Kommunikation), Postleitzahl, hochgeladene Dateien (z. B. Strom- und Gasrechnungen), IP-Adresse und technische Verbindungsdaten sowie Nutzungsdaten (z. B. Seitenaufrufe und Klickverhalten).</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>4. Rechtsgrundlagen</h3>
+      <p>Die Verarbeitung Ihrer Daten erfolgt auf folgenden Rechtsgrundlagen gemäß Art. 6 DSGVO: Art. 6 Abs. 1 lit. b (Durchführung vorvertraglicher Maßnahmen und Vertragsanbahnung), Art. 6 Abs. 1 lit. a (Einwilligung der betroffenen Person) sowie Art. 6 Abs. 1 lit. f (berechtigtes Interesse an der Verbesserung und Sicherheit unseres Angebots).</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>5. Datenweitergabe</h3>
+      <p>Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Eine Weitergabe erfolgt nur an die <strong>Teleson AG</strong> im Rahmen der Vermittlungstätigkeit sowie an Energieversorgungsunternehmen zur Erstellung eines individuellen Tarifangebots auf Ihren Wunsch. Eine Weitergabe an sonstige unbeteiligte Dritte erfolgt nicht.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>6. Upload von Dokumenten</h3>
+      <p>Sofern auf dieser Website die Möglichkeit besteht, Strom- oder Gasrechnungen hochzuladen, werden diese Daten verschlüsselt übertragen (SSL/TLS), sicher gespeichert und ausschließlich zur Erstellung individueller Tarifangebote verwendet. Die übermittelten Dokumente werden vertraulich behandelt und nicht für andere Zwecke genutzt.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>7. WhatsApp-Kommunikation</h3>
+      <p>Für die Kommunikation mit Interessenten und Kunden bieten wir WhatsApp als zusätzlichen Kontaktweg an. Anbieter ist die WhatsApp Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland.</p>
+      <p>Durch die Nutzung von WhatsApp können personenbezogene Daten (z. B. Telefonnummer, Nachrichteninhalte, Zeitstempel und Metadaten) verarbeitet werden. Eine Datenverarbeitung kann dabei auch außerhalb der Europäischen Union erfolgen. Die Nutzung erfolgt freiwillig und basiert auf Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>8. Kontaktformular und E-Mail</h3>
+      <p>Wenn Sie uns per Kontaktformular oder E-Mail kontaktieren, werden die von Ihnen angegebenen Daten zur Bearbeitung Ihrer Anfrage gespeichert und verarbeitet. Diese Daten geben wir ohne Ihre ausdrückliche Einwilligung nicht an Dritte weiter, sofern keine gesetzliche Verpflichtung besteht.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>9. Analyse- und Tracking-Tools</h3>
+      <p>Sofern Analyse-Tools wie Google Analytics eingesetzt werden, erfolgt deren Nutzung ausschließlich nach Ihrer ausdrücklichen Einwilligung über das Cookie-Banner. Dabei können gekürzte IP-Adresse, Geräteinformationen, Nutzungsverhalten und Seitenaufrufe verarbeitet werden. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TTDSG. Sie können Ihre Einwilligung jederzeit widerrufen.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>10. SSL-/TLS-Verschlüsselung</h3>
+      <p>Diese Website nutzt aus Sicherheitsgründen eine SSL-/TLS-Verschlüsselung. Dadurch werden übermittelte Daten, beispielsweise Anfragen oder hochgeladene Dokumente, vor dem Zugriff unbefugter Dritter geschützt.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>11. Speicherdauer</h3>
+      <p>Personenbezogene Daten werden nur solange gespeichert, wie dies für die jeweiligen Verarbeitungszwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen. Nach Wegfall des Verarbeitungszwecks bzw. Ablauf gesetzlicher Fristen werden die Daten gelöscht oder anonymisiert.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>12. Ihre Rechte</h3>
+      <p>Sie haben jederzeit folgende Rechte: Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20), Widerruf einer Einwilligung (Art. 7 Abs. 3), Widerspruch gegen die Verarbeitung (Art. 21) sowie Beschwerde bei einer Datenschutzaufsichtsbehörde (Art. 77 DSGVO).</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>13. Zuständige Aufsichtsbehörde</h3>
+      <p>Landesbeauftragter für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz<br>Hintere Bleiche 34<br>55116 Mainz<br>Deutschland</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>14. Kontakt für Datenschutzanfragen</h3>
+      <p>Bei Fragen zum Datenschutz oder zur Ausübung Ihrer Rechte kontaktieren Sie uns bitte unter:<br>E-Mail: <a href="mailto:sturmkonrad96@googlemail.com">sturmkonrad96@googlemail.com</a></p>
+    </div>
+
+    <div class="imp-block">
+      <h3>15. Hinweis zur Zusammenarbeit</h3>
+      <p>Die Vermittlung erfolgt im Rahmen eines Handelsvertretermodells in Zusammenarbeit mit der Teleson AG. Sturm Energie ist <strong>kein Energieversorger</strong>. Verträge kommen ausschließlich zwischen dem Kunden und dem jeweiligen Energieversorgungsunternehmen zustande.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3>16. Änderungen dieser Datenschutzerklärung</h3>
+      <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, sofern dies aufgrund rechtlicher, technischer oder organisatorischer Änderungen erforderlich wird. Die jeweils aktuelle Version finden Sie jederzeit auf dieser Website.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ KARRIERE MODAL ═══ -->
+<div id="kr-modal" role="dialog" aria-modal="true" aria-labelledby="kr-title">
+  <div id="kr-backdrop" onclick="closeKarriere()"></div>
+  <div class="imp-dialog">
+    <button class="imp-close" onclick="closeKarriere()" aria-label="Schließen">✕</button>
+    <div class="imp-label green"><div class="dot"></div>Karriere</div>
+    <h2 id="kr-title">Karriere bei Sturm Energie</h2>
+    <p class="imp-subtitle">Werde Teil unseres Vertriebsteams – digital, flexibel und im Auftrag der Teleson AG.</p>
+
+    <div class="imp-notice" style="display:flex;gap:16px;align-items:center;margin-bottom:32px;background:rgba(10,132,255,.06);border-color:rgba(10,132,255,.2)">
+      <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">👤</div>
+      <div>
+        <p style="color:#fff;font-weight:500;font-size:15px;margin:0">Ernst Konrad Sturm</p>
+        <p style="color:var(--w70);font-size:13px;margin:2px 0 0">Inhaber & Ihr Ansprechpartner von Sturm Energie</p>
+      </div>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">⚡</span>Offiziell im Auftrag der Teleson AG</h3>
+      <p>Sturm Energie vermittelt Strom- und Gastarife im Auftrag der <strong>Teleson AG</strong>.</p>
+      <p>Aufgrund der hohen Nachfrage bauen wir unser Vertriebsteam kontinuierlich aus. Wir bieten interessierten Personen die Möglichkeit, sich unverbindlich und kostenlos in die Vermittlung von Energieverträgen einarbeiten zu lassen.</p>
+      <p>Alle Inhalte und Schulungen werden vollständig digital zur Verfügung gestellt. Wenn Sie Interesse haben, selbst als Vermittler im Auftrag von Sturm Energie tätig zu werden, freuen wir uns über Ihre Initiativbewerbung.</p>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">🎯</span>Ihre Vorteile auf einen Blick</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px">
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"><p style="color:#fff;font-weight:500;font-size:14px;margin:0 0 4px">💻 100% digital</p><p style="color:var(--w70);font-size:13px;margin:0;line-height:1.6">Schulungen und Einarbeitung online</p></div>
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"><p style="color:#fff;font-weight:500;font-size:14px;margin:0 0 4px">🆓 Kostenlos</p><p style="color:var(--w70);font-size:13px;margin:0;line-height:1.6">Keine Eintritts- oder Schulungskosten</p></div>
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"><p style="color:#fff;font-weight:500;font-size:14px;margin:0 0 4px">🕐 Flexibel</p><p style="color:var(--w70);font-size:13px;margin:0;line-height:1.6">Nebenberuflich oder hauptberuflich möglich</p></div>
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)"><p style="color:#fff;font-weight:500;font-size:14px;margin:0 0 4px">🚀 Einfach starten</p><p style="color:var(--w70);font-size:13px;margin:0;line-height:1.6">Strukturierte Einarbeitung in die Vertriebsprozesse</p></div>
+      </div>
+    </div>
+
+    <div class="imp-block">
+      <h3><span class="ico">✉️</span>E-Mail für Bewerbungen</h3>
+      <p>Senden Sie Ihre Initiativbewerbung an:<br><a href="mailto:sturmkonrad96@googlemail.com?subject=Bewerbung%20Vertriebsteam%20Sturm%20Energie">sturmkonrad96@googlemail.com</a></p>
+      <a href="mailto:sturmkonrad96@googlemail.com?subject=Bewerbung%20Vertriebsteam%20Sturm%20Energie" class="btn-p" style="margin-top:16px">Jetzt bewerben →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GENERIC INFO MODAL (Produkte / Unternehmen / Wissen / AGB / Cookies) ═══ -->
+<div id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-title">
+  <div id="info-backdrop" onclick="closeInfo()"></div>
+  <div class="imp-dialog">
+    <button class="imp-close" onclick="closeInfo()" aria-label="Schließen">✕</button>
+    <div class="imp-label" id="info-label"><div class="dot"></div>Info</div>
+    <h2 id="info-title">Titel</h2>
+    <p class="imp-subtitle" id="info-subtitle"></p>
+    <div id="info-body"></div>
+  </div>
+</div>
 
 <script>
 /* ════════════════════════════════════════════════════════════════
@@ -828,32 +1189,99 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => observer.observe(el));
 
 // Calc
-let currentType='haushalt';
-function setType(t){
-  currentType=t;
-  const max=t==='haushalt'?6000:20000;
-  const slider=document.getElementById('kwh-slider');
-  slider.max=max; slider.value=t==='haushalt'?2500:8000;
-  document.getElementById('max-label').textContent=max.toLocaleString('de-DE')+' kWh';
-  document.getElementById('btn-haushalt').style.background=t==='haushalt'?'var(--blue)':'rgba(255,255,255,.05)';
-  document.getElementById('btn-haushalt').style.border=t==='haushalt'?'1px solid var(--blue)':'1px solid rgba(255,255,255,.1)';
-  document.getElementById('btn-gewerbe').style.background=t==='gewerbe'?'var(--blue)':'rgba(255,255,255,.05)';
-  document.getElementById('btn-gewerbe').style.border=t==='gewerbe'?'1px solid var(--blue)':'1px solid rgba(255,255,255,.1)';
-  updateCalc();
+/* ════════════ REQUEST FUNNEL LOGIC ════════════ */
+const WA_NUMBER = '491725767938'; // WhatsApp: +49 + Nummer ohne führende 0
+const MAIL_TO  = 'sturmkonrad96@googlemail.com';
+const funnel = { step:0, energie:'', tarif:'', files:[] };
+
+function pickChoice(el){
+  const group = el.dataset.group;
+  document.querySelectorAll('.choice[data-group="'+group+'"]').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  funnel[group] = el.dataset.val;
+  if(group==='energie'){ document.getElementById('next0').disabled = false; }
+  buildMessages();
 }
-function updateCalc(){
-  const slider=document.getElementById('kwh-slider');
-  const kwh=Number(slider.value), max=Number(slider.max);
-  const pct=((kwh-500)/(max-500))*100;
-  slider.style.background=`linear-gradient(to right, var(--blue) ${pct}%, rgba(255,255,255,.12) ${pct}%)`;
-  document.getElementById('kwh-display').textContent=kwh.toLocaleString('de-DE')+' kWh';
-  const total=(kwh*0.269+7.90*12).toFixed(2);
-  const monthly=(total/12).toFixed(2);
-  const saving=((kwh*0.314+7.90*12)-parseFloat(total)).toFixed(2);
-  document.getElementById('total-display').textContent=total.replace('.',',');
-  document.getElementById('monthly-display').textContent=monthly.replace('.',',')+' €/Monat';
-  document.getElementById('saving-display').textContent=saving.replace('.',',')+' € jährlich sparen';
+function checkStep2(){
+  const n=document.getElementById('f-name').value.trim();
+  const p=document.getElementById('f-phone').value.trim();
+  const m=document.getElementById('f-email').value.trim();
+  document.getElementById('next2').disabled = !(n && p && m);
+  buildMessages();
 }
+function showStep(i){
+  funnel.step = i;
+  for(let s=0;s<5;s++){
+    const panel=document.getElementById('fp'+s);
+    if(panel) panel.classList.toggle('active', s===i);
+  }
+  // progress ticks (4 visible steps: 0..3)
+  for(let s=0;s<4;s++){
+    const fs=document.getElementById('fs'+s);
+    if(!fs) continue;
+    fs.classList.toggle('active', s===i);
+    fs.classList.toggle('done', s<i);
+  }
+  // scroll funnel into view nicely
+  const sec=document.getElementById('anfrage');
+  if(sec && i>0){ /* keep position */ }
+}
+function funnelNext(){ if(funnel.step<3) showStep(funnel.step+1); buildMessages(); }
+function funnelBack(){ if(funnel.step>0) showStep(funnel.step-1); }
+
+// File upload
+function handleFiles(fileList){
+  for(const f of fileList){
+    if(f.size > 10*1024*1024){ alert('Datei zu groß (max. 10 MB): '+f.name); continue; }
+    funnel.files.push(f);
+  }
+  renderFiles();
+}
+function renderFiles(){
+  const wrap=document.getElementById('fileList');
+  wrap.innerHTML='';
+  funnel.files.forEach((f,idx)=>{
+    const ext=(f.name.split('.').pop()||'').toLowerCase();
+    const ico = ext==='pdf'?'📕':(['jpg','jpeg','png'].includes(ext)?'🖼️':'📄');
+    const chip=document.createElement('div');
+    chip.className='file-chip';
+    chip.innerHTML='<span class="fc-ico">'+ico+'</span><span class="fc-name">'+f.name+'</span><span class="fc-x" onclick="removeFile('+idx+')">✕</span>';
+    wrap.appendChild(chip);
+  });
+}
+function removeFile(i){ funnel.files.splice(i,1); renderFiles(); }
+
+// Drag & drop
+(function(){
+  const dz=document.getElementById('dropzone');
+  if(!dz) return;
+  ['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('drag');}));
+  ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('drag');}));
+  dz.addEventListener('drop',e=>{ if(e.dataTransfer&&e.dataTransfer.files) handleFiles(e.dataTransfer.files); });
+})();
+
+// Build WhatsApp + E-Mail prefilled messages
+function buildMessages(){
+  const energie = funnel.energie || 'Strom/Gas/Wärmeenergie';
+  const tarif = funnel.tarif ? (' ('+funnel.tarif+')') : '';
+  const waText = `Hallo Sturm Energie, ich interessiere mich für ein Angebot für ${energie}${tarif}. Meine Jahresabschlussrechnung sende ich Ihnen zur Prüfung zu.`;
+  const waURL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waText)}`;
+  const mailSubject = 'Anfrage für individuelles Energieangebot';
+  const mailBody = `Hallo Sturm Energie,\n\nich interessiere mich für ein individuelles Angebot für ${energie}${tarif}.\n\nMeine Jahresabschlussrechnung habe ich beigefügt bzw. sende sie Ihnen in Kürze zu.\n\nName: ${(document.getElementById('f-name')||{}).value||''}\nTelefon: ${(document.getElementById('f-phone')||{}).value||''}\nE-Mail: ${(document.getElementById('f-email')||{}).value||''}`;
+  const mailURL = `mailto:${MAIL_TO}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+  ['waBtn','waBtn2'].forEach(id=>{const e=document.getElementById(id); if(e) e.href=waURL;});
+  ['mailBtn','mailBtn2'].forEach(id=>{const e=document.getElementById(id); if(e) e.href=mailURL;});
+  // contact section WhatsApp
+  const kw=document.getElementById('kontaktWa');
+  if(kw) kw.href=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hallo Sturm Energie, ich habe eine Frage zu Ihrem Angebot.')}`;
+}
+function funnelSubmit(){
+  buildMessages();
+  showStep(4);
+  // mark all ticks done
+  for(let s=0;s<4;s++){const fs=document.getElementById('fs'+s); if(fs){fs.classList.add('done');fs.classList.remove('active');}}
+}
+
 function toggleFaq(i){
   const body=document.getElementById('fb'+i), icon=document.getElementById('fi'+i);
   const isOpen=body.classList.contains('open');
@@ -862,8 +1290,8 @@ function toggleFaq(i){
   if(!isOpen){body.classList.add('open');icon.classList.add('open');icon.textContent='+';}
 }
 function setSubject(i){
-  for(let j=0;j<4;j++){
-    const btn=document.getElementById('sb'+j);
+  for(let j=0;j<3;j++){
+    const btn=document.getElementById('sb'+j); if(!btn) continue;
     btn.style.background=j===i?'var(--blue)':'rgba(255,255,255,.05)';
     btn.style.border=j===i?'1px solid var(--blue)':'1px solid rgba(255,255,255,.1)';
   }
@@ -871,6 +1299,98 @@ function setSubject(i){
 function submitForm(){
   document.getElementById('form-wrap').innerHTML='<div class="success-box"><div class="success-icon">✓</div><h3 style="font-family:var(--fd);font-size:24px;margin-bottom:12px">Nachricht erhalten!</h3><p style="color:var(--w90);font-size:15px">Wir melden uns innerhalb von 4 Stunden bei Ihnen.</p></div>';
 }
+// Initialise prefilled WhatsApp/E-Mail links on load
+buildMessages();
+// Impressum modal
+function openImpressum(e){ if(e) e.preventDefault(); document.getElementById('imp-modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeImpressum(){ document.getElementById('imp-modal').classList.remove('open'); document.body.style.overflow=''; }
+// Datenschutz modal
+function openDatenschutz(e){ if(e) e.preventDefault(); document.getElementById('ds-modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDatenschutz(){ document.getElementById('ds-modal').classList.remove('open'); document.body.style.overflow=''; }
+// Karriere modal
+function openKarriere(e){ if(e) e.preventDefault(); document.getElementById('kr-modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeKarriere(){ document.getElementById('kr-modal').classList.remove('open'); document.body.style.overflow=''; }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeImpressum(); closeDatenschutz(); closeKarriere(); closeInfo(); } });
+
+// ── Generic info modal content ──
+const INFO = {
+  portal: { label:'Produkte', title:'Kundenportal', sub:'Ihr digitales Zuhause für alle Energiethemen',
+    body:`<div class="imp-block"><p>Im Sturm-Energie-Kundenportal verwalten Sie alles rund um Ihren Energievertrag – jederzeit und auf jedem Gerät.</p></div>
+    <div class="imp-block"><h3><span class="ico">📊</span>Was Sie erwartet</h3>
+      <p>Verbrauch in Echtzeit einsehen, Abschläge flexibel anpassen, Rechnungen herunterladen, Zählerstände melden und Ihre Vertragsdaten verwalten – alles an einem Ort.</p></div>
+    <div class="imp-block"><h3><span class="ico">🔐</span>Sicher & verschlüsselt</h3><p>Der Zugang erfolgt verschlüsselt (SSL/TLS). Ihre Daten sind jederzeit geschützt.</p></div>
+    <div class="imp-notice"><p><strong>Hinweis:</strong> Das Kundenportal befindet sich im Aufbau. Bei Fragen erreichen Sie uns unter <a href="mailto:sturmkonrad96@googlemail.com">sturmkonrad96@googlemail.com</a>.</p></div>` },
+  app: { label:'Produkte', title:'Sturm Energie App', sub:'Ihre Energie immer dabei',
+    body:`<div class="imp-block"><p>Mit der Sturm-Energie-App behalten Sie Ihren Energieverbrauch unterwegs im Blick und kommunizieren bequem mit uns.</p></div>
+    <div class="imp-block"><h3><span class="ico">📱</span>Funktionen</h3><p>Verbrauchsübersicht, Push-Benachrichtigungen zu Abrechnungen, digitaler Zählerstand per Foto und direkter Draht zu Ihrem Energieberater.</p></div>
+    <div class="imp-notice"><p><strong>Bald verfügbar.</strong> Die App für iOS und Android ist in Vorbereitung. Schreiben Sie uns an <a href="mailto:sturmkonrad96@googlemail.com">sturmkonrad96@googlemail.com</a>, wenn Sie zum Start informiert werden möchten.</p></div>` },
+  foerder: { label:'Produkte', title:'Förderprogramme', sub:'Profitieren Sie von staatlichen Zuschüssen',
+    body:`<div class="imp-block"><p>Rund um Energieeffizienz und erneuerbare Energien gibt es zahlreiche Fördermöglichkeiten. Wir beraten Sie gerne, welche für Sie infrage kommen.</p></div>
+    <div class="imp-block"><h3><span class="ico">☀️</span>Solar & Photovoltaik</h3><p>Beratung zu Zuschüssen und Einspeisevergütungen für Ihre PV-Anlage.</p></div>
+    <div class="imp-block"><h3><span class="ico">🔋</span>Stromspeicher & Wärmepumpe</h3><p>Hinweise zu KfW- und BAFA-Programmen für moderne Energietechnik.</p></div>
+    <div class="imp-notice"><p><strong>Hinweis:</strong> Die Förderberatung ist Teil unseres Öko-Plus-Tarifs. Eine konkrete Förderzusage erfolgt ausschließlich durch die jeweilige Förderstelle.</p></div>` },
+  ueberuns: { label:'Unternehmen', title:'Über uns', sub:'Wer hinter Sturm Energie steht',
+    body:`<div class="imp-block"><p>Sturm Energie ist die Marke von Ernst Konrad Sturm – einem unabhängigen Handelsvertreter im Sinne des § 84 HGB mit Sitz in Koblenz.</p></div>
+    <div class="imp-block"><h3><span class="ico">🤝</span>Unsere Aufgabe</h3><p>Wir vermitteln faire Strom- und Gastarife für Privat- und Geschäftskunden – im Auftrag der <strong>Teleson AG</strong>. Persönlich, transparent und digital.</p></div>
+    <div class="imp-block"><h3><span class="ico">🎯</span>Unser Anspruch</h3><p>Energie soll einfach, verständlich und fair sein. Wir nehmen uns Zeit, beraten ehrlich und ohne Druck – damit Sie den Tarif finden, der wirklich zu Ihnen passt.</p></div>
+    <div class="imp-notice"><p><strong>Wichtig:</strong> Sturm Energie ist kein Energieversorger. Verträge kommen ausschließlich zwischen Ihnen und dem jeweiligen Energieversorgungsunternehmen zustande.</p></div>` },
+  presse: { label:'Unternehmen', title:'Presse', sub:'Informationen für Medienvertreter',
+    body:`<div class="imp-block"><p>Sie sind Journalist:in oder Medienvertreter:in und möchten mehr über Sturm Energie erfahren? Wir freuen uns über Ihre Anfrage.</p></div>
+    <div class="imp-block"><h3><span class="ico">✉️</span>Pressekontakt</h3><p>Ernst Konrad Sturm<br>E-Mail: <a href="mailto:sturmkonrad96@googlemail.com?subject=Presseanfrage">sturmkonrad96@googlemail.com</a><br>Telefon: <a href="tel:+4901725767938">0172 5767938</a></p></div>
+    <div class="imp-notice"><p>Wir antworten in der Regel innerhalb von 4 Stunden auf Presseanfragen.</p></div>` },
+  partner: { label:'Unternehmen', title:'Partnerprogramm', sub:'Gemeinsam mehr erreichen',
+    body:`<div class="imp-block"><p>Sie möchten als Partner mit Sturm Energie zusammenarbeiten oder Kunden empfehlen? Wir bieten attraktive Modelle für Vertriebspartner und Empfehlungsgeber.</p></div>
+    <div class="imp-block"><h3><span class="ico">💼</span>Für Vertriebspartner</h3><p>Werden Sie selbst Vermittler im Auftrag von Sturm Energie – 100% digital, kostenlos und flexibel. Mehr dazu im Bereich <a href="#" onclick="closeInfo();openKarriere(event)">Karriere</a>.</p></div>
+    <div class="imp-block"><h3><span class="ico">🎁</span>Kunden werben Kunden</h3><p>Empfehlen Sie Sturm Energie weiter und profitieren Sie. Details auf Anfrage.</p></div>
+    <div class="imp-notice"><p>Interesse? Schreiben Sie uns an <a href="mailto:sturmkonrad96@googlemail.com?subject=Partnerprogramm">sturmkonrad96@googlemail.com</a>.</p></div>` },
+  blog: { label:'Unternehmen', title:'Blog', sub:'Wissen, Tipps & Neuigkeiten',
+    body:`<div class="imp-block"><p>In unserem Blog teilen wir Wissenswertes rund um Energie, Spartipps und Neuigkeiten aus der Energiewelt.</p></div>
+    <div class="imp-notice"><p><strong>Bald geht's los.</strong> Unser Blog befindet sich im Aufbau. Bis dahin beantworten wir Ihre Fragen gerne persönlich unter <a href="mailto:sturmkonrad96@googlemail.com">sturmkonrad96@googlemail.com</a>.</p></div>` },
+  lexikon: { label:'Wissen', title:'Stromlexikon', sub:'Energiebegriffe einfach erklärt',
+    body:`<div class="imp-block"><h3><span class="ico">⚡</span>kWh – Kilowattstunde</h3><p>Die Maßeinheit für Energieverbrauch. Ein Haushalt mit 2 Personen verbraucht durchschnittlich rund 2.500 kWh pro Jahr.</p></div>
+    <div class="imp-block"><h3><span class="ico">💶</span>Grundpreis &amp; Arbeitspreis</h3><p>Der Grundpreis ist die feste monatliche Gebühr, der Arbeitspreis die Kosten pro verbrauchter kWh. Zusammen ergeben sie Ihre Stromkosten.</p></div>
+    <div class="imp-block"><h3><span class="ico">🌿</span>Ökostrom</h3><p>Strom aus erneuerbaren Quellen wie Wind, Sonne und Wasser – mit Herkunftsnachweis zertifiziert.</p></div>
+    <div class="imp-block"><h3><span class="ico">📄</span>Herkunftsnachweis</h3><p>Ein offizielles Zertifikat, das belegt, dass eine kWh Strom aus erneuerbarer Erzeugung stammt.</p></div>
+    <div class="imp-block"><h3><span class="ico">🔁</span>Grundversorgung</h3><p>Der gesetzlich geregelte Standardtarif Ihres örtlichen Grundversorgers – meist teurer als ein gewählter Tarif.</p></div>` },
+  guide: { label:'Wissen', title:'Energieführer', sub:'So sparen Sie clever Energie',
+    body:`<div class="imp-block"><p>Mit ein paar einfachen Schritten senken Sie Ihren Verbrauch und Ihre Kosten – ganz ohne Komfortverlust.</p></div>
+    <div class="imp-block"><h3><span class="ico">💡</span>1. Auf LED umsteigen</h3><p>LED-Lampen verbrauchen bis zu 90% weniger Strom als Glühbirnen.</p></div>
+    <div class="imp-block"><h3><span class="ico">🔌</span>2. Standby vermeiden</h3><p>Geräte im Standby ziehen dauerhaft Strom. Abschaltbare Steckdosenleisten helfen.</p></div>
+    <div class="imp-block"><h3><span class="ico">🌡️</span>3. Richtig heizen &amp; lüften</h3><p>Stoßlüften statt Kippstellung und 1°C weniger Raumtemperatur sparen spürbar Energie.</p></div>
+    <div class="imp-block"><h3><span class="ico">📊</span>4. Verbrauch kennen</h3><p>Wer seinen Verbrauch im Blick hat, spart automatisch. Nutzen Sie dafür unser Kundenportal.</p></div>` },
+  bericht: { label:'Wissen', title:'Nachhaltigkeitsbericht', sub:'Unsere Wirkung in Zahlen',
+    body:`<div class="imp-block"><p>Transparenz ist uns wichtig. Hier sehen Sie, welchen Beitrag wir und unsere Kunden gemeinsam zur Energiewende leisten.</p></div>
+    <div class="imp-block"><h3><span class="ico">🌍</span>Unser Energiemix 2025</h3><p>68% Windkraft, 22% Solarenergie, 10% Wasserkraft – 100% erneuerbar, mit 0g CO₂ pro kWh und TÜV-Zertifizierung.</p></div>
+    <div class="imp-block"><h3><span class="ico">📈</span>Gemeinsame Wirkung</h3><p>Über 180.000 zufriedene Kunden, 2,4 Mio. Tonnen eingespartes CO₂ und 15% des Umsatzes, die direkt in neue Erneuerbare-Energien-Projekte fließen.</p></div>
+    <div class="imp-notice"><p><strong>Hinweis:</strong> Die genannten Kennzahlen sind beispielhafte Zielwerte. Den vollständigen, geprüften Bericht stellen wir auf Anfrage bereit.</p></div>` },
+  agb: { label:'Rechtliches', title:'Allgemeine Geschäftsbedingungen', sub:'Stand: Juni 2026',
+    body:`<div class="imp-block"><h3>1. Geltungsbereich</h3><p>Diese AGB gelten für die Vermittlungstätigkeit von Sturm Energie, Inhaber Ernst Konrad Sturm, handelnd unter der Marke „Sturm Energie", im Rahmen der Vermittlung von Strom- und Gastarifen.</p></div>
+    <div class="imp-block"><h3>2. Gegenstand der Leistung</h3><p>Sturm Energie ist als unabhängiger Handelsvertreter (§ 84 HGB) im Auftrag der Teleson AG tätig und vermittelt Energieverträge zwischen Kunden und Energieversorgungsunternehmen. Sturm Energie ist selbst kein Energieversorger.</p></div>
+    <div class="imp-block"><h3>3. Zustandekommen von Verträgen</h3><p>Verträge über die Lieferung von Strom oder Gas kommen ausschließlich zwischen dem Kunden und dem jeweiligen Energieversorgungsunternehmen zustande. Sturm Energie wird nicht Vertragspartei des Energieliefervertrags.</p></div>
+    <div class="imp-block"><h3>4. Kosten der Vermittlung</h3><p>Für die Vermittlung entstehen dem Kunden keine zusätzlichen Kosten. Die Beratung ist unverbindlich und kostenlos.</p></div>
+    <div class="imp-block"><h3>5. Mitwirkungspflichten des Kunden</h3><p>Der Kunde stellt die für die Vermittlung erforderlichen Angaben (z. B. Verbrauchsdaten, Anschrift) vollständig und wahrheitsgemäß bereit.</p></div>
+    <div class="imp-block"><h3>6. Haftung</h3><p>Sturm Energie haftet für die sorgfältige Vermittlung. Für den Inhalt und die Erfüllung des Energieliefervertrags ist ausschließlich das jeweilige Energieversorgungsunternehmen verantwortlich.</p></div>
+    <div class="imp-block"><h3>7. Widerruf</h3><p>Etwaige Widerrufsrechte richten sich nach den Bedingungen des jeweiligen Energieliefervertrags und werden Ihnen durch das Energieversorgungsunternehmen mitgeteilt.</p></div>
+    <div class="imp-block"><h3>8. Schlussbestimmungen</h3><p>Es gilt das Recht der Bundesrepublik Deutschland. Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p></div>
+    <div class="imp-notice"><p><strong>Hinweis:</strong> Diese AGB sind eine allgemeine Vorlage. Bitte lassen Sie sie vor Veröffentlichung rechtlich prüfen.</p></div>` },
+  cookies: { label:'Rechtliches', title:'Cookie-Einstellungen', sub:'Sie haben die Kontrolle',
+    body:`<div class="imp-block"><p>Diese Website verwendet nur technisch notwendige Cookies, die für den Betrieb erforderlich sind. Analyse- oder Marketing-Cookies werden ausschließlich nach Ihrer ausdrücklichen Einwilligung gesetzt.</p></div>
+    <div class="imp-block"><h3><span class="ico">✅</span>Notwendige Cookies</h3><p>Immer aktiv. Sie ermöglichen grundlegende Funktionen und können nicht deaktiviert werden.</p></div>
+    <div class="imp-block"><h3><span class="ico">📊</span>Analyse-Cookies</h3><p>Helfen uns, die Website zu verbessern. Nur mit Ihrer Einwilligung gemäß § 25 Abs. 1 TTDSG. Sie können Ihre Einwilligung jederzeit widerrufen.</p></div>
+    <div class="imp-notice"><p>Details zur Datenverarbeitung finden Sie in unserer <a href="#" onclick="closeInfo();openDatenschutz(event)">Datenschutzerklärung</a>.</p></div>` }
+};
+function openInfo(e, key){
+  if(e) e.preventDefault();
+  const d = INFO[key]; if(!d) return;
+  document.getElementById('info-label').innerHTML = '<div class="dot"></div>'+d.label;
+  document.getElementById('info-title').textContent = d.title;
+  document.getElementById('info-subtitle').textContent = d.sub || '';
+  document.getElementById('info-body').innerHTML = d.body;
+  const m = document.getElementById('info-modal');
+  m.scrollTop = 0;
+  m.classList.add('open'); document.body.style.overflow='hidden';
+}
+function closeInfo(){ document.getElementById('info-modal').classList.remove('open'); document.body.style.overflow=''; }
 </script>
 </body>
 </html>
