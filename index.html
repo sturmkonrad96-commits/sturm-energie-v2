@@ -2,9 +2,18 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Sturm Energie – Sauber. Intelligent. Transparent.</title>
 <meta name="description" content="Sturm Energie – 100% Ökostrom, faire Preise, digitaler Service. Eine Reise durch die Energie der Zukunft."/>
+<!-- PWA / App-Konfiguration -->
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#0a0d12"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Sturm Energie"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
@@ -22,7 +31,7 @@
   --tf:200ms cubic-bezier(.25,.46,.45,.94);
   --ts:700ms cubic-bezier(.16,1,.3,1);
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--bg)}
 body{font-family:var(--fb);background:var(--bg);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--blue);color:#fff}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}
@@ -33,9 +42,9 @@ body{font-family:var(--fb);background:var(--bg);color:var(--white);overflow-x:hi
 @keyframes floatdot{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
 /* ═══ THE PERSISTENT CINEMATIC CANVAS — lives behind EVERYTHING ═══ */
-#story-canvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block;pointer-events:none}
+#story-canvas{position:fixed;top:-2px;left:-2px;width:calc(100vw + 4px);height:calc(100vh + 4px);z-index:0;display:block;pointer-events:none;background:var(--bg)}
 /* A global tint layer that subtly shifts to keep text readable */
-#story-veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 0%,rgba(10,13,18,.35) 100%)}
+#story-veil{position:fixed;top:-2px;left:-2px;right:-2px;bottom:-2px;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 0%,rgba(10,13,18,.35) 100%)}
 /* Everything else floats above the film */
 #page{position:relative;z-index:2}
 
@@ -88,6 +97,32 @@ body{font-family:var(--fb);background:var(--bg);color:var(--white);overflow-x:hi
 .nav-links a{padding:8px 16px;border-radius:8px;color:var(--w70);text-decoration:none;font-size:14px;transition:all var(--tf)}
 .nav-links a:hover{color:#fff;background:var(--w08)}
 .nav-right{display:flex;gap:12px;align-items:center}
+/* Hamburger (hidden on desktop) */
+#burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;background:rgba(255,255,255,.06);border:1px solid var(--w15);border-radius:10px;cursor:pointer;padding:0}
+#burger span{display:block;width:18px;height:2px;background:#fff;margin:0 auto;border-radius:2px;transition:all .3s var(--ts)}
+#burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#burger.open span:nth-child(2){opacity:0}
+#burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#mobile-menu{display:none;flex-direction:column;background:rgba(10,13,18,.97);backdrop-filter:blur(24px) saturate(180%);border-top:1px solid rgba(255,255,255,.07);padding:8px 18px 18px}
+#mobile-menu.open{display:flex}
+#mobile-menu a{padding:15px 4px;color:var(--w90);text-decoration:none;font-size:16px;border-bottom:1px solid rgba(255,255,255,.05)}
+#mobile-menu a:last-child{border-bottom:none}
+#mobile-menu a:active{color:var(--blue2)}
+/* PWA Install-Button (erscheint nur wenn installierbar) */
+#pwa-install{position:fixed;left:50%;transform:translateX(-50%) translateY(120%);bottom:22px;z-index:1500;display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:var(--r99);background:rgba(13,17,23,.92);backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(10,132,255,.35);box-shadow:0 12px 40px rgba(0,0,0,.5);transition:transform .5s var(--ts);max-width:calc(100vw - 32px)}
+#pwa-install.show{transform:translateX(-50%) translateY(0)}
+#pwa-install .pwa-ic{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+#pwa-install .pwa-tx{font-size:13px;line-height:1.3;color:var(--w90)}
+#pwa-install .pwa-tx b{display:block;font-size:14px;color:#fff;font-weight:600}
+#pwa-install .pwa-add{padding:9px 16px;border-radius:var(--r99);background:var(--blue);color:#fff;border:none;font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background var(--tf)}
+#pwa-install .pwa-add:active{background:var(--blue2)}
+#pwa-install .pwa-x{background:none;border:none;color:var(--w40);font-size:18px;cursor:pointer;padding:0 2px;line-height:1}
+/* iOS-Hinweis (Share -> Zum Home-Bildschirm) */
+#ios-hint{position:fixed;left:50%;transform:translateX(-50%) translateY(120%);bottom:22px;z-index:1500;display:flex;flex-direction:column;gap:6px;padding:16px 20px;border-radius:var(--r16);background:rgba(13,17,23,.95);backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(10,132,255,.35);box-shadow:0 12px 40px rgba(0,0,0,.5);transition:transform .5s var(--ts);max-width:calc(100vw - 32px);text-align:center}
+#ios-hint.show{transform:translateX(-50%) translateY(0)}
+#ios-hint .ios-t{font-size:14px;font-weight:600;color:#fff}
+#ios-hint .ios-s{font-size:13px;color:var(--w70);line-height:1.5}
+#ios-hint .ios-x{position:absolute;top:8px;right:12px;background:none;border:none;color:var(--w40);font-size:18px;cursor:pointer}
 
 /* SECTIONS — now mostly transparent so the film is the backdrop.
    Each has a soft gradient fade at top & bottom for seamless flow. */
@@ -348,14 +383,150 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
   .footer-grid{grid-template-columns:1fr 1fr!important}
   #chapter-rail{display:none}
   section{min-height:auto;padding:100px 20px}
+  .why-grid,.sust-grid{gap:48px!important}
 }
 @media(max-width:768px){
   .nav-links,.nav-portal{display:none!important}
+  .nav-cta-btn{display:none!important}
+  #burger{display:flex!important}
+  #nav{padding:0 16px}
+  .nav-inner{height:64px}
   .footer-grid{grid-template-columns:1fr!important}
+  section{padding:84px 18px}
+  /* Hero: stack and shrink so nothing overlaps */
+  .hero-block{max-width:100%}
+  .hero-h1{font-size:clamp(38px,11vw,56px)!important;line-height:1.05}
+  .hero-stats{gap:20px 28px}
+  .hero-stat .val{font-size:clamp(20px,6vw,26px)!important}
+  .hero-actions{gap:12px}
+  .hero-actions .btn-p,.hero-actions .btn-g{width:100%;justify-content:center}
+  /* Section headings */
+  .section-h2,.why-h2,.sust-h2,.contact-h2{font-size:clamp(28px,8vw,40px)!important}
+  /* Funnel: comfortable tap targets, full-width buttons */
+  .funnel-card{padding:30px 22px}
+  .funnel-nav{flex-wrap:wrap}
+  .funnel-nav .fbtn-next,.funnel-nav .fbtn-back{flex:1;text-align:center;justify-content:center}
+  .choice-grid,.choice-grid.two{grid-template-columns:1fr!important}
+  .alt-send{grid-template-columns:1fr!important}
+  .trust-strip{gap:14px}
+  /* Stats cells: avoid cramped long values */
+  .stat-val{font-size:clamp(26px,7vw,36px)!important}
+  /* Modals: more breathing room, scroll safely */
+  .imp-dialog{padding:32px 22px 28px}
+  .imp-dialog h2{font-size:clamp(26px,8vw,36px)}
+  /* Contact cards */
+  .contact-card{padding:22px}
+  /* Forms full width feel */
+  .form-card{padding:30px 22px}
 }
 @media(max-width:480px){
   .stats-row{grid-template-columns:1fr!important}
+  .hero-stats{gap:18px 24px}
+  .hero-eyebrow{font-size:11px;padding:6px 12px}
+  .label{font-size:11px}
+  .subject-btns{gap:6px}
+  .subject-btn{padding:8px 12px;font-size:12px}
+  .car-perks{grid-template-columns:1fr!important}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:12px}
 }
+/* ═══ Minispiel: Stromfresser-Jagd ═══ */
+#sfj-chip{position:fixed;left:18px;bottom:18px;z-index:1400;display:flex;align-items:center;gap:9px;padding:10px 16px;border-radius:var(--r99);background:rgba(13,17,23,.92);backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(10,132,255,.35);box-shadow:0 12px 40px rgba(0,0,0,.5);cursor:pointer;color:#fff;font-family:var(--fb);font-size:13px;font-weight:600;transition:transform var(--tf),border-color var(--tf)}
+#sfj-chip:hover{transform:translateY(-2px);border-color:rgba(10,132,255,.7)}
+#sfj-chip .zap{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:12px}
+#sfj-modal{position:fixed;inset:0;z-index:2100;display:none;align-items:center;justify-content:center;padding:20px}
+#sfj-modal.open{display:flex}
+#sfj-backdrop{position:absolute;inset:0;background:rgba(4,6,10,.82);backdrop-filter:blur(8px)}
+.sfj-dialog{position:relative;width:100%;max-width:420px;background:linear-gradient(180deg,#12161d,#0c1016);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:26px 22px;box-shadow:0 40px 120px rgba(0,0,0,.7)}
+.sfj-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.sfj-title{font-family:var(--fd);font-size:24px;color:#fff}
+.sfj-x{background:none;border:none;color:var(--w40);font-size:20px;cursor:pointer;padding:2px 6px}
+.sfj-x:hover{color:#fff}
+.sfj-stats{display:flex;gap:10px;margin-bottom:14px}
+.sfj-stat{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:8px 6px;text-align:center}
+.sfj-stat b{display:block;font-family:var(--fd);font-size:20px;color:#fff;font-weight:400}
+.sfj-stat span{font-size:10px;color:var(--w40);letter-spacing:.06em;text-transform:uppercase}
+.sfj-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sfj-hole{position:relative;aspect-ratio:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden}
+.sfj-item{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;background:none;border:none;cursor:pointer;transform:scale(0);transition:transform .16s var(--ts);-webkit-tap-highlight-color:transparent}
+.sfj-item.show{transform:scale(1)}
+.sfj-item.show:active{transform:scale(.85)}
+.sfj-screen{text-align:center;padding:6px 2px}
+.sfj-screen p{font-size:14px;color:var(--w70);line-height:1.65;margin:10px 0 16px}
+.sfj-legend{display:flex;justify-content:center;gap:14px;margin:0 0 18px;font-size:13px;color:var(--w70);flex-wrap:wrap}
+.sfj-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:var(--r99);border:none;cursor:pointer;font-family:var(--fb);font-size:15px;font-weight:600;text-decoration:none;transition:opacity var(--tf)}
+.sfj-btn:hover{opacity:.9}
+.sfj-btn.p{background:var(--blue);color:#fff}
+.sfj-btn.g{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.12);margin-top:10px}
+.sfj-score-big{font-family:var(--fd);font-size:46px;color:#fff;line-height:1}
+.sfj-note{font-size:11px;color:var(--w40);margin-top:14px;line-height:1.5}
+@media(max-width:480px){#sfj-chip{left:12px;bottom:12px;padding:9px 13px;font-size:12px}.sfj-dialog{padding:22px 16px}.sfj-item{font-size:30px}.sfj-title{font-size:21px}}
+/* ═══ Feedback-Formular & Formular-Status ═══ */
+.fb-stars{display:flex;gap:5px;margin:0 0 18px}
+.fb-star{background:none;border:none;font-size:31px;line-height:1;cursor:pointer;color:rgba(255,255,255,.2);padding:2px;transition:color .15s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
+.fb-star:hover{transform:scale(1.12)}
+.fb-star.on{color:#ffb340}
+.fb-check{display:flex;gap:10px;align-items:flex-start;margin:2px 0 16px;cursor:pointer;font-size:13px;color:var(--w70);line-height:1.55}
+.fb-check input{width:18px;height:18px;flex-shrink:0;margin-top:1px;accent-color:var(--blue)}
+.form-status{font-size:13.5px;margin:-2px 0 14px;line-height:1.6;display:none}
+.form-status.err{display:block;color:#ff6b6b}
+.form-status.info{display:block;color:var(--w70)}
+.hp-field{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none}
+.upl-bar{height:4px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:14px 0 0;display:none}
+.upl-bar.on{display:block}
+.upl-bar i{display:block;height:100%;width:0%;background:var(--blue);transition:width .3s ease}
+/* ═══ Interner Bereich (Admin) – alle Klassen mit ad- vorangestellt ═══ */
+#ad-overlay{position:fixed;inset:0;z-index:3000;display:none;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+#ad-overlay.open{display:block}
+.ad-wrap{max-width:860px;margin:0 auto;padding:0 16px}
+.ad-head{position:sticky;top:0;z-index:10;background:rgba(10,13,18,.94);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid rgba(255,255,255,.09)}
+.ad-hd{display:flex;align-items:center;gap:10px;height:62px}
+.ad-hd b{font-size:15px;font-weight:600}
+.ad-hd .ad-sp{flex:1}
+.ad-ic{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ad-mini{background:rgba(255,255,255,.06);border:1px solid var(--w15);color:#fff;border-radius:var(--r99);padding:7px 13px;font-family:var(--fb);font-size:12px;font-weight:500;cursor:pointer}
+.ad-mini:active{background:rgba(255,255,255,.14)}
+.ad-login{max-width:380px;margin:11vh auto 0;padding:0 16px 40px;text-align:center}
+.ad-login .ad-big{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px}
+.ad-login h2{font-family:var(--fd);font-size:30px;font-weight:400;margin-bottom:8px}
+.ad-login p{color:var(--w40);font-size:14px;margin-bottom:24px;line-height:1.6}
+.ad-inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--w15);border-radius:12px;padding:14px 16px;color:#fff;font-family:var(--fb);font-size:16px;outline:none}
+.ad-inp:focus{border-color:var(--blue)}
+.ad-btn{display:flex;align-items:center;justify-content:center;width:100%;padding:14px;border-radius:var(--r99);border:none;background:var(--blue);color:#fff;font-family:var(--fb);font-size:15px;font-weight:600;cursor:pointer;margin-top:12px}
+.ad-btn:disabled{opacity:.5}
+.ad-err{color:#ff6b6b;font-size:13px;margin-top:12px;min-height:18px;line-height:1.55}
+.ad-tabs{display:flex;gap:7px;overflow-x:auto;padding:14px 0 4px;scrollbar-width:none}
+.ad-tabs::-webkit-scrollbar{display:none}
+.ad-tab{flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--w70);border-radius:var(--r99);padding:9px 14px;font-family:var(--fb);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+.ad-tab.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.ad-tab .ad-n{opacity:.75;font-size:11px;margin-left:4px}
+.ad-list{padding:12px 0 40px;display:flex;flex-direction:column;gap:12px}
+.ad-item{background:#12161d;border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:16px}
+.ad-item.ad-neu{border-color:rgba(10,132,255,.45)}
+.ad-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.ad-badge{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:var(--r99)}
+.ad-b-anfrage{background:rgba(10,132,255,.16);color:#7cbcff;border:1px solid rgba(10,132,255,.35)}
+.ad-b-frage{background:rgba(255,179,64,.14);color:#ffcb7a;border:1px solid rgba(255,179,64,.32)}
+.ad-b-feedback{background:rgba(48,209,88,.14);color:#7ee495;border:1px solid rgba(48,209,88,.32)}
+.ad-dot{width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.ad-when{color:var(--w40);font-size:12px;margin-left:auto}
+.ad-who{font-family:var(--fd);font-size:19px;line-height:1.25;margin-bottom:6px}
+.ad-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.ad-chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:5px 9px;font-size:12.5px;color:var(--w70);text-decoration:none}
+.ad-msg{background:#0e1218;border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 14px;font-size:14.5px;color:var(--w90);line-height:1.65;white-space:pre-wrap;word-break:break-word}
+.ad-stars{font-size:16px;letter-spacing:2px;margin-bottom:8px;color:#ffb340}
+.ad-files{display:flex;flex-direction:column;gap:7px;margin-top:10px}
+.ad-file{display:flex;align-items:center;gap:9px;background:rgba(10,132,255,.09);border:1px solid rgba(10,132,255,.3);border-radius:10px;padding:10px 12px;text-decoration:none;color:#fff;font-size:13.5px}
+.ad-file .ad-fn{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ad-file .ad-fs{color:var(--w40);font-size:11.5px;flex-shrink:0}
+.ad-acts{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.09)}
+.ad-act{background:rgba(255,255,255,.05);border:1px solid var(--w15);color:var(--w90);border-radius:var(--r99);padding:8px 12px;font-family:var(--fb);font-size:12.5px;font-weight:500;cursor:pointer}
+.ad-act.ad-ok{border-color:rgba(48,209,88,.4);color:#7ee495}
+.ad-act.ad-del{border-color:rgba(255,107,107,.35);color:#ff9b9b}
+.ad-empty{text-align:center;padding:52px 20px;color:var(--w40);font-size:14px;line-height:1.7}
+.ad-setup{background:rgba(255,179,64,.09);border:1px solid rgba(255,179,64,.32);border-radius:16px;padding:16px;font-size:13.5px;line-height:1.7;color:var(--w90)}
+.ad-toast{position:fixed;left:50%;transform:translateX(-50%) translateY(150%);bottom:20px;background:rgba(13,17,23,.96);border:1px solid var(--w15);border-radius:var(--r99);padding:12px 20px;font-size:13.5px;z-index:3100;transition:transform .35s var(--ts);max-width:calc(100vw - 32px);text-align:center}
+.ad-toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:480px){.ad-who{font-size:17px}.ad-item{padding:14px}}
 </style>
 </head>
 <body>
@@ -364,6 +535,80 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
 <canvas id="story-canvas"></canvas>
 <div id="story-veil"></div>
 <div id="scroll-bar"></div>
+
+<!-- PWA Install-Banner (Android/Desktop, erscheint per JS wenn installierbar) -->
+<div id="pwa-install">
+  <div class="pwa-ic">⚡</div>
+  <div class="pwa-tx"><b>App installieren</b>Sturm Energie auf dem Startbildschirm</div>
+  <button class="pwa-add" id="pwaAdd">Installieren</button>
+  <button class="pwa-x" id="pwaClose" aria-label="Schließen">✕</button>
+</div>
+<!-- iOS-Hinweis (Safari kann nicht automatisch installieren) -->
+<div id="ios-hint">
+  <button class="ios-x" id="iosClose" aria-label="Schließen">✕</button>
+  <div class="ios-t">⚡ Zum Startbildschirm hinzufügen</div>
+  <div class="ios-s">Tippe unten auf „Teilen" <span style="font-size:15px">􀈂</span> und dann auf<br><b>„Zum Home-Bildschirm"</b>.</div>
+</div>
+
+<!-- ═══ Minispiel: Stromfresser-Jagd ═══ -->
+<button id="sfj-chip" onclick="openGame()" aria-label="Minispiel Stromfresser-Jagd öffnen"><span class="zap">🎮</span>Stromfresser-Jagd</button>
+<!-- ═══ INTERNER BEREICH (nur mit Passwort) ═══ -->
+<div id="ad-overlay" role="dialog" aria-modal="true" aria-label="Interner Bereich">
+  <div id="ad-login" class="ad-login">
+    <div class="ad-big">⚡</div>
+    <h2>Interner Bereich</h2>
+    <p>Bitte mit Ihrem Passwort anmelden, um Anfragen, Dateien und Feedback zu sehen.</p>
+    <input class="ad-inp" type="password" id="ad-pw" placeholder="Passwort" autocomplete="current-password" enterkeyhint="go"/>
+    <button class="ad-btn" id="ad-loginBtn">Anmelden</button>
+    <div class="ad-err" id="ad-loginErr"></div>
+    <p style="margin-top:22px;font-size:12px"><a href="#" id="ad-back" style="color:var(--blue2);text-decoration:none">← Zurück zur Website</a></p>
+  </div>
+  <div id="ad-app" style="display:none">
+    <div class="ad-head">
+      <div class="ad-wrap ad-hd">
+        <div class="ad-ic">⚡</div><b>Eingänge</b>
+        <span class="ad-sp"></span>
+        <button class="ad-mini" id="ad-reload">Aktualisieren</button>
+        <button class="ad-mini" id="ad-out">Abmelden</button>
+        <button class="ad-mini" id="ad-close" aria-label="Schließen">✕</button>
+      </div>
+    </div>
+    <div class="ad-wrap">
+      <div class="ad-tabs" id="ad-tabs"></div>
+      <input class="ad-inp" id="ad-q" type="text" placeholder="Suchen: Name, E-Mail, Text …" style="padding:11px 14px;font-size:14px;margin-top:10px"/>
+      <div class="ad-list" id="ad-listbox"></div>
+    </div>
+  </div>
+  <div class="ad-toast" id="ad-toast"></div>
+</div>
+
+<div id="sfj-modal" role="dialog" aria-modal="true" aria-label="Stromfresser-Jagd Minispiel">
+  <div id="sfj-backdrop" onclick="closeGame()"></div>
+  <div class="sfj-dialog">
+    <div class="sfj-head"><div class="sfj-title">⚡ Stromfresser-Jagd</div><button class="sfj-x" onclick="closeGame()" aria-label="Schließen">✕</button></div>
+    <div id="sfj-start" class="sfj-screen">
+      <p>Tippe in <b>30 Sekunden</b> so viele Stromfresser wie möglich –<br>aber verschone den Öko-Spross!</p>
+      <div class="sfj-legend"><span>📺 💡 🖥️ 🔌 ❄️ &nbsp;antippen ✓</span><span>🌱 &nbsp;verschonen ✕</span></div>
+      <button class="sfj-btn p" onclick="startGame()">Jagd starten</button>
+    </div>
+    <div id="sfj-play" style="display:none">
+      <div class="sfj-stats">
+        <div class="sfj-stat"><b id="sfj-time">30</b><span>Sekunden</span></div>
+        <div class="sfj-stat"><b id="sfj-score">0</b><span>Watt gerettet</span></div>
+        <div class="sfj-stat"><b id="sfj-best">0</b><span>Rekord</span></div>
+      </div>
+      <div class="sfj-board" id="sfj-board"></div>
+    </div>
+    <div id="sfj-end" class="sfj-screen" style="display:none">
+      <div class="sfj-score-big" id="sfj-final">0</div>
+      <div style="font-size:11px;color:var(--w40);letter-spacing:.08em;text-transform:uppercase;margin-top:4px">Watt gerettet</div>
+      <p id="sfj-msg" style="margin-top:16px"></p>
+      <a class="sfj-btn p" href="#anfrage" onclick="closeGame()">Tarif kostenlos prüfen lassen →</a>
+      <button class="sfj-btn g" onclick="startGame()">Nochmal spielen</button>
+      <div class="sfj-note">Spielpunkte, keine echte Ersparnis – die prüfen wir lieber mit deiner Jahresabrechnung 😉</div>
+    </div>
+  </div>
+</div>
 
 <!-- Chapter rail -->
 <div id="chapter-rail">
@@ -386,8 +631,19 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
     </div>
     <div class="nav-right">
       <a href="#" onclick="openInfo(event,'portal')" class="btn-g nav-portal" style="padding:9px 20px;font-size:14px">Kundenportal</a>
-      <a href="#anfrage" class="btn-p" style="padding:9px 20px;font-size:14px">Angebot anfordern</a>
+      <a href="#anfrage" class="btn-p nav-cta-btn" style="padding:9px 20px;font-size:14px">Angebot anfordern</a>
+      <button id="burger" aria-label="Menü öffnen" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button>
     </div>
+  </div>
+  <div id="mobile-menu">
+    <a href="#anfrage" onclick="closeMenu()">Angebot anfordern</a>
+    <a href="#vorteile" onclick="closeMenu()">Vorteile</a>
+    <a href="#warum-rechnung" onclick="closeMenu()">So funktioniert's</a>
+    <a href="#nachhaltigkeit" onclick="closeMenu()">Öko-Tarife</a>
+    <a href="#bewertungen" onclick="closeMenu()">Serviceversprechen</a>
+    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="#kontakt" onclick="closeMenu()">Kontakt</a>
+    <a href="#" onclick="closeMenu();openInfo(event,'portal')">Kundenportal</a>
   </div>
 </nav>
 
@@ -505,7 +761,10 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
             <a class="alt-btn alt-wa" id="waBtn" href="#" target="_blank" rel="noopener">💬 Per WhatsApp senden</a>
             <a class="alt-btn alt-mail" id="mailBtn" href="#">✉️ Per E-Mail senden</a>
           </div>
-          <div class="funnel-nav"><button class="fbtn-back" onclick="funnelBack()">← Zurück</button><button class="fbtn-next" onclick="funnelSubmit()">Anfrage absenden ✓</button></div>
+          <input class="hp-field" id="f-hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+          <div class="upl-bar" id="uplBar"><i></i></div>
+          <div class="form-status" id="f-status" style="margin-top:12px"></div>
+          <div class="funnel-nav"><button class="fbtn-back" onclick="funnelBack()">← Zurück</button><button class="fbtn-next" id="fSubmitBtn" onclick="funnelSubmit()">Anfrage absenden ✓</button></div>
         </div>
 
         <!-- Success -->
@@ -682,6 +941,40 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
 </section>
 
 <!-- CHAPTER 7 · KONTAKT · CITY OF THE FUTURE / NIGHT LIGHTS -->
+<!-- FEEDBACK · Kundenstimmen direkt an Sturm Energie -->
+<section id="feedback" data-chapter="7">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="chapter-mark reveal">Kapitel VII · Ihre Stimme</div>
+      <div class="label reveal d1"><div class="dot"></div>Feedback</div>
+      <h2 class="section-h2 reveal d2">Wie war Ihre Erfahrung<br><em style="font-style:italic;color:var(--blue2)">mit uns?</em></h2>
+      <p class="section-sub reveal d3">Ehrliches Feedback hilft uns weiter – Lob genauso wie Kritik. Ihre Nachricht landet direkt bei Ernst Konrad Sturm.</p>
+    </div>
+    <div class="card form-card reveal d1" id="fb-wrap" style="max-width:620px;margin:0 auto">
+      <div class="form-h3">Feedback abgeben</div>
+      <label class="form-label">Ihre Bewertung</label>
+      <div class="fb-stars" id="fb-stars" role="group" aria-label="Bewertung von 1 bis 5 Sternen">
+        <button type="button" class="fb-star" data-n="1" onclick="setStars(1)" aria-label="1 Stern">★</button>
+        <button type="button" class="fb-star" data-n="2" onclick="setStars(2)" aria-label="2 Sterne">★</button>
+        <button type="button" class="fb-star" data-n="3" onclick="setStars(3)" aria-label="3 Sterne">★</button>
+        <button type="button" class="fb-star" data-n="4" onclick="setStars(4)" aria-label="4 Sterne">★</button>
+        <button type="button" class="fb-star" data-n="5" onclick="setStars(5)" aria-label="5 Sterne">★</button>
+      </div>
+      <label class="form-label">Ihr Feedback</label>
+      <textarea class="form-input" id="fb-text" rows="4" placeholder="Was hat gut funktioniert? Was können wir besser machen?" style="resize:vertical"></textarea>
+      <label class="form-label">Name (optional)</label>
+      <input class="form-input" id="fb-name" type="text" placeholder="Vorname genügt"/>
+      <label class="form-label">E-Mail (optional – nur falls wir antworten sollen)</label>
+      <input class="form-input" id="fb-email" type="email" placeholder="max@beispiel.de"/>
+      <label class="fb-check"><input type="checkbox" id="fb-ok"/><span>Sie dürfen mein Feedback (ggf. mit Vornamen) auf Ihrer Website veröffentlichen.</span></label>
+      <input class="hp-field" id="fb-hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+      <div class="form-status" id="fb-status"></div>
+      <button class="btn-p" id="fb-btn" onclick="submitFeedback()" style="width:100%;justify-content:center">Feedback senden →</button>
+      <p class="form-note" style="margin-top:14px">Ihr Feedback wird vertraulich behandelt. Eine Veröffentlichung erfolgt ausschließlich mit Ihrer Zustimmung. Mehr in unserer <a href="#" onclick="openDatenschutz(event)">Datenschutzerklärung</a>.</p>
+    </div>
+  </div>
+</section>
+
 <section id="kontakt" data-chapter="7">
   <div class="section-inner">
     <div class="section-head">
@@ -693,7 +986,7 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
     <div class="contact-grid">
       <div class="contact-cards reveal-left">
         <a class="card contact-card" id="kontaktWa" href="#" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer"><div class="contact-icon" style="background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.3)">💬</div><div><div class="contact-label">WhatsApp</div><div class="contact-val">Direkt schreiben</div><div class="contact-sub">Schnellste Antwort · Rechnung einfach nachreichen</div></div></a>
-        <a class="card contact-card" href="mailto:sturmkonrad96@googlemail.com" style="text-decoration:none"><div class="contact-icon" style="background:rgba(10,132,255,.15);border:1px solid rgba(10,132,255,.3)">✉️</div><div><div class="contact-label">E-Mail</div><div class="contact-val">sturmkonrad96@googlemail.com</div><div class="contact-sub">Antwort innerhalb von 4 Stunden</div></div></a>
+        <a class="card contact-card" href="mailto:sturmkonrad96@googlemail.com?subject=Anfrage%20an%20Sturm%20Energie" style="text-decoration:none"><div class="contact-icon" style="background:rgba(10,132,255,.15);border:1px solid rgba(10,132,255,.3)">✉️</div><div><div class="contact-label">E-Mail</div><div class="contact-val">sturmkonrad96@googlemail.com</div><div class="contact-sub">Antwort innerhalb von 4 Stunden</div></div></a>
         <a class="card contact-card" href="tel:+491725737938" style="text-decoration:none"><div class="contact-icon" style="background:rgba(191,90,242,.12);border:1px solid rgba(191,90,242,.3)">📞</div><div><div class="contact-label">Telefon</div><div class="contact-val">+49 172 5737938</div><div class="contact-sub">Ernst Konrad Sturm · persönlich</div></div></a>
       </div>
       <div class="card form-card reveal-right" id="form-wrap">
@@ -703,10 +996,12 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
           <button class="subject-btn" id="sb1" onclick="setSubject(1)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Jahresabrechnung</button>
           <button class="subject-btn" id="sb2" onclick="setSubject(2)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">Allgemeine Frage</button>
         </div>
-        <label class="form-label">Name</label><input class="form-input" type="text" placeholder="Max Mustermann"/>
-        <label class="form-label">E-Mail</label><input class="form-input" type="email" placeholder="max@beispiel.de"/>
-        <label class="form-label">Nachricht</label><textarea class="form-input" rows="4" placeholder="Wie können wir Ihnen helfen?" style="resize:vertical"></textarea>
-        <button class="btn-p" onclick="submitForm()" style="width:100%;justify-content:center;margin-top:8px">Nachricht senden →</button>
+        <label class="form-label">Name</label><input class="form-input" id="ct-name" type="text" placeholder="Max Mustermann"/>
+        <label class="form-label">E-Mail</label><input class="form-input" id="ct-email" type="email" placeholder="max@beispiel.de"/>
+        <label class="form-label">Nachricht</label><textarea class="form-input" id="ct-msg" rows="4" placeholder="Wie können wir Ihnen helfen?" style="resize:vertical"></textarea>
+        <input class="hp-field" id="ct-hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+        <div class="form-status" id="ct-error"></div>
+        <button class="btn-p" id="ct-btn" onclick="submitForm()" style="width:100%;justify-content:center;margin-top:8px">Nachricht senden →</button>
         <p class="form-note">Bereit für Ihr Angebot? <a href="#anfrage">Direkt zur Anfrage →</a></p>
         <p class="form-note" style="margin-top:6px">Mit dem Absenden stimmen Sie unserer <a href="#" onclick="openDatenschutz(event)">Datenschutzerklärung</a> zu.</p>
       </div>
@@ -720,16 +1015,16 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
     <div class="footer-grid">
       <div>
         <a href="#hero" class="footer-brand"><div class="footer-brand-icon">⚡</div><span class="footer-brand-text">Sturm<span>Energie</span></span></a>
-        <p class="footer-desc">Deutschlands moderner Energieversorger. 100% Ökostrom, faire Preise, digitaler Service.</p>
-        <div class="footer-badges"><span class="footer-badge">Ökostrom</span><span class="footer-badge">TÜV</span><span class="footer-badge">CO₂-neutral</span></div>
+        <p class="footer-desc">Ihr persönlicher Strommanager. Unabhängige Vermittlung von Strom-, Gas- und Wärmetarifen – kostenlos und unverbindlich.</p>
+        <div class="footer-badges"><span class="footer-badge">Unabhängig</span><span class="footer-badge">Kostenlos</span><span class="footer-badge">Persönlich</span></div>
       </div>
       <div><div class="footer-col-title">Angebot</div><ul class="footer-links"><li><a href="#anfrage">Angebot anfordern</a></li><li><a href="#warum-rechnung">So funktioniert's</a></li><li><a href="#nachhaltigkeit">Öko & Standard</a></li><li><a href="#" onclick="openInfo(event,'foerder')">Förderprogramme</a></li><li><a href="#" onclick="openInfo(event,'app')">App (in Kürze)</a></li></ul></div>
       <div><div class="footer-col-title">Unternehmen</div><ul class="footer-links"><li><a href="#" onclick="openInfo(event,'ueberuns')">Über uns</a></li><li><a href="#" onclick="openKarriere(event)">Karriere<span class="footer-link-badge">Jobs!</span></a></li><li><a href="#" onclick="openInfo(event,'presse')">Presse</a></li><li><a href="#" onclick="openInfo(event,'partner')">Partnerprogramm</a></li><li><a href="#" onclick="openInfo(event,'blog')">Blog</a></li></ul></div>
-      <div><div class="footer-col-title">Wissen</div><ul class="footer-links"><li><a href="#" onclick="openInfo(event,'lexikon')">Stromlexikon</a></li><li><a href="#faq">FAQ</a></li><li><a href="#" onclick="openInfo(event,'guide')">Energieführer</a></li><li><a href="#" onclick="openInfo(event,'bericht')">Nachhaltigkeitsbericht</a></li></ul></div>
+      <div><div class="footer-col-title">Wissen</div><ul class="footer-links"><li><a href="#" onclick="openInfo(event,'lexikon')">Stromlexikon</a></li><li><a href="#faq">FAQ</a></li><li><a href="#" onclick="openInfo(event,'guide')">Energieführer</a></li><li><a href="#" onclick="openInfo(event,'bericht')">Nachhaltigkeitsbericht</a></li><li><a href="#" onclick="openGame(event)">🎮 Stromfresser-Jagd</a></li></ul></div>
       <div><div class="footer-col-title">Rechtliches</div><ul class="footer-links"><li><a href="#" onclick="openImpressum(event)">Impressum</a></li><li><a href="#" onclick="openDatenschutz(event)">Datenschutz</a></li><li><a href="#" onclick="openInfo(event,'agb')">AGB</a></li><li><a href="#" onclick="openInfo(event,'cookies')">Cookie-Einstellungen</a></li></ul></div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 Sturm Energie GmbH · Alle Rechte vorbehalten · Reguliert durch die BNetzA</p>
+      <p class="footer-copy">© 2026 Sturm Energie · Ernst Konrad Sturm · Alle Rechte vorbehalten · Unabhängige Vermittlung im Auftrag der Teleson AG · <a href="#intern" onclick="openAdmin(event)" style="color:var(--w40);text-decoration:none">Intern</a></p>
       <div class="lang-btns"><button class="lang-btn" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#fff">DE</button><button class="lang-btn" style="background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--w40)">EN</button></div>
     </div>
   </div>
@@ -840,8 +1135,12 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
     </div>
 
     <div class="imp-block">
-      <h3>6. Upload von Dokumenten</h3>
-      <p>Sofern auf dieser Website die Möglichkeit besteht, Strom- oder Gasrechnungen hochzuladen, werden diese Daten verschlüsselt übertragen (SSL/TLS), sicher gespeichert und ausschließlich zur Erstellung individueller Tarifangebote verwendet. Die übermittelten Dokumente werden vertraulich behandelt und nicht für andere Zwecke genutzt.</p>
+      <h3>6. Formulardaten, Dokumenten-Upload und Feedback</h3>
+      <p>Wenn Sie ein Formular auf dieser Website absenden (Angebots-Anfrage, Kontaktanfrage oder Feedback), werden die von Ihnen eingegebenen Daten verschlüsselt übertragen (SSL/TLS) und in einer zugangsgeschützten Datenbank gespeichert, damit wir Ihre Anfrage bearbeiten können. Der Zugriff erfolgt ausschließlich passwortgeschützt durch den Verantwortlichen.</p>
+      <p>Sofern Sie Ihre Jahresabrechnung hochladen, wird diese ebenfalls verschlüsselt übertragen, in einem nicht öffentlich zugänglichen Speicherbereich abgelegt und ausschließlich zur Erstellung Ihres individuellen Tarifangebots verwendet. Die Dokumente werden vertraulich behandelt und nicht für andere Zwecke genutzt.</p>
+      <p><strong>Auftragsverarbeitung und Hosting:</strong> Für Datenbank und Dateispeicher nutzen wir den Dienst Supabase (Supabase, Inc.) mit Serverstandort innerhalb der Europäischen Union. Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Die Bereitstellung der Website erfolgt über Vercel Inc.</p>
+      <p><strong>Rechtsgrundlage und Speicherdauer:</strong> Die Verarbeitung Ihrer Anfrage- und Kontaktdaten erfolgt zur Anbahnung bzw. Durchführung eines Vertragsverhältnisses (Art. 6 Abs. 1 lit. b DSGVO) sowie auf Grundlage unseres berechtigten Interesses an der Bearbeitung Ihres Anliegens (Art. 6 Abs. 1 lit. f DSGVO). Wir löschen Ihre Angaben und hochgeladenen Dokumente, sobald sie für den genannten Zweck nicht mehr erforderlich sind – in der Regel spätestens sechs Monate nach Abschluss der Anfrage –, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+      <p><strong>Feedback:</strong> Die Abgabe von Feedback ist freiwillig; Name und E-Mail-Adresse sind optional. Ihr Feedback wird ausschließlich veröffentlicht, wenn Sie dem im Formular ausdrücklich zugestimmt haben (Art. 6 Abs. 1 lit. a DSGVO). Diese Einwilligung können Sie jederzeit ohne Angabe von Gründen widerrufen – eine kurze Nachricht an uns genügt, wir entfernen die Veröffentlichung dann unverzüglich.</p>
     </div>
 
     <div class="imp-block">
@@ -978,7 +1277,7 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
 
   let W=0,H=0;
   function resize(){
-    W = window.innerWidth; H = window.innerHeight;
+    W = window.innerWidth + 4; H = window.innerHeight + 4;
     canvas.width = Math.round(W*DPR);
     canvas.height= Math.round(H*DPR);
     ctx.setTransform(DPR,0,0,DPR,0,0);
@@ -1182,6 +1481,18 @@ window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive:true });
 
+// Mobile menu
+function toggleMenu(){
+  const m=document.getElementById('mobile-menu'), b=document.getElementById('burger');
+  const open=m.classList.toggle('open');
+  b.classList.toggle('open', open);
+  b.setAttribute('aria-expanded', open?'true':'false');
+}
+function closeMenu(){
+  const m=document.getElementById('mobile-menu'), b=document.getElementById('burger');
+  m.classList.remove('open'); b.classList.remove('open'); b.setAttribute('aria-expanded','false');
+}
+
 // Scroll reveal — with light parallax handled by transform on .reveal already
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
@@ -1264,10 +1575,10 @@ function removeFile(i){ funnel.files.splice(i,1); renderFiles(); }
 function buildMessages(){
   const energie = funnel.energie || 'Strom/Gas/Wärmeenergie';
   const tarif = funnel.tarif ? (' ('+funnel.tarif+')') : '';
-  const waText = `Hallo Sturm Energie, ich interessiere mich für ein Angebot für ${energie}${tarif}. Meine Jahresabschlussrechnung sende ich Ihnen zur Prüfung zu.`;
+  const waText = `Hallo Sturm Energie, ich interessiere mich für ein Angebot für ${energie}${tarif}. Meine aktuelle Jahresabschlussrechnung schicke ich Ihnen zeitnah hier per WhatsApp zu, damit Sie mir ein passendes Angebot erstellen können. Vielen Dank!`;
   const waURL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waText)}`;
   const mailSubject = 'Anfrage für individuelles Energieangebot';
-  const mailBody = `Hallo Sturm Energie,\n\nich interessiere mich für ein individuelles Angebot für ${energie}${tarif}.\n\nMeine Jahresabschlussrechnung habe ich beigefügt bzw. sende sie Ihnen in Kürze zu.\n\nName: ${(document.getElementById('f-name')||{}).value||''}\nTelefon: ${(document.getElementById('f-phone')||{}).value||''}\nE-Mail: ${(document.getElementById('f-email')||{}).value||''}`;
+  const mailBody = `Hallo Sturm Energie,\n\nich interessiere mich für ein individuelles Angebot für ${energie}${tarif}.\n\nMeine aktuelle Jahresabschlussrechnung reiche ich Ihnen zeitnah nach – entweder als Anhang zu dieser E-Mail oder in einer separaten Nachricht in den nächsten Tagen –, damit Sie mir ein passendes Angebot erstellen können.\n\nMit freundlichen Grüßen\n\nName: ${(document.getElementById('f-name')||{}).value||''}\nTelefon: ${(document.getElementById('f-phone')||{}).value||''}\nE-Mail: ${(document.getElementById('f-email')||{}).value||''}`;
   const mailURL = `mailto:${MAIL_TO}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
   ['waBtn','waBtn2'].forEach(id=>{const e=document.getElementById(id); if(e) e.href=waURL;});
   ['mailBtn','mailBtn2'].forEach(id=>{const e=document.getElementById(id); if(e) e.href=mailURL;});
@@ -1275,11 +1586,122 @@ function buildMessages(){
   const kw=document.getElementById('kontaktWa');
   if(kw) kw.href=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hallo Sturm Energie, ich habe eine Frage zu Ihrem Angebot.')}`;
 }
-function funnelSubmit(){
+/* ════════════ SERVER-ANBINDUNG (Anfragen, Dateien, Feedback) ════════════ */
+async function apiPost(pfad, daten){
+  const r = await fetch(pfad, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(daten)
+  });
+  let d = {};
+  try { d = await r.json(); } catch(e) {}
+  if(!r.ok || !d.ok) throw new Error(d.error || ('Server antwortet nicht (Code '+r.status+')'));
+  return d;
+}
+function setStatus(id, inhalt, art){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.className = 'form-status' + (inhalt ? ' ' + (art || 'err') : '');
+  el.innerHTML = inhalt || '';
+}
+function notausgangHTML(){
+  const wa = (document.getElementById('waBtn')||{}).href || '';
+  const ml = (document.getElementById('mailBtn')||{}).href || '';
+  let h = '';
+  if(wa) h += ' <a href="'+wa+'" target="_blank" rel="noopener" style="color:var(--blue2)">per WhatsApp senden</a>';
+  if(wa && ml) h += ' oder';
+  if(ml) h += ' <a href="'+ml+'" style="color:var(--blue2)">per E-Mail senden</a>';
+  return h;
+}
+
+/* Eine Datei hochladen: erst direkt in den Speicher, sonst über den Server */
+async function uploadEine(file){
+  const meta = { name:file.name, groesse:file.size, typ:file.type||'' };
+  try {
+    const s = await apiPost('/api/index?fn=upload-url', meta);
+    let r = await fetch(s.uploadUrl, {
+      method:'PUT',
+      headers:{'Content-Type': file.type || 'application/octet-stream'},
+      body: file
+    });
+    if(!r.ok && (r.status === 405 || r.status === 400)){
+      r = await fetch(s.uploadUrl, {
+        method:'POST',
+        headers:{'Content-Type': file.type || 'application/octet-stream'},
+        body: file
+      });
+    }
+    if(!r.ok) throw new Error('Direkte Übertragung fehlgeschlagen ('+r.status+')');
+    meta.pfad = s.pfad;
+    return meta;
+  } catch(e) {
+    // Rückfallweg für kleine Dateien: über den Server
+    if(file.size > 3*1024*1024) throw e;
+    const daten = await new Promise((res, rej)=>{
+      const fr = new FileReader();
+      fr.onload = ()=>res(String(fr.result).split(',')[1] || '');
+      fr.onerror = ()=>rej(new Error('Datei konnte nicht gelesen werden'));
+      fr.readAsDataURL(file);
+    });
+    const d = await apiPost('/api/index?fn=upload', { name:file.name, typ:file.type||'', daten:daten });
+    meta.pfad = d.pfad;
+    return meta;
+  }
+}
+
+/* ── Anfrage-Funnel absenden ── */
+async function funnelSubmit(){
   buildMessages();
-  showStep(4);
-  // mark all ticks done
-  for(let s=0;s<4;s++){const fs=document.getElementById('fs'+s); if(fs){fs.classList.add('done');fs.classList.remove('active');}}
+  const btn  = document.getElementById('fSubmitBtn');
+  const bar  = document.getElementById('uplBar');
+  const fill = bar ? bar.querySelector('i') : null;
+  const name  = ((document.getElementById('f-name')||{}).value || '').trim();
+  const phone = ((document.getElementById('f-phone')||{}).value || '').trim();
+  const email = ((document.getElementById('f-email')||{}).value || '').trim();
+
+  setStatus('f-status','','info');
+  if(!name || !email){
+    setStatus('f-status','Bitte füllen Sie Name und E-Mail aus.','err');
+    return;
+  }
+  if(btn){ btn.disabled = true; btn.textContent = 'Wird gesendet …'; }
+
+  const dateien = [];
+  let fehlgeschlagen = 0;
+  try {
+    if(funnel.files.length && bar){ bar.classList.add('on'); if(fill) fill.style.width='4%'; }
+    for(let i=0; i<funnel.files.length; i++){
+      setStatus('f-status','Datei '+(i+1)+' von '+funnel.files.length+' wird übertragen …','info');
+      try {
+        dateien.push(await uploadEine(funnel.files[i]));
+      } catch(e) {
+        fehlgeschlagen++;
+      }
+      if(fill) fill.style.width = Math.round(((i+1)/funnel.files.length)*100)+'%';
+    }
+
+    setStatus('f-status','Anfrage wird übermittelt …','info');
+    await apiPost('/api/index?fn=submit', {
+      typ:'anfrage',
+      name:name, email:email, telefon:phone,
+      energieart: funnel.energie || '',
+      tarifart: funnel.tarif || '',
+      dateien: dateien,
+      nachricht: fehlgeschlagen
+        ? ('Hinweis: '+fehlgeschlagen+' Datei(en) konnten nicht übertragen werden – bitte beim Kunden nachfordern.')
+        : '',
+      hp: ((document.getElementById('f-hp')||{}).value || '')
+    });
+
+    setStatus('f-status','','info');
+    showStep(4);
+    for(let s=0;s<4;s++){ const fs=document.getElementById('fs'+s); if(fs){ fs.classList.add('done'); fs.classList.remove('active'); } }
+  } catch(e) {
+    setStatus('f-status','Die Anfrage konnte gerade nicht übertragen werden. Bitte'+notausgangHTML()+' – Ihre Angaben sind dort schon vorbereitet.','err');
+  } finally {
+    if(btn){ btn.disabled = false; btn.textContent = 'Anfrage absenden ✓'; }
+    if(bar){ bar.classList.remove('on'); if(fill) fill.style.width='0%'; }
+  }
 }
 
 function toggleFaq(i){
@@ -1289,15 +1711,91 @@ function toggleFaq(i){
   document.querySelectorAll('.faq-icon').forEach(ic=>{ic.classList.remove('open');ic.textContent='+';});
   if(!isOpen){body.classList.add('open');icon.classList.add('open');icon.textContent='+';}
 }
+const CT_SUBJECTS = ['Angebot','Jahresabrechnung','Allgemeine Frage'];
+let ctSubject = 0;
 function setSubject(i){
+  ctSubject = i;
   for(let j=0;j<3;j++){
     const btn=document.getElementById('sb'+j); if(!btn) continue;
     btn.style.background=j===i?'var(--blue)':'rgba(255,255,255,.05)';
     btn.style.border=j===i?'1px solid var(--blue)':'1px solid rgba(255,255,255,.1)';
   }
 }
-function submitForm(){
-  document.getElementById('form-wrap').innerHTML='<div class="success-box"><div class="success-icon">✓</div><h3 style="font-family:var(--fd);font-size:24px;margin-bottom:12px">Nachricht erhalten!</h3><p style="color:var(--w90);font-size:15px">Wir melden uns innerhalb von 4 Stunden bei Ihnen.</p></div>';
+/* ── Kontaktformular „Schnell eine Frage stellen" ── */
+async function submitForm(){
+  const nameEl=document.getElementById('ct-name');
+  const mailEl=document.getElementById('ct-email');
+  const msgEl=document.getElementById('ct-msg');
+  const btn=document.getElementById('ct-btn');
+  const name=(nameEl.value||'').trim();
+  const email=(mailEl.value||'').trim();
+  const msg=(msgEl.value||'').trim();
+
+  setStatus('ct-error','','err');
+  if(!name){ setStatus('ct-error','Bitte geben Sie Ihren Namen ein.','err'); nameEl.focus(); return; }
+  if(!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ setStatus('ct-error','Bitte geben Sie eine gültige E-Mail-Adresse ein.','err'); mailEl.focus(); return; }
+  if(!msg){ setStatus('ct-error','Bitte schreiben Sie uns eine kurze Nachricht.','err'); msgEl.focus(); return; }
+
+  if(btn){ btn.disabled=true; btn.textContent='Wird gesendet …'; }
+  try {
+    await apiPost('/api/index?fn=submit', {
+      typ:'frage', name:name, email:email, nachricht:msg,
+      kategorie: CT_SUBJECTS[ctSubject],
+      hp: ((document.getElementById('ct-hp')||{}).value || '')
+    });
+    document.getElementById('form-wrap').innerHTML =
+      '<div class="success-box"><div class="success-icon">✓</div>'+
+      '<h3 style="font-family:var(--fd);font-size:24px;margin-bottom:12px">Nachricht erhalten!</h3>'+
+      '<p style="color:var(--w90);font-size:15px;line-height:1.6;max-width:380px;margin:0 auto 18px">Vielen Dank. Ihre Nachricht ist bei uns eingegangen – wir antworten in der Regel innerhalb weniger Stunden.</p>'+
+      '<p style="color:var(--w40);font-size:13px;max-width:380px;margin:0 auto">Es ist dringend? Schreiben Sie uns direkt per <a href="https://wa.me/'+WA_NUMBER+'" target="_blank" rel="noopener" style="color:var(--blue2);text-decoration:none">WhatsApp</a>.</p></div>';
+  } catch(e) {
+    // Rückfallweg: E-Mail-Programm mit vorbereiteter Nachricht öffnen
+    const subject = 'Sturm Energie · '+CT_SUBJECTS[ctSubject];
+    const body = 'Kategorie: '+CT_SUBJECTS[ctSubject]+'\n\n'+msg+'\n\n— — —\nName: '+name+'\nE-Mail: '+email;
+    const mailURL = 'mailto:'+MAIL_TO+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    setStatus('ct-error','Der Versand über die Website ist gerade nicht möglich. <a href="'+mailURL+'" style="color:var(--blue2)">Hier per E-Mail senden</a> – Ihre Nachricht ist bereits vorbereitet.','err');
+    if(btn){ btn.disabled=false; btn.textContent='Nachricht senden →'; }
+  }
+}
+
+/* ── Feedback ── */
+let fbStars = 0;
+function setStars(n){
+  fbStars = n;
+  const sterne = document.querySelectorAll('#fb-stars .fb-star');
+  for(let i=0;i<sterne.length;i++){
+    sterne[i].classList.toggle('on', Number(sterne[i].dataset.n) <= n);
+  }
+  setStatus('fb-status','','err');
+}
+async function submitFeedback(){
+  const textEl=document.getElementById('fb-text');
+  const btn=document.getElementById('fb-btn');
+  const text=(textEl.value||'').trim();
+  const name=((document.getElementById('fb-name')||{}).value||'').trim();
+  const email=((document.getElementById('fb-email')||{}).value||'').trim();
+  const ok=!!(document.getElementById('fb-ok')||{}).checked;
+
+  setStatus('fb-status','','err');
+  if(!fbStars){ setStatus('fb-status','Bitte wählen Sie zuerst eine Bewertung von 1 bis 5 Sternen.','err'); return; }
+  if(!text){ setStatus('fb-status','Bitte schreiben Sie ein kurzes Feedback.','err'); textEl.focus(); return; }
+  if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ setStatus('fb-status','Die E-Mail-Adresse scheint nicht zu stimmen. Sie können das Feld auch leer lassen.','err'); return; }
+
+  if(btn){ btn.disabled=true; btn.textContent='Wird gesendet …'; }
+  try {
+    await apiPost('/api/index?fn=submit', {
+      typ:'feedback', bewertung:fbStars, nachricht:text,
+      name:name, email:email, veroeffentlichung_ok:ok,
+      hp: ((document.getElementById('fb-hp')||{}).value || '')
+    });
+    document.getElementById('fb-wrap').innerHTML =
+      '<div class="success-box"><div class="success-icon">✓</div>'+
+      '<h3 style="font-family:var(--fd);font-size:24px;margin-bottom:12px">Danke für Ihr Feedback!</h3>'+
+      '<p style="color:var(--w90);font-size:15px;line-height:1.6;max-width:400px;margin:0 auto">Ihre Rückmeldung ist angekommen und wird gelesen – sie hilft uns, unseren Service weiter zu verbessern.</p></div>';
+  } catch(e) {
+    setStatus('fb-status','Ihr Feedback konnte gerade nicht übertragen werden. Bitte versuchen Sie es später erneut oder schreiben Sie uns per <a href="https://wa.me/'+WA_NUMBER+'" target="_blank" rel="noopener" style="color:var(--blue2)">WhatsApp</a>.','err');
+    if(btn){ btn.disabled=false; btn.textContent='Feedback senden →'; }
+  }
 }
 // Initialise prefilled WhatsApp/E-Mail links on load
 buildMessages();
@@ -1391,6 +1889,462 @@ function openInfo(e, key){
   m.classList.add('open'); document.body.style.overflow='hidden';
 }
 function closeInfo(){ document.getElementById('info-modal').classList.remove('open'); document.body.style.overflow=''; }
+/* ═══ Minispiel: Stromfresser-Jagd ═══ */
+const SFJ = {
+  WASTERS: ['📺','💡','🖥️','🔌','❄️'],
+  GOOD: '🌱',
+  DURATION: 30,
+  score: 0, time: 0, best: 0,
+  timerId: null, spawnId: null, running: false
+};
+try { SFJ.best = parseInt(localStorage.getItem('sfj-best') || '0', 10) || 0; } catch(e) {}
+
+function openGame(e){
+  if(e) e.preventDefault();
+  document.getElementById('sfj-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  sfjShow('start');
+}
+function closeGame(){
+  document.getElementById('sfj-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  sfjStop();
+}
+function sfjShow(which){
+  ['start','play','end'].forEach(k => {
+    document.getElementById('sfj-' + k).style.display = (k === which) ? '' : 'none';
+  });
+}
+function sfjStop(){
+  SFJ.running = false;
+  clearInterval(SFJ.timerId);
+  clearTimeout(SFJ.spawnId);
+}
+function startGame(){
+  const board = document.getElementById('sfj-board');
+  board.innerHTML = '';
+  for(let i = 0; i < 9; i++){
+    const h = document.createElement('div'); h.className = 'sfj-hole';
+    const b = document.createElement('button'); b.className = 'sfj-item'; b.type = 'button';
+    b.setAttribute('aria-label','Feld');
+    b.addEventListener('pointerdown', sfjTap);
+    h.appendChild(b); board.appendChild(h);
+  }
+  SFJ.score = 0; SFJ.time = SFJ.DURATION; SFJ.running = true;
+  document.getElementById('sfj-score').textContent = '0';
+  document.getElementById('sfj-time').textContent = SFJ.time;
+  document.getElementById('sfj-best').textContent = SFJ.best;
+  sfjShow('play');
+  clearInterval(SFJ.timerId);
+  SFJ.timerId = setInterval(() => {
+    SFJ.time--;
+    document.getElementById('sfj-time').textContent = SFJ.time;
+    if(SFJ.time <= 0) sfjEnd();
+  }, 1000);
+  clearTimeout(SFJ.spawnId);
+  sfjSpawn();
+}
+function sfjSpawn(){
+  if(!SFJ.running) return;
+  const items = Array.prototype.slice.call(document.querySelectorAll('#sfj-board .sfj-item'));
+  const free = items.filter(b => !b.classList.contains('show'));
+  if(free.length){
+    const btn = free[Math.floor(Math.random() * free.length)];
+    const isGood = Math.random() < 0.22;
+    btn.textContent = isGood ? SFJ.GOOD : SFJ.WASTERS[Math.floor(Math.random() * SFJ.WASTERS.length)];
+    btn.dataset.good = isGood ? '1' : '';
+    btn.classList.add('show');
+    const visible = Math.max(620, 1000 - (SFJ.DURATION - SFJ.time) * 14);
+    setTimeout(() => { btn.classList.remove('show'); }, visible);
+  }
+  const gap = Math.max(340, 640 - (SFJ.DURATION - SFJ.time) * 11);
+  SFJ.spawnId = setTimeout(sfjSpawn, gap);
+}
+function sfjTap(ev){
+  const b = ev.currentTarget;
+  if(!SFJ.running || !b.classList.contains('show')) return;
+  b.classList.remove('show');
+  if(b.dataset.good){
+    SFJ.score = Math.max(0, SFJ.score - 15);
+  } else {
+    SFJ.score += 10;
+  }
+  document.getElementById('sfj-score').textContent = SFJ.score;
+}
+function sfjEnd(){
+  sfjStop();
+  if(SFJ.score > SFJ.best){
+    SFJ.best = SFJ.score;
+    try { localStorage.setItem('sfj-best', String(SFJ.best)); } catch(e) {}
+  }
+  document.getElementById('sfj-final').textContent = SFJ.score;
+  const tips = [
+    'Übrigens: Geräte im Standby ziehen das ganze Jahr Strom – eine schaltbare Steckerleiste hilft sofort.',
+    'Übrigens: LED-Lampen verbrauchen deutlich weniger als alte Glühbirnen – der Wechsel lohnt fast immer.',
+    'Übrigens: Der Kühlschrank läuft rund um die Uhr – ein effizientes Gerät spart jeden einzelnen Tag.'
+  ];
+  const hook = SFJ.score >= 150 ? 'Starke Reaktion! ' : (SFJ.score >= 80 ? 'Gut gejagt! ' : 'Netter Versuch! ');
+  document.getElementById('sfj-msg').innerHTML =
+    hook + 'Aber der größte Stromfresser versteckt sich meist nicht im Wohnzimmer, sondern <b>im Tarif</b>. Den jagen wir für dich – kostenlos, in 60 Sekunden angefragt.<br><span style="font-size:12px;color:var(--w40)">' + tips[Math.floor(Math.random() * tips.length)] + '</span>';
+  sfjShow('end');
+}
+</script>
+<script>
+/* ══════════ PWA: Service Worker + Installation ══════════ */
+// Service Worker registrieren (macht die App offline-fähig & installierbar)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').catch(function () {});
+  });
+}
+
+(function () {
+  var STORAGE_KEY = 'pwa-dismissed';
+  var installBar = document.getElementById('pwa-install');
+  var iosHint = document.getElementById('ios-hint');
+  var deferredPrompt = null;
+
+  // Läuft die Seite bereits als installierte App? Dann keine Banner zeigen.
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
+  var dismissed = false;
+  try { dismissed = localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) {}
+
+  // Android/Desktop: Browser bietet Installation an
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!isStandalone && !dismissed) {
+      setTimeout(function () { installBar.classList.add('show'); }, 2500);
+    }
+  });
+
+  var addBtn = document.getElementById('pwaAdd');
+  if (addBtn) addBtn.addEventListener('click', function () {
+    installBar.classList.remove('show');
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.finally(function () { deferredPrompt = null; });
+    }
+  });
+
+  var closeBtn = document.getElementById('pwaClose');
+  if (closeBtn) closeBtn.addEventListener('click', function () {
+    installBar.classList.remove('show');
+    try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+  });
+
+  // App erfolgreich installiert -> Banner weg
+  window.addEventListener('appinstalled', function () {
+    installBar.classList.remove('show');
+    try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+  });
+
+  // iOS/iPadOS Safari: kein automatisches Prompt -> dezenten Hinweis zeigen
+  var ua = window.navigator.userAgent;
+  var isIOS = /iphone|ipad|ipod/i.test(ua) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isSafari = /^((?!chrome|crios|fxios|android).)*safari/i.test(ua);
+  if (isIOS && isSafari && !isStandalone && !dismissed) {
+    setTimeout(function () { iosHint.classList.add('show'); }, 3000);
+  }
+  var iosClose = document.getElementById('iosClose');
+  if (iosClose) iosClose.addEventListener('click', function () {
+    iosHint.classList.remove('show');
+    try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+  });
+})();
+
+/* ══════════ INTERNER BEREICH (Anfragen, Dateien, Feedback) ══════════ */
+(function(){
+  var adToken = null, adAlle = [], adFilter = 'ungelesen', adSuche = '', adTimer = null;
+  try { adToken = sessionStorage.getItem('se-token'); } catch(e) {}
+
+  var AD_TABS = [
+    { k:'ungelesen', t:'Neu',      z:'ungelesen' },
+    { k:'alle',      t:'Alle',     z:'alle' },
+    { k:'anfrage',   t:'Anfragen', z:'anfragen' },
+    { k:'frage',     t:'Fragen',   z:'fragen' },
+    { k:'feedback',  t:'Feedback', z:'feedback' },
+    { k:'archiv',    t:'Archiv',   z:null }
+  ];
+
+  function el(id){ return document.getElementById(id); }
+  function adEsc(s){
+    return String(s === null || s === undefined ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function adToast(text){
+    var t = el('ad-toast');
+    t.textContent = text;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+  function adDatum(iso){
+    try {
+      var d = new Date(iso), n = new Date();
+      var zeit = d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+      if(d.toDateString() === n.toDateString()) return 'Heute, ' + zeit;
+      var g = new Date(n.getTime() - 86400000);
+      if(d.toDateString() === g.toDateString()) return 'Gestern, ' + zeit;
+      return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'2-digit'}) + ', ' + zeit;
+    } catch(e){ return ''; }
+  }
+  function adKb(n){
+    n = Number(n) || 0;
+    if(!n) return '';
+    return n > 1048576 ? (n/1048576).toFixed(1)+' MB' : Math.max(1, Math.round(n/1024))+' KB';
+  }
+  function adWa(tel){
+    var t = String(tel||'').replace(/[^0-9]/g,'');
+    if(!t) return null;
+    if(t.indexOf('0') === 0) t = '49' + t.slice(1);
+    return 'https://wa.me/' + t;
+  }
+
+  /* ── Öffnen / Schließen ── */
+  window.openAdmin = function(e){
+    if(e) e.preventDefault();
+    el('ad-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(adToken) adStart(); else { el('ad-login').style.display=''; el('ad-app').style.display='none'; }
+  };
+  function adClose(){
+    el('ad-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    clearInterval(adTimer);
+    if(location.hash === '#intern'){
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+  }
+  el('ad-close').addEventListener('click', adClose);
+  el('ad-back').addEventListener('click', function(e){ e.preventDefault(); adClose(); });
+
+  /* ── Anmelden ── */
+  async function adLogin(){
+    var pw = el('ad-pw').value;
+    var err = el('ad-loginErr');
+    var btn = el('ad-loginBtn');
+    err.textContent = '';
+    if(!pw){ err.textContent = 'Bitte Passwort eingeben.'; return; }
+    btn.disabled = true; btn.textContent = 'Prüfe …';
+    try {
+      var r = await fetch('/api/index?fn=login', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ passwort: pw })
+      });
+      var d = {};
+      try { d = await r.json(); } catch(e2) {}
+      if(r.ok && d.ok && d.token){
+        adToken = d.token;
+        try { sessionStorage.setItem('se-token', adToken); } catch(e3) {}
+        el('ad-pw').value = '';
+        adStart();
+      } else {
+        err.innerHTML = adEsc(d.error || 'Anmeldung fehlgeschlagen.') +
+          (d.hinweis ? '<br><span style="color:var(--w40)">'+adEsc(d.hinweis)+'</span>' : '');
+      }
+    } catch(e){
+      err.textContent = 'Server nicht erreichbar. Läuft die Seite schon auf sturm-energie.de?';
+    }
+    btn.disabled = false; btn.textContent = 'Anmelden';
+  }
+  el('ad-loginBtn').addEventListener('click', adLogin);
+  el('ad-pw').addEventListener('keydown', function(e){ if(e.key === 'Enter') adLogin(); });
+
+  function adLogout(){
+    adToken = null;
+    try { sessionStorage.removeItem('se-token'); } catch(e) {}
+    clearInterval(adTimer);
+    el('ad-app').style.display = 'none';
+    el('ad-login').style.display = '';
+  }
+  el('ad-out').addEventListener('click', adLogout);
+  el('ad-reload').addEventListener('click', function(){ adLaden(true); });
+  el('ad-q').addEventListener('input', function(e){
+    adSuche = e.target.value.toLowerCase().trim();
+    adZeichne();
+  });
+
+  function adStart(){
+    el('ad-login').style.display = 'none';
+    el('ad-app').style.display = '';
+    adLaden(true);
+    clearInterval(adTimer);
+    adTimer = setInterval(function(){ adLaden(false); }, 60000);
+  }
+
+  /* ── Laden ── */
+  async function adLaden(meldung){
+    if(!adToken) return;
+    var url = '/api/index?fn=messages&limit=300';
+    if(adFilter === 'archiv') url += '&archiv=1';
+    else if(adFilter === 'ungelesen') url += '&ungelesen=1';
+    else if(adFilter !== 'alle') url += '&typ=' + adFilter;
+    try {
+      var r = await fetch(url, { headers:{ Authorization:'Bearer ' + adToken } });
+      if(r.status === 401){ adToast('Sitzung abgelaufen – bitte neu anmelden.'); adLogout(); return; }
+      var d = {};
+      try { d = await r.json(); } catch(e2) {}
+      if(!d.ok){
+        el('ad-listbox').innerHTML = '<div class="ad-setup"><b style="color:#ffcb7a">Noch nicht fertig eingerichtet.</b><br>'+
+          adEsc(d.error||'') + (d.hinweis ? '<br>'+adEsc(d.hinweis) : '') +
+          '<br><br>Öffnen Sie <a href="/api/index?fn=status" target="_blank" rel="noopener" style="color:var(--blue2)">den Selbsttest</a> – dort steht Punkt für Punkt, was fehlt.</div>';
+        return;
+      }
+      adAlle = d.eintraege || [];
+      adZeichneTabs(d.zaehler || {});
+      adZeichne();
+      if(meldung) adToast(adAlle.length + ' Einträge geladen');
+    } catch(e){
+      adToast('Laden fehlgeschlagen. Verbindung prüfen.');
+    }
+  }
+
+  function adZeichneTabs(z){
+    var html = '';
+    for(var i=0;i<AD_TABS.length;i++){
+      var t = AD_TABS[i];
+      var n = (t.z && z[t.z] !== undefined) ? '<span class="ad-n">'+z[t.z]+'</span>' : '';
+      html += '<button class="ad-tab'+(adFilter===t.k?' on':'')+'" data-k="'+t.k+'">'+t.t+n+'</button>';
+    }
+    var box = el('ad-tabs');
+    box.innerHTML = html;
+    var b = box.querySelectorAll('.ad-tab');
+    for(var j=0;j<b.length;j++){
+      b[j].addEventListener('click', function(e){
+        adFilter = e.currentTarget.dataset.k;
+        adLaden(false);
+      });
+    }
+  }
+
+  function adZeichne(){
+    var rows = adAlle;
+    if(adSuche){
+      rows = rows.filter(function(r){
+        return [r.name,r.email,r.telefon,r.nachricht,r.energieart,r.tarifart,r.kategorie]
+          .join(' ').toLowerCase().indexOf(adSuche) !== -1;
+      });
+    }
+    var box = el('ad-listbox');
+    if(!rows.length){
+      box.innerHTML = '<div class="ad-empty"><div style="font-size:34px;margin-bottom:12px">📭</div>' +
+        (adSuche ? 'Nichts gefunden für „'+adEsc(adSuche)+'".'
+                 : 'Noch keine Einträge in dieser Ansicht.<br>Sobald ein Kunde ein Formular abschickt,<br>erscheint es hier automatisch.') +
+        '</div>';
+      return;
+    }
+    box.innerHTML = rows.map(adKarte).join('');
+    adVerdrahten();
+  }
+
+  function adKarte(r){
+    var label = r.typ === 'anfrage' ? 'Angebots-Anfrage' : (r.typ === 'feedback' ? 'Feedback' : 'Frage');
+    var h = '<div class="ad-item'+(r.gelesen?'':' ad-neu')+'" data-id="'+adEsc(r.id)+'">';
+    h += '<div class="ad-top">';
+    h += r.gelesen ? '' : '<span class="ad-dot"></span>';
+    h += '<span class="ad-badge ad-b-'+adEsc(r.typ)+'">'+label+'</span>';
+    if(r.typ === 'feedback' && r.veroeffentlichung_ok) h += '<span class="ad-badge ad-b-feedback">Veröffentlichung erlaubt</span>';
+    if(r.freigegeben) h += '<span class="ad-badge ad-b-feedback">freigegeben</span>';
+    h += '<span class="ad-when">'+adEsc(adDatum(r.created_at))+'</span></div>';
+    h += '<div class="ad-who">'+adEsc(r.name || 'Ohne Namen')+'</div>';
+
+    if(r.typ === 'feedback' && r.bewertung){
+      var s = '';
+      for(var i=1;i<=5;i++) s += (i <= r.bewertung ? '★' : '☆');
+      h += '<div class="ad-stars">'+s+' <span style="font-size:13px;color:var(--w40)">'+r.bewertung+'/5</span></div>';
+    }
+
+    h += '<div class="ad-meta">';
+    if(r.email) h += '<a class="ad-chip" href="mailto:'+adEsc(r.email)+'?subject='+encodeURIComponent('Ihre Anfrage bei Sturm Energie')+'">✉️ '+adEsc(r.email)+'</a>';
+    if(r.telefon){
+      h += '<a class="ad-chip" href="tel:'+adEsc(r.telefon)+'">📞 '+adEsc(r.telefon)+'</a>';
+      var wa = adWa(r.telefon);
+      if(wa) h += '<a class="ad-chip" href="'+adEsc(wa)+'" target="_blank" rel="noopener">💬 WhatsApp</a>';
+    }
+    if(r.energieart) h += '<span class="ad-chip">⚡ '+adEsc(r.energieart)+'</span>';
+    if(r.tarifart)   h += '<span class="ad-chip">'+(r.tarifart === 'Öko' ? '🌿 ' : '💡 ')+adEsc(r.tarifart)+'</span>';
+    if(r.kategorie)  h += '<span class="ad-chip">🏷️ '+adEsc(r.kategorie)+'</span>';
+    h += '</div>';
+
+    if(r.nachricht) h += '<div class="ad-msg">'+adEsc(r.nachricht)+'</div>';
+
+    var dateien = Array.isArray(r.dateien) ? r.dateien : [];
+    if(dateien.length){
+      h += '<div class="ad-files">';
+      for(var k=0;k<dateien.length;k++){
+        var f = dateien[k];
+        var name = f.name || String(f.pfad||'').split('/').pop();
+        var ext = (name.split('.').pop()||'').toLowerCase();
+        var link = f.url || ('/api/index?fn=file&pfad='+encodeURIComponent(f.pfad)+'&token='+encodeURIComponent(adToken));
+        h += '<a class="ad-file" href="'+adEsc(link)+'" target="_blank" rel="noopener" download>'+
+             '<span>'+(ext === 'pdf' ? '📕' : '🖼️')+'</span>'+
+             '<span class="ad-fn">'+adEsc(name)+'</span>'+
+             '<span class="ad-fs">'+adEsc(adKb(f.groesse))+' ↓</span></a>';
+      }
+      h += '</div>';
+    } else if(r.typ === 'anfrage'){
+      h += '<div class="ad-msg" style="color:var(--w40);font-size:13px">Keine Datei hochgeladen – Jahresabrechnung ggf. per WhatsApp nachfordern.</div>';
+    }
+
+    h += '<div class="ad-acts">';
+    h += '<button class="ad-act'+(r.gelesen?'':' ad-ok')+'" data-a="gelesen" data-v="'+(r.gelesen?'0':'1')+'">'+
+         (r.gelesen ? '↺ Als neu markieren' : '✓ Als gelesen markieren')+'</button>';
+    h += '<button class="ad-act" data-a="archiviert" data-v="'+(r.archiviert?'0':'1')+'">'+
+         (r.archiviert ? '↩ Aus Archiv holen' : '🗄️ Archivieren')+'</button>';
+    if(r.typ === 'feedback' && r.veroeffentlichung_ok){
+      h += '<button class="ad-act'+(r.freigegeben?'':' ad-ok')+'" data-a="freigegeben" data-v="'+(r.freigegeben?'0':'1')+'">'+
+           (r.freigegeben ? '✕ Freigabe zurücknehmen' : '★ Für Website freigeben')+'</button>';
+    }
+    h += '<button class="ad-act ad-del" data-a="loeschen">🗑️ Löschen</button>';
+    h += '</div></div>';
+    return h;
+  }
+
+  function adVerdrahten(){
+    var btns = el('ad-listbox').querySelectorAll('.ad-act');
+    for(var i=0;i<btns.length;i++){
+      btns[i].addEventListener('click', async function(e){
+        var btn = e.currentTarget;
+        var id = btn.closest('.ad-item').dataset.id;
+        var a = btn.dataset.a;
+        var body = { id:id };
+        if(a === 'loeschen'){
+          if(!confirm('Diesen Eintrag samt Dateien endgültig löschen?')) return;
+          body.loeschen = true;
+        } else {
+          body[a] = (btn.dataset.v === '1');
+        }
+        btn.disabled = true;
+        try {
+          var r = await fetch('/api/index?fn=update', {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json', Authorization:'Bearer ' + adToken },
+            body: JSON.stringify(body)
+          });
+          if(r.status === 401){ adToast('Sitzung abgelaufen.'); adLogout(); return; }
+          var d = {};
+          try { d = await r.json(); } catch(e2) {}
+          if(d.ok){
+            adToast(a === 'loeschen' ? 'Eintrag gelöscht' : 'Gespeichert');
+            adLaden(false);
+          } else {
+            adToast(d.error || 'Änderung fehlgeschlagen');
+            btn.disabled = false;
+          }
+        } catch(err){
+          adToast('Verbindung fehlgeschlagen');
+          btn.disabled = false;
+        }
+      });
+    }
+  }
+
+  /* Direkter Aufruf über sturm-energie.de/#intern */
+  if(location.hash === '#intern') window.openAdmin();
+})();
 </script>
 </body>
 </html>
