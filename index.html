@@ -3,8 +3,23 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>Sturm Energie – Sauber. Intelligent. Transparent.</title>
-<meta name="description" content="Sturm Energie – 100% Ökostrom, faire Preise, digitaler Service. Eine Reise durch die Energie der Zukunft."/>
+<title>Sturm Energie Koblenz · Ihr persönlicher Strommanager</title>
+<meta name="description" content="Ihr persönlicher Strommanager aus Koblenz: unabhängige Vermittlung von Strom-, Gas- und Wärmetarifen. Kostenlose Tarifprüfung mit Ihrer echten Jahresabrechnung."/>
+<link rel="canonical" href="https://www.sturm-energie.de/"/>
+<!-- Social-Vorschau (WhatsApp, Facebook, LinkedIn) -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Sturm Energie"/>
+<meta property="og:title" content="Sturm Energie · Ihr persönlicher Strommanager"/>
+<meta property="og:description" content="Strom, Gas &amp; Wärme: kostenlose Tarifprüfung mit Ihrer echten Jahresabrechnung. Unabhängig, unverbindlich, persönlich."/>
+<meta property="og:url" content="https://www.sturm-energie.de/"/>
+<meta property="og:image" content="https://www.sturm-energie.de/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:locale" content="de_DE"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Sturm Energie","description":"Unabhängige Vermittlung von Strom-, Gas- und Wärmetarifen – Ihr persönlicher Strommanager.","url":"https://www.sturm-energie.de/","telephone":"+491725737938","email":"sturmkonrad96@googlemail.com","image":"https://www.sturm-energie.de/og-image.png","founder":{"@type":"Person","name":"Ernst Konrad Sturm"},"address":{"@type":"PostalAddress","streetAddress":"Münzplatz 3","postalCode":"56068","addressLocality":"Koblenz","addressRegion":"Rheinland-Pfalz","addressCountry":"DE"},"areaServed":"DE"}
+</script>
 <!-- PWA / App-Konfiguration -->
 <link rel="manifest" href="/manifest.json"/>
 <meta name="theme-color" content="#0a0d12"/>
@@ -14,9 +29,15 @@
 <meta name="apple-mobile-web-app-title" content="Sturm Energie"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<!-- Schriften: lokal gehostet (keine Verbindung zu Google-Servern) -->
+<style>
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:swap;src:url('/dm-sans-latin-300-normal.woff2') format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url('/dm-sans-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url('/dm-sans-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:600;font-display:swap;src:url('/dm-sans-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'DM Serif Display';font-style:normal;font-weight:400;font-display:swap;src:url('/dm-serif-display-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'DM Serif Display';font-style:italic;font-weight:400;font-display:swap;src:url('/dm-serif-display-latin-400-italic.woff2') format('woff2')}
+</style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -1021,11 +1042,11 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
       <div><div class="footer-col-title">Angebot</div><ul class="footer-links"><li><a href="#anfrage">Angebot anfordern</a></li><li><a href="#warum-rechnung">So funktioniert's</a></li><li><a href="#nachhaltigkeit">Öko & Standard</a></li><li><a href="#" onclick="openInfo(event,'foerder')">Förderprogramme</a></li><li><a href="#" onclick="openInfo(event,'app')">App (in Kürze)</a></li></ul></div>
       <div><div class="footer-col-title">Unternehmen</div><ul class="footer-links"><li><a href="#" onclick="openInfo(event,'ueberuns')">Über uns</a></li><li><a href="#" onclick="openKarriere(event)">Karriere<span class="footer-link-badge">Jobs!</span></a></li><li><a href="#" onclick="openInfo(event,'presse')">Presse</a></li><li><a href="#" onclick="openInfo(event,'partner')">Partnerprogramm</a></li><li><a href="#" onclick="openInfo(event,'blog')">Blog</a></li></ul></div>
       <div><div class="footer-col-title">Wissen</div><ul class="footer-links"><li><a href="#" onclick="openInfo(event,'lexikon')">Stromlexikon</a></li><li><a href="#faq">FAQ</a></li><li><a href="#" onclick="openInfo(event,'guide')">Energieführer</a></li><li><a href="#" onclick="openInfo(event,'bericht')">Nachhaltigkeitsbericht</a></li><li><a href="#" onclick="openGame(event)">🎮 Stromfresser-Jagd</a></li></ul></div>
-      <div><div class="footer-col-title">Rechtliches</div><ul class="footer-links"><li><a href="#" onclick="openImpressum(event)">Impressum</a></li><li><a href="#" onclick="openDatenschutz(event)">Datenschutz</a></li><li><a href="#" onclick="openInfo(event,'agb')">AGB</a></li><li><a href="#" onclick="openInfo(event,'cookies')">Cookie-Einstellungen</a></li></ul></div>
+      <div><div class="footer-col-title">Rechtliches</div><ul class="footer-links"><li><a href="#" onclick="openImpressum(event)">Impressum</a></li><li><a href="#" onclick="openDatenschutz(event)">Datenschutz</a></li><li><a href="#" onclick="openInfo(event,'agb')">AGB</a></li></ul></div>
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 Sturm Energie · Ernst Konrad Sturm · Alle Rechte vorbehalten · Unabhängige Vermittlung im Auftrag der Teleson AG · <a href="#intern" onclick="openAdmin(event)" style="color:var(--w40);text-decoration:none">Intern</a></p>
-      <div class="lang-btns"><button class="lang-btn" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#fff">DE</button><button class="lang-btn" style="background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--w40)">EN</button></div>
+      
     </div>
   </div>
 </footer>
@@ -1058,7 +1079,7 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
     <div class="imp-block">
       <h3><span class="ico">💼</span>Tätigkeit</h3>
       <p>Selbstständige Tätigkeit als Handelsvertreter im Sinne des § 84 HGB.</p>
-      <p>Ich bin als unabhängiger Handelsvertreter im Auftrag der <strong>Teleson AG</strong> tätig und vermittle Strom- und Gastarife für Privat- und Geschäftskunden.</p>
+      <p>Ich bin als unabhängiger Handelsvertreter im Auftrag der <strong>Teleson AG</strong> tätig und vermittle Strom-, Gas- und Wärmetarife für Privat- und Geschäftskunden.</p>
     </div>
 
     <div class="imp-block">
@@ -1067,11 +1088,6 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
       <p>Verträge kommen ausschließlich zwischen dem Kunden und dem jeweiligen Energieversorgungsunternehmen zustande.</p>
       <p>Die Vermittlung erfolgt im Auftrag und unter Einhaltung der Rahmenbedingungen der:</p>
       <div class="imp-notice"><p><strong>Teleson AG</strong><br><a href="https://www.teleson.de/" target="_blank" rel="noopener noreferrer">https://www.teleson.de/</a></p></div>
-    </div>
-
-    <div class="imp-block">
-      <h3><span class="ico">📋</span>Umsatzsteuer</h3>
-      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br><span class="imp-muted">[USt-IdNr.]</span></p>
     </div>
 
     <div class="imp-block">
@@ -1116,12 +1132,12 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
 
     <div class="imp-block">
       <h3>2. Zweck der Datenverarbeitung</h3>
-      <p>Die Website verarbeitet personenbezogene Daten zu folgenden Zwecken: Vermittlung von Strom- und Gastarifen, Bearbeitung von Kundenanfragen, Erstellung individueller Tarifangebote, Kontaktaufnahme per E-Mail und WhatsApp, Kundenkommunikation sowie Verbesserung der Website (Analyse und Statistik).</p>
+      <p>Die Website verarbeitet personenbezogene Daten zu folgenden Zwecken: Vermittlung von Strom-, Gas- und Wärmetarifen, Bearbeitung von Kundenanfragen, Erstellung individueller Tarifangebote, Kontaktaufnahme per E-Mail und WhatsApp, Kundenkommunikation sowie Verbesserung der Website (Analyse und Statistik).</p>
     </div>
 
     <div class="imp-block">
       <h3>3. Verarbeitete Daten</h3>
-      <p>Wir verarbeiten folgende Kategorien personenbezogener Daten: Name (optional), E-Mail-Adresse, Telefonnummer (optional; Pflicht bei Wahl der WhatsApp-Kommunikation), Postleitzahl, hochgeladene Dateien (z. B. Strom- und Gasrechnungen), IP-Adresse und technische Verbindungsdaten sowie Nutzungsdaten (z. B. Seitenaufrufe und Klickverhalten).</p>
+      <p>Wir verarbeiten folgende Kategorien personenbezogener Daten: Name (optional), E-Mail-Adresse, Telefonnummer (optional; Pflicht bei Wahl der WhatsApp-Kommunikation), hochgeladene Dateien (z. B. Strom- und Gasrechnungen), IP-Adresse und technische Verbindungsdaten sowie Nutzungsdaten (z. B. Seitenaufrufe und Klickverhalten).</p>
     </div>
 
     <div class="imp-block">
@@ -1155,8 +1171,8 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
     </div>
 
     <div class="imp-block">
-      <h3>9. Analyse- und Tracking-Tools</h3>
-      <p>Sofern Analyse-Tools wie Google Analytics eingesetzt werden, erfolgt deren Nutzung ausschließlich nach Ihrer ausdrücklichen Einwilligung über das Cookie-Banner. Dabei können gekürzte IP-Adresse, Geräteinformationen, Nutzungsverhalten und Seitenaufrufe verarbeitet werden. Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TTDSG. Sie können Ihre Einwilligung jederzeit widerrufen.</p>
+      <h3>9. Cookies, Tracking und lokale Speicherung</h3>
+      <p>Diese Website verwendet keine Tracking- oder Analyse-Cookies und keine Werbenetzwerke; ein Cookie-Einwilligungsbanner ist daher nicht erforderlich. Für die reine Funktion speichert die Website wenige technische Angaben lokal auf Ihrem Gerät (z. B. ob Sie den App-Installationshinweis ausgeblendet haben oder den Punktestand des Minispiels). Diese Angaben verbleiben ausschließlich auf Ihrem Gerät, enthalten keine personenbezogenen Daten und werden nicht an uns übertragen (Rechtsgrundlage: § 25 Abs. 2 TTDSG). Die verwendeten Schriftarten werden lokal von unserem Server geladen; eine Verbindung zu Google-Servern findet dabei nicht statt.</p>
     </div>
 
     <div class="imp-block">
@@ -1215,7 +1231,7 @@ footer{position:relative;z-index:2;background:linear-gradient(to bottom,transpar
 
     <div class="imp-block">
       <h3><span class="ico">⚡</span>Offiziell im Auftrag der Teleson AG</h3>
-      <p>Sturm Energie vermittelt Strom- und Gastarife im Auftrag der <strong>Teleson AG</strong>.</p>
+      <p>Sturm Energie vermittelt Strom-, Gas- und Wärmetarife im Auftrag der <strong>Teleson AG</strong>.</p>
       <p>Aufgrund der hohen Nachfrage bauen wir unser Vertriebsteam kontinuierlich aus. Wir bieten interessierten Personen die Möglichkeit, sich unverbindlich und kostenlos in die Vermittlung von Energieverträgen einarbeiten zu lassen.</p>
       <p>Alle Inhalte und Schulungen werden vollständig digital zur Verfügung gestellt. Wenn Sie Interesse haben, selbst als Vermittler im Auftrag von Sturm Energie tätig zu werden, freuen wir uns über Ihre Initiativbewerbung.</p>
     </div>
@@ -1829,7 +1845,7 @@ const INFO = {
     <div class="imp-notice"><p><strong>Hinweis:</strong> Die Förderberatung ist Teil unseres Öko-Plus-Tarifs. Eine konkrete Förderzusage erfolgt ausschließlich durch die jeweilige Förderstelle.</p></div>` },
   ueberuns: { label:'Unternehmen', title:'Über uns', sub:'Wer hinter Sturm Energie steht',
     body:`<div class="imp-block"><p>Sturm Energie ist die Marke von Ernst Konrad Sturm – einem unabhängigen Handelsvertreter im Sinne des § 84 HGB mit Sitz in Koblenz.</p></div>
-    <div class="imp-block"><h3><span class="ico">🤝</span>Unsere Aufgabe</h3><p>Wir vermitteln faire Strom- und Gastarife für Privat- und Geschäftskunden – im Auftrag der <strong>Teleson AG</strong>. Persönlich, transparent und digital.</p></div>
+    <div class="imp-block"><h3><span class="ico">🤝</span>Unsere Aufgabe</h3><p>Wir vermitteln faire Strom-, Gas- und Wärmetarife für Privat- und Geschäftskunden – im Auftrag der <strong>Teleson AG</strong>. Persönlich, transparent und digital.</p></div>
     <div class="imp-block"><h3><span class="ico">🎯</span>Unser Anspruch</h3><p>Energie soll einfach, verständlich und fair sein. Wir nehmen uns Zeit, beraten ehrlich und ohne Druck – damit Sie den Tarif finden, der wirklich zu Ihnen passt.</p></div>
     <div class="imp-notice"><p><strong>Wichtig:</strong> Sturm Energie ist kein Energieversorger. Verträge kommen ausschließlich zwischen Ihnen und dem jeweiligen Energieversorgungsunternehmen zustande.</p></div>` },
   presse: { label:'Unternehmen', title:'Presse', sub:'Informationen für Medienvertreter',
@@ -1862,7 +1878,7 @@ const INFO = {
     <div class="imp-block"><h3><span class="ico">📈</span>Gemeinsame Wirkung</h3><p>Über 180.000 zufriedene Kunden, 2,4 Mio. Tonnen eingespartes CO₂ und 15% des Umsatzes, die direkt in neue Erneuerbare-Energien-Projekte fließen.</p></div>
     <div class="imp-notice"><p><strong>Hinweis:</strong> Die genannten Kennzahlen sind beispielhafte Zielwerte. Den vollständigen, geprüften Bericht stellen wir auf Anfrage bereit.</p></div>` },
   agb: { label:'Rechtliches', title:'Allgemeine Geschäftsbedingungen', sub:'Stand: Juni 2026',
-    body:`<div class="imp-block"><h3>1. Geltungsbereich</h3><p>Diese AGB gelten für die Vermittlungstätigkeit von Sturm Energie, Inhaber Ernst Konrad Sturm, handelnd unter der Marke „Sturm Energie", im Rahmen der Vermittlung von Strom- und Gastarifen.</p></div>
+    body:`<div class="imp-block"><h3>1. Geltungsbereich</h3><p>Diese AGB gelten für die Vermittlungstätigkeit von Sturm Energie, Inhaber Ernst Konrad Sturm, handelnd unter der Marke „Sturm Energie", im Rahmen der Vermittlung von Strom-, Gas- und Wärmetarifen.</p></div>
     <div class="imp-block"><h3>2. Gegenstand der Leistung</h3><p>Sturm Energie ist als unabhängiger Handelsvertreter (§ 84 HGB) im Auftrag der Teleson AG tätig und vermittelt Energieverträge zwischen Kunden und Energieversorgungsunternehmen. Sturm Energie ist selbst kein Energieversorger.</p></div>
     <div class="imp-block"><h3>3. Zustandekommen von Verträgen</h3><p>Verträge über die Lieferung von Strom oder Gas kommen ausschließlich zwischen dem Kunden und dem jeweiligen Energieversorgungsunternehmen zustande. Sturm Energie wird nicht Vertragspartei des Energieliefervertrags.</p></div>
     <div class="imp-block"><h3>4. Kosten der Vermittlung</h3><p>Für die Vermittlung entstehen dem Kunden keine zusätzlichen Kosten. Die Beratung ist unverbindlich und kostenlos.</p></div>

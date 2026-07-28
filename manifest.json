@@ -1,0 +1,50 @@
+{
+  "name": "Sturm Energie – Ihr Strommanager",
+  "short_name": "Sturm Energie",
+  "description": "Ihr persönlicher Strommanager. Tarif für Strom, Gas & Wärme kostenlos und unverbindlich prüfen lassen – Angebot auf Basis Ihrer echten Verbrauchsdaten.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0d12",
+  "theme_color": "#0a0d12",
+  "lang": "de",
+  "dir": "ltr",
+  "categories": ["business", "utilities", "finance"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Angebot anfordern",
+      "short_name": "Angebot",
+      "description": "Direkt zur kostenlosen Tarifanfrage",
+      "url": "/?source=pwa#anfrage",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Kontakt",
+      "short_name": "Kontakt",
+      "description": "Support per WhatsApp, E-Mail oder Telefon",
+      "url": "/?source=pwa#kontakt",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
